@@ -1,8 +1,10 @@
-package com.example.tutrong6;
+package com.example.tutrong6.GUI;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.tutrong6.R;
 
 public class MainActivity extends AppCompatActivity {
 
