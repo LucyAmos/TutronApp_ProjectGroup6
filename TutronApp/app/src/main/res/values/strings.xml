@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">TutronG6</string>
+    <string name="app_name">Tutron</string>
+    <string name="intro_text_string">Connect with eager students or highly qualified tutors.</string>
+    <string name="sign_up_prompt_string">Become a...</string>
+    <string name="student_btn_string">Student</string>
+    <string name="tutor_btn_string">Tutor</string>
+    <string name="welcome_to_string">Sign Up To Tutron!</string>
+    <string name="logo_image_string">Paper with A plus and pencil</string>
 </resources>
