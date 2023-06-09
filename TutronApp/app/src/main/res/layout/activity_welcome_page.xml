@@ -1,0 +1,57 @@
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent" android:layout_height="wrap_content" >
+
+	<ScrollView android:id="@+id/android_small___2" 
+		android:layout_width="wrap_content" 
+		android:layout_height="match_parent" >
+
+		<RelativeLayout android:id="@+id/content_container" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" >
+
+
+			<RelativeLayout
+				android:id="@+id/page_android_small___2_ek1"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_alignParentStart="true"
+				android:layout_marginStart="25dp"
+				android:layout_marginTop="0dp">
+
+				<View
+					android:id="@+id/_bg__android_small___2_ek2"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="0dp"
+					android:layout_marginTop="0dp" />
+
+				<TextView
+					android:id="@+id/welcome_"
+					android:layout_width="wrap_content"
+					android:layout_height="52.5dp"
+					android:layout_gravity="center_horizontal|center"
+					android:layout_marginLeft="5dp"
+					android:layout_marginTop="57dp"
+					android:gravity="center"
+					android:text="@string/welcome__string"
+					android:textColor="@color/welcome__color"
+					android:textSize="35sp"
+					android:textStyle="bold" />
+
+				<TextView
+					android:id="@+id/you_are_logged_in_as_a"
+					android:layout_width="263dp"
+					android:layout_height="37.5dp"
+					android:layout_gravity="center_horizontal|center"
+					android:layout_marginLeft="52dp"
+					android:layout_marginTop="129dp"
+					android:gravity="center"
+					android:text="@string/you_are_logged_in_as_a_string"
+					android:textColor="@color/welcome__color"
+					android:textSize="13sp" />
+
+			</RelativeLayout>
+		</RelativeLayout>
+
+	</ScrollView>
+</HorizontalScrollView>

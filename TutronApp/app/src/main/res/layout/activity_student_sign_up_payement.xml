@@ -1,0 +1,167 @@
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent" android:layout_height="wrap_content" >
+
+	<ScrollView android:id="@+id/android_small___1" 
+		android:layout_width="wrap_content" 
+		android:layout_height="match_parent" >
+
+		<RelativeLayout android:id="@+id/content_container" 
+			android:layout_width="wrap_content" 
+			android:layout_height="wrap_content" >
+
+
+
+			<RelativeLayout android:id="@+id/page_android_small___1_ek1"
+				android:layout_marginTop="0dp"
+				android:layout_marginStart="0dp"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				>
+
+				<View
+					android:id="@+id/_bg__android_small___1_ek2"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_marginStart="0dp"
+					android:layout_marginTop="0dp"
+					android:background="@drawable/_bg__android_small___1_ek2_shape" />
+
+				<TextView android:id="@+id/payment_method"
+					android:textStyle="bold"
+					android:layout_gravity="center_horizontal|center"
+					android:gravity="center"
+					android:textSize="35sp"
+					android:textColor="@color/payment_method_color"
+					android:layout_marginLeft="30dp"
+					android:layout_marginTop="57dp"
+					android:layout_width="320dp"
+					android:layout_height="52.5dp"
+					android:text="@string/payment_method_string"
+					 />
+
+				<View   android:id="@+id/rectangle_15"
+					android:background="@drawable/rectangle_15_shape"
+					 android:layout_marginStart="31dp"
+					android:layout_marginTop="216dp"
+					android:layout_width="307dp"
+					android:layout_height="38dp" />
+
+				<View   android:id="@+id/rectangle_12"
+					android:background="@drawable/rectangle_12_shape"
+					 android:layout_marginStart="31dp"
+					android:layout_marginTop="287dp"
+					android:layout_width="307dp"
+					android:layout_height="38dp" />
+
+				<View   android:id="@+id/rectangle_13"
+					android:background="@drawable/rectangle_13_shape"
+					 android:layout_marginStart="31dp"
+					android:layout_marginTop="358dp"
+					android:layout_width="307dp"
+					android:layout_height="38dp" />
+
+				<TextView android:id="@+id/card_holder_name"
+					android:textSize="15sp"
+					android:textColor="@color/payment_method_color"
+					android:layout_marginLeft="38dp"
+					android:layout_marginTop="182dp"
+					android:layout_width="153.5dp"
+					android:layout_height="30.5dp"
+					android:text="@string/card_holder_name_string"
+					 />
+
+				<TextView android:id="@+id/credit_debit_card_numbers"
+					android:textSize="15sp"
+					android:textColor="@color/payment_method_color"
+					android:layout_marginLeft="42dp"
+					android:layout_marginTop="267dp"
+					android:layout_width="256.5dp"
+					android:layout_height="30.5dp"
+					android:text="@string/credit_debit_card_numbers_string"
+					 />
+
+				<TextView android:id="@+id/cvs_number"
+					android:textSize="15sp"
+					android:textColor="@color/payment_method_color"
+					android:layout_marginLeft="42dp"
+					android:layout_marginTop="338dp"
+					android:layout_width="153.5dp"
+					android:layout_height="30.5dp"
+					android:text="@string/cvs_number_string"
+					 />
+
+				<View   android:id="@+id/rectangle_14"
+					android:background="@drawable/rectangle_14_shape"
+					 android:layout_marginStart="36dp"
+					android:layout_marginTop="425dp"
+					android:layout_width="307dp"
+					android:layout_height="38dp" />
+
+				<TextView android:id="@+id/expiration_number"
+					android:textSize="15sp"
+					android:textColor="@color/payment_method_color"
+					android:layout_marginLeft="47dp"
+					android:layout_marginTop="405dp"
+					android:layout_width="153.5dp"
+					android:layout_height="30.5dp"
+					android:text="@string/expiration_number_string"
+					 />
+
+				<TextView android:id="@+id/set_up_your_details"
+					android:layout_gravity="center_horizontal|center"
+					android:gravity="center"
+					android:textSize="13sp"
+					android:textColor="@color/payment_method_color"
+					android:layout_marginLeft="59dp"
+					android:layout_marginTop="105dp"
+					android:layout_width="263dp"
+					android:layout_height="37.5dp"
+					android:text="@string/set_up_your_details_string"
+					 />
+
+				<TextView
+					android:id="@+id/we_assure_you_that_your_personal_and_credit_card_information_will_not_be_used_without_your_explicit_consent_"
+					android:layout_width="263dp"
+					android:layout_height="57.5dp"
+					android:layout_gravity="center_horizontal|center"
+					android:layout_marginLeft="77dp"
+					android:layout_marginTop="600dp"
+					android:gravity="center"
+					android:text="@string/we_assure_you_that_your_personal_and_credit_card_information_will_not_be_used_without_your_explicit_consent__string"
+					android:textColor="@color/payment_method_color"
+					android:textSize="13sp" />
+
+				<ImageView android:id="@+id/backbutton"
+					android:src="@drawable/backbutton"
+					android:contentDescription="backbutton"
+					 android:layout_marginStart="31dp"
+					android:layout_marginTop="35dp"
+					android:layout_width="49dp"
+					android:layout_height="0dp" />
+
+				<View
+					android:id="@+id/rectangle_11"
+					android:layout_width="276dp"
+					android:layout_height="74dp"
+					android:layout_marginStart="57dp"
+					android:layout_marginTop="510dp"
+					android:background="@drawable/rectangle_11_shape" />
+
+				<TextView
+					android:id="@+id/submit"
+					android:layout_width="173dp"
+					android:layout_height="55dp"
+					android:layout_gravity="center_horizontal|center"
+					android:layout_marginLeft="103dp"
+					android:layout_marginTop="520dp"
+					android:gravity="center"
+					android:text="@string/submit_string"
+					android:textColor="@color/_bg__android_small___1_ek2_color"
+					android:textSize="32sp"
+					android:textStyle="bold" />
+
+			</RelativeLayout>
+		</RelativeLayout>
+
+	</ScrollView>
+</HorizontalScrollView>

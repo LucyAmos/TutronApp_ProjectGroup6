@@ -6,4 +6,37 @@
     <string name="tutor_btn_string">Tutor</string>
     <string name="welcome_to_string">Sign Up To Tutron!</string>
     <string name="logo_image_string">Paper with A plus and pencil</string>
+
+    <!--  Student Sign Up Page -->
+
+    <string name="email_generic_com_string">Email@generic.com</string>
+    <string name="password_string">Password</string>
+    <string name="thank_you_for_signing_up_string">Thank You for Signing Up</string>
+    <string name="set_up_your_details_string">Set up your details</string>
+    <string name="first_name_string">First name</string>
+    <string name="first_name_ek1_string">First name</string>
+    <string name="last_name_string">Last name</string>
+    <string name="last_name_ek1_string">Last name</string>
+    <string name="email_string">Email </string>
+    <string name="country_string">Country</string>
+    <string name="address_string">Address</string>
+    <string name="password_ek1_string">Password</string>
+    <string name="continue_string">Continue</string>
+
+
+    <!--  Student Sign Up Page - Payement -->
+    <string name="payment_method_string">Payment Method</string>
+    <string name="card_holder_name_string">Card Holder Name</string>
+    <string name="credit_debit_card_numbers_string">Credit/Debit Card Numbers</string>
+    <string name="cvs_number_string">CVS Number</string>
+    <string name="expiration_number_string">Expiration Number</string>
+    <string name="we_assure_you_that_your_personal_and_credit_card_information_will_not_be_used_without_your_explicit_consent__string">We assure you that your personal and credit card information will not be used without your explicit consent.</string>
+    <string name="submit_string">Submit</string>
+
+
+    <!--  Welcome  -->
+    <string name="ek_img_content">ExportKit Image</string>
+    <string name="welcome__string">Welcome,</string>
+    <string name="you_are_logged_in_as_a_string">You are logged in as a</string>
+
 </resources>
