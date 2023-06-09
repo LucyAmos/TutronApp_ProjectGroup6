@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GUI.TutorSignUpActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:id="@+id/thank_you_tutor_signup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textStyle="bold"
+                android:textSize="36sp"
+                android:textAlignment="center"
+                android:textColor="#0088C8"
+                android:text="@string/thank_you_for_signing_up_tutor_string"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:id="@+id/details_prompt_tutor_signup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:textAlignment="center"
+                android:textColor="#4E4E4E"
+                android:text="@string/set_up_your_details_string" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:id="@+id/first_name_tutor_text"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:text="@string/first_name_string" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <EditText
+                android:id="@+id/first_name_tutor_input"
+                android:layout_width="400dp"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:textStyle="italic"
+                android:inputType="text"
+                android:paddingLeft="2mm"
+                android:background="@drawable/signup_input"
+                android:hint="@string/first_name_string" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:id="@+id/last_name_tutor_text"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:text="@string/last_name_string" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <EditText
+                android:id="@+id/last_name_tutor_input"
+                android:layout_width="400dp"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:textStyle="italic"
+                android:inputType="text"
+                android:paddingLeft="2mm"
+                android:background="@drawable/signup_input"
+                android:hint="@string/last_name_string" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:id="@+id/email_tutor_text"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:text="@string/email_string" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <EditText
+                android:id="@+id/email_tutor_input"
+                android:layout_width="400dp"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:textStyle="italic"
+                android:paddingLeft="2mm"
+                android:background="@drawable/signup_input"
+                android:inputType="textEmailAddress"
+                android:hint="@string/email_generic_com_string"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:id="@+id/password_tutor_text"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:text="@string/password_string" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <EditText
+                android:id="@+id/password_tutor_input"
+                android:layout_width="400dp"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:textStyle="italic"
+                android:paddingLeft="2mm"
+                android:inputType="textPassword"
+                android:background="@drawable/signup_input"
+                android:hint="@string/password_string"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:id="@+id/education_level_tutor_text"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:text="@string/education_level_string" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <AutoCompleteTextView
+                android:id="@+id/education_level_tutor_input"
+                android:layout_width="400dp"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:textStyle="italic"
+                android:inputType="text"
+                android:paddingLeft="2mm"
+                android:background="@drawable/signup_input"
+                android:hint="@string/education_level_string" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:id="@+id/native_language_tutor_text"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:text="@string/native_language_string" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <AutoCompleteTextView
+                android:id="@+id/native_language_tutor_input"
+                android:layout_width="400dp"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:textStyle="italic"
+                android:inputType="text"
+                android:paddingLeft="2mm"
+                android:background="@drawable/signup_input"
+                android:hint="@string/native_language_string"  />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:id="@+id/description_tutor_text"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:text="@string/description_string"  />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <EditText
+                android:id="@+id/description_tutor_input"
+                android:layout_width="400dp"
+                android:layout_height="300dp"
+                android:ems="10"
+                android:textStyle="italic"
+                android:paddingLeft="2mm"
+                android:paddingVertical="1mm"
+                android:gravity="top|left"
+                android:inputType="textMultiLine"
+                android:lines="13"
+                android:maxLines="50"
+                android:minLines="1"
+                android:scrollbars="vertical"
+                android:background="@drawable/signup_input"
+                android:hint="@string/description_prompt_string" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:id="@+id/profile_pic_tutor_text"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:textAlignment="center"
+                android:text="@string/profile_picture_prompt_string"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <ImageView
+                android:id="@+id/profile_pic_tutor"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                app:srcCompat="@drawable/default_avatar" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:id="@+id/warning_sign"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#E00000"
+                android:textAlignment="center"
+                android:text="@string/signup_warning"
+                android:visibility="invisible" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="5dp" />
+
+            <TextView
+                android:id="@+id/warning_sign_desc"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#E00000"
+                android:textAlignment="center"
+                android:text="@string/desc_warning"
+                android:visibility="invisible" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="5dp" />
+
+            <TextView
+                android:id="@+id/warning_sign_email"
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#E00000"
+                android:textAlignment="center"
+                android:text="@string/email_warning"
+                android:visibility="invisible" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <Button
+                android:id="@+id/submit_tutor_button"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:background="@drawable/rounded_button"
+                android:fontFamily="@font/andada"
+                android:textStyle="bold"
+                android:textSize="28dp"
+                android:text="@string/submit_string" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

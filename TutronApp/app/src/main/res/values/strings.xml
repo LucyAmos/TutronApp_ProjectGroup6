@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Tutron</string>
+
+    <!--  Sign Up Prompt Page -->
     <string name="intro_text_string">Connect with eager students or highly qualified tutors.</string>
     <string name="sign_up_prompt_string">Become a...</string>
     <string name="student_btn_string">Student</string>
@@ -7,12 +9,12 @@
     <string name="welcome_to_string">Sign Up To Tutron!</string>
     <string name="logo_image_string">Paper with A plus and pencil</string>
 
-    <!--  Student Sign Up Page -->
+    <!--  Student (&tutor) Sign Up Page -->
 
     <string name="email_generic_com_string">Email@generic.com</string>
     <string name="password_string">Password</string>
     <string name="thank_you_for_signing_up_string">Thank You for Signing Up</string>
-    <string name="set_up_your_details_string">Set up your details</string>
+    <string name="set_up_your_details_string">Please enter your details</string>
     <string name="first_name_string">First name</string>
     <string name="first_name_ek1_string">First name</string>
     <string name="last_name_string">Last name</string>
@@ -33,6 +35,17 @@
     <string name="we_assure_you_that_your_personal_and_credit_card_information_will_not_be_used_without_your_explicit_consent__string">We assure you that your personal and credit card information will not be used without your explicit consent.</string>
     <string name="submit_string">Submit</string>
 
+
+    <!--  Tutor Sign Up Page -->
+    <string name="thank_you_for_signing_up_tutor_string">Thank You for Signing Up As A Tutor!</string>
+    <string name="education_level_string">Education Level</string>
+    <string name="native_language_string">Native Language</string>
+    <string name="description_string">Description</string>
+    <string name="description_prompt_string">Description...(600 characters max.)</string>
+    <string name="profile_picture_prompt_string">Click Image To Set  A Profile Picture (optional)</string>
+    <string name="signup_warning">***WARNING! PLEASE FILL OUT ALL THE BOXES***</string>
+    <string name="desc_warning">***WARNING! DESCRIPTION HAS MORE THAN 600 CHARACTERS***</string>
+    <string name="email_warning">***WARNING! INVALID EMAIL***</string>
 
     <!--  Welcome  -->
     <string name="ek_img_content">ExportKit Image</string>

@@ -23,6 +23,18 @@
             android:exported="true"
             tools:ignore="ExtraText">
         </activity>
+        <activity android:name=".GUI.TutorSignUpActivity"
+            android:exported="true"
+            tools:ignore="ExtraText">
+        </activity>
+        <activity android:name=".GUI.StudentSignUp"
+            android:exported="true"
+            tools:ignore="ExtraText">
+        </activity>
+        <activity android:name=".GUI.WelcomePage"
+            android:exported="true"
+            tools:ignore="ExtraText">
+        </activity>
     </application>
 
 
