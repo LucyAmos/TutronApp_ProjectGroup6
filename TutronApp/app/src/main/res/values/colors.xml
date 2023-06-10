@@ -1,30 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-
-    <!--  Student Sign Up -->
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="_bg__android_large___1_ek2_color">#FFFFFF</color>
-    <color name="rectangle_3_color">#F2F2F2</color>
-    <color name="email_generic_com_color">#000000</color>
-    <color name="rectangle_4_color">#2980F2</color>
-
-    <!--  Student Sign Up Payment  -->
-    <color name="_bg__android_small___1_ek2_color">#FFFFFF</color>
-    <color name="payment_method_color">#000000</color>
-    <color name="rectangle_15_color">#F2F2F2</color>
-    <color name="rectangle_11_color">#2980F2</color>
-
-    <!--  Welcome page -->
-    <color name="_bg__android_small___2_ek2_color">#FFFFFF</color>
-    <color name="welcome__color">#000000</color>
-
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimary">#FF0000</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#00FF00</color>
 </resources>

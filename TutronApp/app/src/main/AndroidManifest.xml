@@ -19,6 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".GUI.LandingPageActivity"
+            android:exported="true"
+            tools:ignore="ExtraText">
+        </activity>
         <activity android:name=".GUI.SignUpLauncherActivity"
             android:exported="true"
             tools:ignore="ExtraText">
@@ -28,6 +32,14 @@
             tools:ignore="ExtraText">
         </activity>
         <activity android:name=".GUI.StudentSignUp"
+            android:exported="true"
+            tools:ignore="ExtraText">
+        </activity>
+        <activity android:name=".GUI.StudentSignUpPayment"
+            android:exported="true"
+            tools:ignore="ExtraText">
+        </activity>
+        <activity android:name=".GUI.LoginPageActivity"
             android:exported="true"
             tools:ignore="ExtraText">
         </activity>
