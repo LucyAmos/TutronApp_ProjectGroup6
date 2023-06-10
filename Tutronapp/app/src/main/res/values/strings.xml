@@ -1,14 +1,120 @@
-<resources>
-    <string name="app_name">Tutron app</string>
-    <string name="logo_image">logo image</string>
-    <string name="turton">Turton</string>
-    <string name="tutron">Tutron</string>
-    <string name="welcome_to_tutron">Welcome to Tutron</string>
-    <string name="login_or_sign_up_to_explore_our_offers">Login or sign up to explore our offers</string>
-    <string name="login">Login</string>
-    <string name="sign_up">Sign up</string>
-    <string name="sign_in">Sign in</string>
-    <string name="submit">Submit</string>
-    <string name="password">Password</string>
-    <string name="email">Email</string>
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <resources>
+
+    <string name="app_name">Tutron</string>
+
+    <!-- Sign Up Prompt Page -->
+
+
+    <string name="intro_text_string">Connect with eager students or highly qualified tutors.</string>
+
+    <string name="sign_up_prompt_string">Become a...</string>
+
+    <string name="student_btn_string">Student</string>
+
+    <string name="welcome_to_string">Sign Up To Tutron!</string>
+
+    <string name="logo_image_string">Paper with A plus and pencil</string>
+
+    <!-- Student (&tutor) Sign Up Page -->
+
+
+    <string name="email_generic_com_string">Email@generic.com</string>
+
+    <string name="password_string">Password</string>
+
+    <string name="thank_you_for_signing_up_string">Thank You for Signing Up</string>
+
+    <string name="set_up_your_details_string">Please enter your details</string>
+
+    <string name="first_name_string">First name</string>
+
+    <string name="first_name_ek1_string">First name</string>
+
+    <string name="last_name_string">Last name</string>
+
+    <string name="last_name_ek1_string">Last name</string>
+
+    <string name="email_string">Email </string>
+
+    <string name="country_string">Country</string>
+
+    <string name="address_string">Address</string>
+
+    <string name="password_ek1_string">Password</string>
+
+    <string name="continue_string">Continue</string>
+
+    <!-- Student Sign Up Page - Payement -->
+
+
+    <string name="payment_method_string">Payment Method</string>
+
+    <string name="card_holder_name_string">Card Holder Name</string>
+
+    <string name="credit_debit_card_numbers_string">Credit/Debit Card Numbers</string>
+
+    <string name="cvs_number_string">CVS Number</string>
+
+    <string name="expiration_number_string">Expiration Number</string>
+
+    <string name="we_assure_you_that_your_personal_and_credit_card_information_will_not_be_used_without_your_explicit_consent__string">We assure you that your personal and credit card information will not be used without your explicit consent.</string>
+
+    <string name="submit_string">Submit</string>
+
+    <!-- Tutor Sign Up Page -->
+
+
+    <string name="thank_you_for_signing_up_tutor_string">Thank You for Signing Up As A Tutor!</string>
+
+    <string name="education_level_string">Education Level</string>
+
+    <string name="native_language_string">Native Language</string>
+
+    <string name="description_string">Description</string>
+
+    <string name="description_prompt_string">Description...(600 characters max.)</string>
+
+    <string name="profile_picture_prompt_string">Click Image To Set A Profile Picture (optional)</string>
+
+    <string name="signup_warning">***WARNING! PLEASE FILL OUT ALL THE BOXES***</string>
+
+    <string name="desc_warning">***WARNING! DESCRIPTION HAS MORE THAN 600 CHARACTERS***</string>
+
+    <string name="email_warning">***WARNING! INVALID EMAIL***</string>
+
+    <!-- Welcome -->
+
+
+    <string name="ek_img_content">ExportKit Image</string>
+
+    <string name="welcome__string">Welcome,</string>
+
+    <string name="you_are_logged_in_as_a_string">You are logged in as a</string>
+
+    <!-- Landing -->
+
+
+    <string name="sign_up_text">Sign Up</string>
+
+    <string name="login_text">Login</string>
+
+    <string name="Tutron_landing_prompt">Welcome to Tutron!</string>
+
+    <string name="landing_desc">An enriching community of learners and teachers.</string>
+
+    <string name="landing_action_prompt">Login to an existing account, or sign up and join our community!</string>
+
+    <!-- Login -->
+
+
+    <string name="welcome_back">Welcome Back</string>
+
+    <string name="enter_credentials_string">Please enter your credentials</string>
+
+    <string name="account_warning">***WARNING! THIS ACCOUNT DOES NOT EXIST***</string>
+
+    <string name="password_warning">***WARNING! INCORRECT PASSWORD***</string>
+
 </resources>

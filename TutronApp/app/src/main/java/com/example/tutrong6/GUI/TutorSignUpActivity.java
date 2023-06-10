@@ -94,9 +94,9 @@ public class TutorSignUpActivity extends AppCompatActivity {
         EditText tutorPassword = findViewById(R.id.password_tutor_input);
         EditText tutorDescription = findViewById(R.id.description_tutor_input);
         Button tutorSubmit = findViewById(R.id.submit_tutor_button);
-        TextView warningSign = findViewById(R.id.warning_sign);
-        TextView warningSignDesc = findViewById(R.id.warning_sign_desc);
-        TextView warningSignEmail = findViewById(R.id.warning_sign_email);
+        TextView warningSign = findViewById(R.id.warning_sign_tutor);
+        TextView warningSignDesc = findViewById(R.id.warning_sign_desc_tutor);
+        TextView warningSignEmail = findViewById(R.id.warning_sign_email_tutor);
 
         tutorSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
