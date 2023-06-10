@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Tutron app</string>
+    <string name="logo_image">logo image</string>
+    <string name="turton">Turton</string>
+    <string name="tutron">Tutron</string>
+    <string name="welcome_to_tutron">Welcome to Tutron</string>
+    <string name="login_or_sign_up_to_explore_our_offers">Login or sign up to explore our offers</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign up</string>
+    <string name="sign_in">Sign in</string>
+    <string name="submit">Submit</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+</resources>
