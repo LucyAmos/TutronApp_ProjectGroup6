@@ -12,10 +12,6 @@ import android.widget.TextView;
 
 public class WelcomePage extends Activity {
 
-	
-	private View _bg__android_small___2_ek2;
-	private TextView welcome_;
-	private TextView you_are_logged_in_as_a;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -24,12 +20,9 @@ public class WelcomePage extends Activity {
 		setContentView(R.layout.activity_welcome_page);
 
 		
-		_bg__android_small___2_ek2 = (View) findViewById(R.id._bg__android_small___2_ek2);
-		welcome_ = (TextView) findViewById(R.id.welcome_);
-		you_are_logged_in_as_a = (TextView) findViewById(R.id.you_are_logged_in_as_a);
-	
-		
-		//custom code goes here
+		TextView userName = findViewById(R.id.user_name);
+		TextView accountStatus = findViewById(R.id.account_status);
+
 	
 	}
 }

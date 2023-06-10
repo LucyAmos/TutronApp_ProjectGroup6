@@ -12,6 +12,7 @@
     <string name="sign_up_prompt_string">Become a...</string>
 
     <string name="student_btn_string">Student</string>
+    <string name="tutor_btn_string">Tutor</string>
 
     <string name="welcome_to_string">Sign Up To Tutron!</string>
 
@@ -24,7 +25,7 @@
 
     <string name="password_string">Password</string>
 
-    <string name="thank_you_for_signing_up_string">Thank You for Signing Up</string>
+    <string name="thank_you_for_signing_up_student_string">Thank You For Signing Up As A Student</string>
 
     <string name="set_up_your_details_string">Please enter your details</string>
 
@@ -39,6 +40,11 @@
     <string name="email_string">Email </string>
 
     <string name="country_string">Country</string>
+    <string name="city_string">City</string>
+    <string name="region_string">Region</string>
+    <string name="postalcode_string">Postal Code</string>
+    <string name ="postalcode_prompt_string">A1A 1A1</string>
+
 
     <string name="address_string">Address</string>
 
@@ -54,19 +60,25 @@
     <string name="card_holder_name_string">Card Holder Name</string>
 
     <string name="credit_debit_card_numbers_string">Credit/Debit Card Numbers</string>
+    <string name="credit_debit_card_numbers_prompt_string">#### #### #### ####</string>
 
-    <string name="cvs_number_string">CVS Number</string>
+    <string name="cvv_number_string">CVV Number</string>
+    <string name="cvv_prompt_string">CVV</string>
 
     <string name="expiration_number_string">Expiration Number</string>
+    <string name="expiration_prompt_string">MMYY</string>
 
     <string name="we_assure_you_that_your_personal_and_credit_card_information_will_not_be_used_without_your_explicit_consent__string">We assure you that your personal and credit card information will not be used without your explicit consent.</string>
 
     <string name="submit_string">Submit</string>
 
+    <string name="expiration_warning">***WARNING! INVALID DATE***</string>
+
+
     <!-- Tutor Sign Up Page -->
 
 
-    <string name="thank_you_for_signing_up_tutor_string">Thank You for Signing Up As A Tutor!</string>
+    <string name="thank_you_for_signing_up_tutor_string">Thank You For Signing Up As A Tutor!</string>
 
     <string name="education_level_string">Education Level</string>
 
@@ -116,5 +128,10 @@
     <string name="account_warning">***WARNING! THIS ACCOUNT DOES NOT EXIST***</string>
 
     <string name="password_warning">***WARNING! INCORRECT PASSWORD***</string>
+
+    <!-- Welcome -->
+
+    <string name="welcome_welcome_page">Welcome, </string>
+    <string name="login_status_text_string">YOU ARE LOGGED IN AS: </string>
 
 </resources>

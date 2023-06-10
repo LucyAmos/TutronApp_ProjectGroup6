@@ -1,262 +1,376 @@
-<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
-	android:layout_height="wrap_content">
-	<!--
-    /*
-     *	This content is generated from the API File Info.
-     *	(Alt+Shift+Ctrl+I).
-     *
-     *	@desc
-     *	@file 		android_large___1
-     *	@date 		Thursday 08th of June 2023 04:23:51 PM
-     *	@title 		Page 1
-     *	@author
-     *	@keywords
-     *	@generator 	Export Kit v1.3.figma
-     *
-     */
-    -->
+	android:layout_height="match_parent"
+	tools:context=".GUI.StudentSignUp">
+
 	<ScrollView
-		android:id="@+id/android_large___1"
-		android:layout_width="wrap_content"
-		android:layout_height="match_parent">
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		tools:layout_editor_absoluteX="1dp"
+		tools:layout_editor_absoluteY="1dp">
 
-		<RelativeLayout
-			android:id="@+id/content_container"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content">
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:orientation="vertical" >
 
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="20dp" />
 
-			<RelativeLayout
-				android:id="@+id/page_android_large___1_ek1"
-				android:layout_width="wrap_content"
+			<TextView
+				android:id="@+id/thank_you_for_signingUp_student"
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_marginStart="0dp"
-				android:layout_marginTop="0dp">
+				android:fontFamily="@font/andada"
+				android:text="@string/thank_you_for_signing_up_student_string"
+				android:textAlignment="center"
+				android:gravity="center"
+				android:textColor="#0088C8"
+				android:textSize="36sp"
+				android:textStyle="bold" />
 
-				<View
-					android:id="@+id/_bg__android_large___1_ek2"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginStart="0dp"
-					android:layout_marginTop="0dp"
-					android:background="@drawable/_bg__android_large___1_ek2_shape" />
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="20dp" />
 
-				<View
-					android:id="@+id/rectangle_3"
-					android:layout_width="357dp"
-					android:layout_height="38dp"
-					android:layout_marginStart="28dp"
-					android:layout_marginTop="190dp"
-					android:background="@drawable/rectangle_3_shape" />
+			<TextView
+				android:id="@+id/details_prompt_student_signup"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/andada"
+				android:textStyle="bold"
+				android:textSize="24sp"
+				android:gravity="center"
+				android:textAlignment="center"
+				android:textColor="#4E4E4E"
+				android:text="@string/set_up_your_details_string" />
 
-				<View
-					android:id="@+id/rectangle_5"
-					android:layout_width="357dp"
-					android:layout_height="38dp"
-					android:layout_marginStart="28dp"
-					android:layout_marginTop="266dp"
-					android:background="@drawable/rectangle_5_shape" />
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="20dp" />
 
-				<View
-					android:id="@+id/rectangle_6"
-					android:layout_width="357dp"
-					android:layout_height="38dp"
-					android:layout_marginStart="28dp"
-					android:layout_marginTop="347dp"
-					android:background="@drawable/rectangle_6_shape" />
+			<TextView
+				android:id="@+id/first_name_student_text"
+				android:layout_width="400dp"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/andada"
+				android:textStyle="bold"
+				android:textSize="20sp"
+				android:textColor="#000000"
+				android:text="@string/first_name_string" />
 
-				<TextView
-					android:id="@+id/email_generic_com"
-					android:layout_width="244.5dp"
-					android:layout_height="30.5dp"
-					android:layout_marginLeft="51dp"
-					android:layout_marginTop="357dp"
-					android:text="@string/email_generic_com_string"
-					android:textColor="@color/email_generic_com_color"
-					android:textSize="15sp" />
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="10dp" />
 
-				<View
-					android:id="@+id/rectangle_7"
-					android:layout_width="357dp"
-					android:layout_height="38dp"
-					android:layout_marginStart="28dp"
-					android:layout_marginTop="578dp"
-					android:background="@drawable/rectangle_7_shape" />
+			<EditText
+				android:id="@+id/first_name_student_input"
+				android:layout_width="400dp"
+				android:layout_height="50dp"
+				android:ems="10"
+				android:textStyle="italic"
+				android:inputType="text"
+				android:fontFamily="@font/andada"
+				android:paddingLeft="2mm"
+				android:background="@drawable/signup_input"
+				android:hint="@string/first_name_string" />
 
-				<TextView
-					android:id="@+id/password"
-					android:layout_width="244.5dp"
-					android:layout_height="30.5dp"
-					android:layout_marginLeft="48dp"
-					android:layout_marginTop="586dp"
-					android:text="@string/password_string"
-					android:textColor="@color/email_generic_com_color"
-					android:textSize="15sp" />
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="20dp" />
 
-				<View
-					android:id="@+id/rectangle_4"
-					android:layout_width="316dp"
-					android:layout_height="74dp"
-					android:layout_marginStart="44dp"
-					android:layout_marginTop="657dp"
-					android:background="@drawable/rectangle_4_shape" />
+			<TextView
+				android:id="@+id/last_name_student_text"
+				android:layout_width="400dp"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/andada"
+				android:textStyle="bold"
+				android:textSize="20sp"
+				android:textColor="#000000"
+				android:text="@string/last_name_string" />
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="10dp" />
 
-				<TextView
-					android:id="@+id/thank_you_for_signing_up"
-					android:layout_width="324dp"
-					android:layout_height="92.5dp"
-					android:layout_gravity="center_horizontal|center"
-					android:layout_marginLeft="45dp"
-					android:layout_marginTop="30dp"
-					android:gravity="center"
-					android:text="@string/thank_you_for_signing_up_string"
-					android:textColor="@color/email_generic_com_color"
-					android:textSize="35sp"
-					android:textStyle="bold" />
+			<EditText
+				android:id="@+id/last_name_student_input"
+				android:layout_width="400dp"
+				android:layout_height="50dp"
+				android:ems="10"
+				android:textStyle="italic"
+				android:fontFamily="@font/andada"
+				android:inputType="text"
+				android:paddingLeft="2mm"
+				android:background="@drawable/signup_input"
+				android:hint="@string/last_name_string" />
 
-				<TextView
-					android:id="@+id/set_up_your_details"
-					android:layout_width="313dp"
-					android:layout_height="37.5dp"
-					android:layout_gravity="center_horizontal|center"
-					android:layout_marginLeft="51dp"
-					android:layout_marginTop="115dp"
-					android:gravity="center"
-					android:text="@string/set_up_your_details_string"
-					android:textColor="@color/email_generic_com_color"
-					android:textSize="13sp" />
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="20dp" />
 
-				<TextView
-					android:id="@+id/first_name"
-					android:layout_width="153.5dp"
-					android:layout_height="30.5dp"
-					android:layout_marginLeft="35dp"
-					android:layout_marginTop="160dp"
-					android:text="@string/first_name_string"
-					android:textColor="@color/email_generic_com_color"
-					android:textSize="15sp" />
+			<TextView
+				android:id="@+id/email_student_text"
+				android:layout_width="400dp"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/andada"
+				android:textStyle="bold"
+				android:textSize="20sp"
+				android:textColor="#000000"
+				android:text="@string/email_string" />
 
-				<TextView
-					android:id="@+id/first_name_ek1"
-					android:layout_width="153.5dp"
-					android:layout_height="30.5dp"
-					android:layout_marginLeft="51dp"
-					android:layout_marginTop="195dp"
-					android:text="@string/first_name_ek1_string"
-					android:textColor="@color/email_generic_com_color"
-					android:textSize="15sp" />
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="10dp" />
 
-				<TextView
-					android:id="@+id/last_name"
-					android:layout_width="153.5dp"
-					android:layout_height="30.5dp"
-					android:layout_marginLeft="39dp"
-					android:layout_marginTop="244dp"
-					android:text="@string/last_name_string"
-					android:textColor="@color/email_generic_com_color"
-					android:textSize="15sp" />
+			<EditText
+				android:id="@+id/email_student_input"
+				android:layout_width="400dp"
+				android:layout_height="50dp"
+				android:ems="10"
+				android:textStyle="italic"
+				android:fontFamily="@font/andada"
+				android:paddingLeft="2mm"
+				android:background="@drawable/signup_input"
+				android:inputType="textEmailAddress"
+				android:hint="@string/email_generic_com_string"/>
 
-				<TextView
-					android:id="@+id/last_name_ek1"
-					android:layout_width="153.5dp"
-					android:layout_height="30.5dp"
-					android:layout_marginLeft="51dp"
-					android:layout_marginTop="275dp"
-					android:text="@string/last_name_ek1_string"
-					android:textColor="@color/email_generic_com_color"
-					android:textSize="15sp" />
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="20dp" />
 
-				<TextView
-					android:id="@+id/email"
-					android:layout_width="153.5dp"
-					android:layout_height="30.5dp"
-					android:layout_marginLeft="39dp"
-					android:layout_marginTop="317dp"
-					android:text="@string/email_string"
-					android:textColor="@color/email_generic_com_color"
-					android:textSize="15sp" />
+			<TextView
+				android:id="@+id/password_student_text"
+				android:layout_width="400dp"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/andada"
+				android:textStyle="bold"
+				android:textSize="20sp"
+				android:textColor="#000000"
+				android:text="@string/password_string" />
 
-				<View
-					android:id="@+id/rectangle_9"
-					android:layout_width="357dp"
-					android:layout_height="38dp"
-					android:layout_marginStart="28dp"
-					android:layout_marginTop="422dp"
-					android:background="@drawable/rectangle_9_shape" />
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="10dp" />
 
-				<TextView
-					android:id="@+id/country"
-					android:layout_width="153.5dp"
-					android:layout_height="30.5dp"
-					android:layout_marginLeft="39dp"
-					android:layout_marginTop="402dp"
-					android:text="@string/country_string"
-					android:textColor="@color/email_generic_com_color"
-					android:textSize="15sp" />
+			<EditText
+				android:id="@+id/password_student_input"
+				android:layout_width="400dp"
+				android:layout_height="50dp"
+				android:ems="10"
+				android:textStyle="italic"
+				android:fontFamily="@font/andada"
+				android:paddingLeft="2mm"
+				android:inputType="textPassword"
+				android:background="@drawable/signup_input"
+				android:hint="@string/password_string"/>
 
-				<View
-					android:id="@+id/rectangle_10"
-					android:layout_width="357dp"
-					android:layout_height="38dp"
-					android:layout_marginStart="28dp"
-					android:layout_marginTop="498dp"
-					android:background="@drawable/rectangle_10_shape" />
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="20dp" />
 
-				<TextView
-					android:id="@+id/address"
-					android:layout_width="153.5dp"
-					android:layout_height="30.5dp"
-					android:layout_marginLeft="43dp"
-					android:layout_marginTop="478dp"
-					android:text="@string/address_string"
-					android:textColor="@color/email_generic_com_color"
-					android:textSize="15sp" />
+			<TextView
+				android:id="@+id/address_student_text"
+				android:layout_width="400dp"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/andada"
+				android:textStyle="bold"
+				android:textSize="20sp"
+				android:textColor="#000000"
+				android:text="@string/address_string" />
 
-				<TextView
-					android:id="@+id/password_ek1"
-					android:layout_width="153.5dp"
-					android:layout_height="30.5dp"
-					android:layout_marginLeft="42dp"
-					android:layout_marginTop="548dp"
-					android:text="@string/password_ek1_string"
-					android:textColor="@color/email_generic_com_color"
-					android:textSize="15sp" />
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="10dp" />
 
-				<Button
-					android:id="@+id/continue_button"
-					android:layout_width="173dp"
-					android:layout_height="55dp"
-					android:layout_gravity="center_horizontal|center"
-					android:layout_marginLeft="120dp"
-					android:layout_marginTop="667dp"
-					android:gravity="center"
-					android:text="@string/continue_string"
-					android:textColor="@color/_bg__android_large___1_ek2_color"
-					android:textSize="32sp"
-					android:textStyle="bold" />
+			<EditText
+				android:id="@+id/address_student_input"
+				android:layout_width="400dp"
+				android:layout_height="50dp"
+				android:ems="10"
+				android:textStyle="italic"
+				android:fontFamily="@font/andada"
+				android:inputType="text"
+				android:paddingLeft="2mm"
+				android:background="@drawable/signup_input"
+				android:hint="@string/address_string" />
 
-				<ImageView
-					android:id="@+id/line_2"
-					android:layout_width="49dp"
-					android:layout_height="0dp"
-					android:layout_marginStart="18dp"
-					android:layout_marginTop="29dp"
-					android:contentDescription="line_2"
-					android:src="@drawable/line_2" />
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="20dp" />
 
-				<ImageView
-					android:id="@+id/line_3"
-					android:layout_width="1dp"
-					android:layout_height="0dp"
-					android:layout_marginStart="304dp"
-					android:layout_marginTop="496dp"
-					android:contentDescription="line_3"
-					android:src="@drawable/line_3" />
+			<TextView
+				android:id="@+id/city_student_text"
+				android:layout_width="400dp"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/andada"
+				android:textStyle="bold"
+				android:textSize="20sp"
+				android:textColor="#000000"
+				android:text="@string/city_string" />
 
-			</RelativeLayout>
-		</RelativeLayout>
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="10dp" />
 
+			<EditText
+				android:id="@+id/city_student_input"
+				android:layout_width="400dp"
+				android:layout_height="50dp"
+				android:ems="10"
+				android:textStyle="italic"
+				android:fontFamily="@font/andada"
+				android:inputType="text"
+				android:paddingLeft="2mm"
+				android:background="@drawable/signup_input"
+				android:text="Ottawa" />
+
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="20dp" />
+
+			<TextView
+				android:id="@+id/Region_student_text"
+				android:layout_width="400dp"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/andada"
+				android:textStyle="bold"
+				android:textSize="20sp"
+				android:textColor="#000000"
+				android:text="@string/region_string" />
+
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="10dp" />
+
+			<EditText
+				android:id="@+id/Region_student_input"
+				android:layout_width="400dp"
+				android:layout_height="50dp"
+				android:ems="10"
+				android:textStyle="italic"
+				android:fontFamily="@font/andada"
+				android:inputType="text"
+				android:paddingLeft="2mm"
+				android:background="@drawable/signup_input"
+				android:text="Ontario" />
+
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="20dp" />
+
+			<TextView
+				android:id="@+id/Country_student_text"
+				android:layout_width="400dp"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/andada"
+				android:textStyle="bold"
+				android:textSize="20sp"
+				android:textColor="#000000"
+				android:text="@string/country_string" />
+
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="10dp" />
+
+			<EditText
+				android:id="@+id/Country_student_input"
+				android:layout_width="400dp"
+				android:layout_height="50dp"
+				android:ems="10"
+				android:textStyle="italic"
+				android:fontFamily="@font/andada"
+				android:inputType="text"
+				android:paddingLeft="2mm"
+				android:background="@drawable/signup_input"
+				android:text="Canada" />
+
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="20dp" />
+
+			<TextView
+				android:id="@+id/postal_student_text"
+				android:layout_width="400dp"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/andada"
+				android:textStyle="bold"
+				android:textSize="20sp"
+				android:textColor="#000000"
+				android:text="@string/postalcode_string" />
+
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="10dp" />
+
+			<EditText
+				android:id="@+id/postal_student_input"
+				android:layout_width="400dp"
+				android:layout_height="50dp"
+				android:ems="10"
+				android:textStyle="italic"
+				android:fontFamily="@font/andada"
+				android:inputType="textCapCharacters|textPostalAddress"
+				android:paddingLeft="2mm"
+				android:background="@drawable/signup_input"
+				android:hint="@string/postalcode_prompt_string" />
+
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="20dp" />
+
+
+
+			<TextView
+				android:id="@+id/warning_sign_student"
+				android:layout_width="400dp"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/andada"
+				android:textStyle="bold"
+				android:textSize="16sp"
+				android:textColor="#E00000"
+				android:textAlignment="center"
+				android:text="@string/signup_warning"
+				android:visibility="invisible" />
+
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="5dp" />
+
+
+			<TextView
+				android:id="@+id/warning_sign_email_student"
+				android:layout_width="400dp"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/andada"
+				android:textStyle="bold"
+				android:textSize="16sp"
+				android:textColor="#E00000"
+				android:textAlignment="center"
+				android:text="@string/email_warning"
+				android:visibility="invisible" />
+
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="10dp" />
+
+			<Button
+				android:id="@+id/continue_student_button"
+				android:layout_width="200dp"
+				android:layout_height="50dp"
+				android:background="@drawable/rounded_button"
+				android:fontFamily="@font/andada"
+				android:textStyle="bold"
+				android:textSize="28dp"
+				android:text="@string/continue_string" />
+
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="20dp" />
+		</LinearLayout>
 	</ScrollView>
-</HorizontalScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

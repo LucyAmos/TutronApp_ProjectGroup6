@@ -1,167 +1,227 @@
-<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
-	android:layout_width="match_parent" android:layout_height="wrap_content" >
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context=".GUI.StudentSignUpPayment">
 
-	<ScrollView android:id="@+id/android_small___1" 
-		android:layout_width="wrap_content" 
-		android:layout_height="match_parent" >
+	<ScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		tools:layout_editor_absoluteX="1dp"
+		tools:layout_editor_absoluteY="1dp">
 
-		<RelativeLayout android:id="@+id/content_container" 
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content" >
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:orientation="vertical" >
 
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="20dp" />
 
-
-			<RelativeLayout android:id="@+id/page_android_small___1_ek1"
-				android:layout_marginTop="0dp"
-				android:layout_marginStart="0dp"
-				android:layout_width="wrap_content"
+			<TextView
+				android:id="@+id/payment_method_text"
+				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				>
+				android:fontFamily="@font/andada"
+				android:text="@string/payment_method_string"
+				android:textAlignment="center"
+				android:gravity="center"
+				android:textColor="#0088C8"
+				android:textSize="36sp"
+				android:textStyle="bold" />
 
-				<View
-					android:id="@+id/_bg__android_small___1_ek2"
-					android:layout_width="match_parent"
-					android:layout_height="match_parent"
-					android:layout_marginStart="0dp"
-					android:layout_marginTop="0dp"
-					android:background="@drawable/_bg__android_small___1_ek2_shape" />
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="20dp" />
 
-				<TextView android:id="@+id/payment_method"
-					android:textStyle="bold"
-					android:layout_gravity="center_horizontal|center"
-					android:gravity="center"
-					android:textSize="35sp"
-					android:textColor="@color/payment_method_color"
-					android:layout_marginLeft="30dp"
-					android:layout_marginTop="57dp"
-					android:layout_width="320dp"
-					android:layout_height="52.5dp"
-					android:text="@string/payment_method_string"
-					 />
+			<TextView
+				android:id="@+id/disclaimer"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/andada"
+				android:textStyle="bold"
+				android:textSize="24sp"
+				android:gravity="center"
+				android:textAlignment="center"
+				android:textColor="#4E4E4E"
+				android:text="@string/we_assure_you_that_your_personal_and_credit_card_information_will_not_be_used_without_your_explicit_consent__string" />
 
-				<View   android:id="@+id/rectangle_15"
-					android:background="@drawable/rectangle_15_shape"
-					 android:layout_marginStart="31dp"
-					android:layout_marginTop="216dp"
-					android:layout_width="307dp"
-					android:layout_height="38dp" />
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="20dp" />
 
-				<View   android:id="@+id/rectangle_12"
-					android:background="@drawable/rectangle_12_shape"
-					 android:layout_marginStart="31dp"
-					android:layout_marginTop="287dp"
-					android:layout_width="307dp"
-					android:layout_height="38dp" />
+			<TextView
+				android:id="@+id/cardholder_name_text"
+				android:layout_width="400dp"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/andada"
+				android:textStyle="bold"
+				android:textSize="20sp"
+				android:textColor="#000000"
+				android:text="@string/card_holder_name_string" />
 
-				<View   android:id="@+id/rectangle_13"
-					android:background="@drawable/rectangle_13_shape"
-					 android:layout_marginStart="31dp"
-					android:layout_marginTop="358dp"
-					android:layout_width="307dp"
-					android:layout_height="38dp" />
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="10dp" />
 
-				<TextView android:id="@+id/card_holder_name"
-					android:textSize="15sp"
-					android:textColor="@color/payment_method_color"
-					android:layout_marginLeft="38dp"
-					android:layout_marginTop="182dp"
-					android:layout_width="153.5dp"
-					android:layout_height="30.5dp"
-					android:text="@string/card_holder_name_string"
-					 />
+			<EditText
+				android:id="@+id/cardholder_name_input"
+				android:layout_width="400dp"
+				android:layout_height="50dp"
+				android:ems="10"
+				android:textStyle="italic"
+				android:inputType="text"
+				android:fontFamily="@font/andada"
+				android:paddingLeft="2mm"
+				android:background="@drawable/signup_input"
+				android:hint="@string/card_holder_name_string" />
 
-				<TextView android:id="@+id/credit_debit_card_numbers"
-					android:textSize="15sp"
-					android:textColor="@color/payment_method_color"
-					android:layout_marginLeft="42dp"
-					android:layout_marginTop="267dp"
-					android:layout_width="256.5dp"
-					android:layout_height="30.5dp"
-					android:text="@string/credit_debit_card_numbers_string"
-					 />
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="20dp" />
 
-				<TextView android:id="@+id/cvs_number"
-					android:textSize="15sp"
-					android:textColor="@color/payment_method_color"
-					android:layout_marginLeft="42dp"
-					android:layout_marginTop="338dp"
-					android:layout_width="153.5dp"
-					android:layout_height="30.5dp"
-					android:text="@string/cvs_number_string"
-					 />
+			<TextView
+				android:id="@+id/card_number_text"
+				android:layout_width="400dp"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/andada"
+				android:textStyle="bold"
+				android:textSize="20sp"
+				android:textColor="#000000"
+				android:text="@string/credit_debit_card_numbers_string" />
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="10dp" />
 
-				<View   android:id="@+id/rectangle_14"
-					android:background="@drawable/rectangle_14_shape"
-					 android:layout_marginStart="36dp"
-					android:layout_marginTop="425dp"
-					android:layout_width="307dp"
-					android:layout_height="38dp" />
+			<EditText
+				android:id="@+id/card_number_input"
+				android:layout_width="400dp"
+				android:layout_height="50dp"
+				android:ems="10"
+				android:textStyle="italic"
+				android:fontFamily="@font/andada"
+				android:inputType="number"
+				android:paddingLeft="2mm"
+				android:background="@drawable/signup_input"
+				android:hint="@string/credit_debit_card_numbers_prompt_string" />
 
-				<TextView android:id="@+id/expiration_number"
-					android:textSize="15sp"
-					android:textColor="@color/payment_method_color"
-					android:layout_marginLeft="47dp"
-					android:layout_marginTop="405dp"
-					android:layout_width="153.5dp"
-					android:layout_height="30.5dp"
-					android:text="@string/expiration_number_string"
-					 />
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="20dp" />
 
-				<TextView android:id="@+id/set_up_your_details"
-					android:layout_gravity="center_horizontal|center"
-					android:gravity="center"
-					android:textSize="13sp"
-					android:textColor="@color/payment_method_color"
-					android:layout_marginLeft="59dp"
-					android:layout_marginTop="105dp"
-					android:layout_width="263dp"
-					android:layout_height="37.5dp"
-					android:text="@string/set_up_your_details_string"
-					 />
+			<TextView
+				android:id="@+id/CVV_number_text"
+				android:layout_width="400dp"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/andada"
+				android:textStyle="bold"
+				android:textSize="20sp"
+				android:textColor="#000000"
+				android:text="@string/cvv_number_string" />
 
-				<TextView
-					android:id="@+id/we_assure_you_that_your_personal_and_credit_card_information_will_not_be_used_without_your_explicit_consent_"
-					android:layout_width="263dp"
-					android:layout_height="57.5dp"
-					android:layout_gravity="center_horizontal|center"
-					android:layout_marginLeft="77dp"
-					android:layout_marginTop="600dp"
-					android:gravity="center"
-					android:text="@string/we_assure_you_that_your_personal_and_credit_card_information_will_not_be_used_without_your_explicit_consent__string"
-					android:textColor="@color/payment_method_color"
-					android:textSize="13sp" />
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="10dp" />
 
-				<ImageView android:id="@+id/backbutton"
-					android:src="@drawable/backbutton"
-					android:contentDescription="backbutton"
-					 android:layout_marginStart="31dp"
-					android:layout_marginTop="35dp"
-					android:layout_width="49dp"
-					android:layout_height="0dp" />
+			<EditText
+				android:id="@+id/CVV_number_input"
+				android:layout_width="400dp"
+				android:layout_height="50dp"
+				android:ems="10"
+				android:textStyle="italic"
+				android:fontFamily="@font/andada"
+				android:paddingLeft="2mm"
+				android:background="@drawable/signup_input"
+				android:inputType="number"
+				android:hint="@string/cvv_prompt_string"/>
 
-				<View
-					android:id="@+id/rectangle_11"
-					android:layout_width="276dp"
-					android:layout_height="74dp"
-					android:layout_marginStart="57dp"
-					android:layout_marginTop="510dp"
-					android:background="@drawable/rectangle_11_shape" />
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="20dp" />
 
-				<TextView
-					android:id="@+id/submit"
-					android:layout_width="173dp"
-					android:layout_height="55dp"
-					android:layout_gravity="center_horizontal|center"
-					android:layout_marginLeft="103dp"
-					android:layout_marginTop="520dp"
-					android:gravity="center"
-					android:text="@string/submit_string"
-					android:textColor="@color/_bg__android_small___1_ek2_color"
-					android:textSize="32sp"
-					android:textStyle="bold" />
+			<TextView
+				android:id="@+id/card_exdate_text"
+				android:layout_width="400dp"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/andada"
+				android:textStyle="bold"
+				android:textSize="20sp"
+				android:textColor="#000000"
+				android:text="@string/expiration_number_string" />
 
-			</RelativeLayout>
-		</RelativeLayout>
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="10dp" />
 
+			<EditText
+				android:id="@+id/card_exdate_input"
+				android:layout_width="400dp"
+				android:layout_height="50dp"
+				android:ems="10"
+				android:textStyle="italic"
+				android:fontFamily="@font/andada"
+				android:paddingLeft="2mm"
+				android:inputType="number"
+				android:background="@drawable/signup_input"
+				android:hint="@string/expiration_prompt_string"/>
+
+
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="20dp" />
+
+
+
+			<TextView
+				android:id="@+id/warning_sign_student"
+				android:layout_width="400dp"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/andada"
+				android:textStyle="bold"
+				android:textSize="16sp"
+				android:textColor="#E00000"
+				android:textAlignment="center"
+				android:text="@string/signup_warning"
+				android:visibility="invisible" />
+
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="5dp" />
+
+
+			<TextView
+				android:id="@+id/warning_sign_exdate"
+				android:layout_width="400dp"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/andada"
+				android:textStyle="bold"
+				android:textSize="16sp"
+				android:textColor="#E00000"
+				android:textAlignment="center"
+				android:text="@string/expiration_warning"
+				android:visibility="invisible" />
+
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="10dp" />
+
+			<Button
+				android:id="@+id/submit_student_button"
+				android:layout_width="200dp"
+				android:layout_height="50dp"
+				android:background="@drawable/rounded_button"
+				android:fontFamily="@font/andada"
+				android:textStyle="bold"
+				android:textSize="28dp"
+				android:text="@string/submit_string" />
+
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="20dp" />
+		</LinearLayout>
 	</ScrollView>
-</HorizontalScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

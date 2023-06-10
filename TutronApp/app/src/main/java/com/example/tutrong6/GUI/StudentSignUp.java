@@ -2,77 +2,66 @@
 package com.example.tutrong6.GUI;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import com.example.tutrong6.R;
 
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ImageView;
 
 public class StudentSignUp extends Activity {
 
-	
-	private View _bg__android_large___1_ek2;
-	private View rectangle_3;
-	private View rectangle_5;
-	private View rectangle_6;
-	private TextView email_generic_com;
-	private View rectangle_7;
-	private TextView password;
-	private View rectangle_4;
-	private TextView thank_you_for_signing_up;
-	private TextView set_up_your_details;
-	private TextView first_name;
-	private TextView first_name_ek1;
-	private TextView last_name;
-	private TextView last_name_ek1;
-	private TextView email;
-	private View rectangle_9;
-	private TextView country;
-	private View rectangle_10;
-	private TextView address;
-	private TextView password_ek1;
-	private Button continue_button;
-	private ImageView line_2;
-	private ImageView line_3;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_student_sign_up);
 
-		
-		_bg__android_large___1_ek2 = (View) findViewById(R.id._bg__android_large___1_ek2);
-		rectangle_3 = (View) findViewById(R.id.rectangle_3);
-		rectangle_5 = (View) findViewById(R.id.rectangle_5);
-		rectangle_6 = (View) findViewById(R.id.rectangle_6);
-		email_generic_com = (TextView) findViewById(R.id.email_generic_com);
-		rectangle_7 = (View) findViewById(R.id.rectangle_7);
-		password = (TextView) findViewById(R.id.password);
-		rectangle_4 = (View) findViewById(R.id.rectangle_4);
-		thank_you_for_signing_up = (TextView) findViewById(R.id.thank_you_for_signing_up);
-		set_up_your_details = (TextView) findViewById(R.id.set_up_your_details);
-		first_name = (TextView) findViewById(R.id.first_name);
-		first_name_ek1 = (TextView) findViewById(R.id.first_name_ek1);
-		last_name = (TextView) findViewById(R.id.last_name);
-		last_name_ek1 = (TextView) findViewById(R.id.last_name_ek1);
-		email = (TextView) findViewById(R.id.email);
-		rectangle_9 = (View) findViewById(R.id.rectangle_9);
-		country = (TextView) findViewById(R.id.country);
-		rectangle_10 = (View) findViewById(R.id.rectangle_10);
-		address = (TextView) findViewById(R.id.address);
-		password_ek1 = (TextView) findViewById(R.id.password_ek1);
-		continue_button = (Button) findViewById(R.id.continue_button);
-		line_2 = (ImageView) findViewById(R.id.line_2);
-		line_3 = (ImageView) findViewById(R.id.line_3);
-	
-		
-		//custom code goes here
+		EditText studentFirstName = findViewById(R.id.first_name_student_input);
+		EditText studentLastName = findViewById(R.id.last_name_student_input);
+		EditText studentEmail = findViewById(R.id.email_student_input);
+		EditText studentPassword = findViewById(R.id.password_student_input);
+		EditText studentAddress = findViewById(R.id.address_student_input);
+		EditText studentCity = findViewById(R.id.city_student_input);
+		EditText studentRegion = findViewById(R.id.Region_student_input);
+		EditText studentCountry = findViewById(R.id.Country_student_input);
+		EditText studentPostal = findViewById(R.id.postal_student_input);
+		Button studentContinue = findViewById(R.id.continue_student_button);
+		TextView warningSign = findViewById(R.id.warning_sign_student);
+		TextView warningSignEmail = findViewById(R.id.warning_sign_email_student);
+
+		studentContinue.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+				String sFN = studentFirstName.getText().toString();
+				String sLN = studentLastName.getText().toString();
+				String sEM = studentEmail.getText().toString();
+				String sPS = studentPassword.getText().toString();
+				String sAD = studentAddress.getText().toString();
+				String sSC = studentCity.getText().toString();
+				String sSR = studentRegion.getText().toString();
+				String sSY = studentCountry.getText().toString();
+				String sPT = studentPostal.getText().toString();
+
+
+				if (sFN.isEmpty()||sLN.isEmpty()||sEM.isEmpty()||sPS.isEmpty()||sAD.isEmpty()||sSC.isEmpty()||sSR.isEmpty()||sSY.isEmpty()||sPT.isEmpty()) {
+					warningSign.setVisibility(View.VISIBLE);
+				}else if (!sEM.contains("@")){
+					warningSignEmail.setVisibility(View.VISIBLE);
+				}   else {
+					Intent intent = new Intent(StudentSignUp.this, StudentSignUpPayment.class);
+					startActivity(intent);
+				}
+			}
+		});
+	}
 	
 	}
-}
+
 	
 	

@@ -23,7 +23,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 // Create an Intent to navigate to the next activity
-                Intent intent = new Intent(SplashActivity.this, LoginPageActivity.class);
+                Intent intent = new Intent(SplashActivity.this, LandingPageActivity.class);
                 startActivity(intent);
 
                 // Finish the splash activity
