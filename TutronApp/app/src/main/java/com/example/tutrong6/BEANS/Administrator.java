@@ -33,4 +33,17 @@ public class Administrator extends User{
     public String getRole() {
         return this.getClass().getSimpleName();
     }
+
+
+    @Override
+    public String toString() {
+        return "Administrator{" +
+                "ID=" + ID +
+                ", first_name='" + first_name + '\'' +
+                ", last_name='" + last_name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", roleID=" + roleID +
+                '}';
+    }
 }

@@ -6,10 +6,13 @@ import com.example.tutrong6.BEANS.*;
 import com.example.tutrong6.DAO.*;
 import com.example.tutrong6.R;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class WelcomePage extends Activity {
@@ -25,15 +28,21 @@ public class WelcomePage extends Activity {
 
 		TextView userName = findViewById(R.id.user_name);
 		TextView user_role = findViewById(R.id.user_role);
+		Button logout_btn = findViewById(R.id.Logout_btn);
 
 
 		//get the ID of the logged user
-	/*	SessionManagement sessionManagement = new SessionManagement(WelcomePage.this);
+		SessionManagement sessionManagement = new SessionManagement(WelcomePage.this);
 		int userID = sessionManagement.getSession();
 		Log.i("USER ID LOGGED", "ICI "+ userID);
 		User session_user= DataBase.getUserbyID(userID);
+		Log.i("USER_session(WELPAGE)", "ici "+ session_user);
+
 		//display the name and role of the logged user
-		String role = DataBase.getRoleNameByRoleID(session_user.getRoleID()) ;
+		userName.setText(session_user.getFirst_name().toString()+ " "+ session_user.getLast_name().toString());
+		user_role.setText(DataBase.getRoleNameByRoleID(session_user.getRoleID()));
+
+	/*	String role = DataBase.getRoleNameByRoleID(session_user.getRoleID()) ;
 		switch (session_user.getRoleID())
 		{
 			case 1:
@@ -53,12 +62,21 @@ public class WelcomePage extends Activity {
 				break;
 		}*/
 
-		//tv.setText(session_user.getFirst_name() + " " + session_user.getLast_name() + " AS "+ role);
+		logout_btn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
 
+				//logout
+				sessionManagement.removeSession();
+				//aller a la page d accueil.
+				startActivity(new Intent(WelcomePage.this, LandingPageActivity.class));
 
-
+			}
+		});
 	
 	}
+
+
 }
 	
 	

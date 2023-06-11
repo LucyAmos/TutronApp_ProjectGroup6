@@ -529,7 +529,7 @@
 				android:paddingLeft="2mm"
 				android:inputType="number"
 				android:background="@drawable/signup_input"
-				android:hint="MM/YY"/>
+				android:hint="MMYY"/>
 
 
 			<Space
@@ -537,36 +537,10 @@
 				android:layout_height="5dp" />
 
 
-
-			<TextView
-				android:id="@+id/warning_sign_student"
-				android:layout_width="400dp"
-				android:layout_height="wrap_content"
-				android:fontFamily="@font/andada"
-				android:textStyle="bold"
-				android:textSize="16sp"
-				android:textColor="#E00000"
-				android:textAlignment="center"
-
-				android:text="@string/signup_warning"
-				android:visibility="invisible" />
-
 			<Space
 				android:layout_width="match_parent"
 				android:layout_height="5dp" />
 
-
-			<TextView
-				android:id="@+id/warning_sign_exdate"
-				android:layout_width="400dp"
-				android:layout_height="wrap_content"
-				android:fontFamily="@font/andada"
-				android:textStyle="bold"
-				android:textSize="16sp"
-				android:textColor="#E00000"
-				android:textAlignment="center"
-				android:text="@string/expiration_warning"
-				android:visibility="invisible" />
 
 			<Space
 				android:layout_width="match_parent"

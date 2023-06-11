@@ -347,18 +347,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="5dp" />
 
-            <TextView
-                android:id="@+id/warning_sign_email_tutor"
-                android:layout_width="400dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/andada"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="#E00000"
-                android:textAlignment="center"
-                android:text="@string/email_warning"
-                android:visibility="invisible" />
-
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="10dp" />

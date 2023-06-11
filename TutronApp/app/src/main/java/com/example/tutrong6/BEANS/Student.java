@@ -63,4 +63,17 @@ public class Student extends User{
         return this.getClass().getSimpleName();
     }
 
+    @Override
+    public String toString() {
+        return "Student{" +
+                "address=" + address +
+                ", credit_card=" + credit_card +
+                ", ID=" + ID +
+                ", first_name='" + first_name + '\'' +
+                ", last_name='" + last_name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", roleID=" + roleID +
+                '}';
+    }
 }

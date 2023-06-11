@@ -49,6 +49,7 @@ public class LoginPageActivity extends AppCompatActivity {
 
                         //prendre les informations du client connecté
                         User logged_user = DataBase.getUserLoggedInfoByEmail(email);
+                        Log.i("LOGGED USER", "ici: " + logged_user);
 
                         //creer sa session
                         SessionManagement sessionManagement = new SessionManagement(LoginPageActivity.this);

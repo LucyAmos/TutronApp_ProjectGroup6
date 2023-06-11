@@ -98,5 +98,15 @@ public class User {
         return m.matches();
     }
 
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "ID=" + ID +
+                ", first_name='" + first_name + '\'' +
+                ", last_name='" + last_name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", roleID=" + roleID +
+                '}';
+    }
 }

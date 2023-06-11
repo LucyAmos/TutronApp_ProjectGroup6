@@ -105,7 +105,7 @@ public class TutorSignUpActivity extends AppCompatActivity {
         Button tutorSubmit = findViewById(R.id.submit_tutor_button);
         TextView warningSign = findViewById(R.id.warning_sign_tutor);
         TextView warningSignDesc = findViewById(R.id.warning_sign_desc_tutor);
-        TextView warningSignEmail = findViewById(R.id.warning_sign_email_tutor);
+
 
         profilePictureTutor = findViewById(R.id.profile_pic_tutor);
 

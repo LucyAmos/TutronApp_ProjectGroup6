@@ -44,7 +44,7 @@
                 android:gravity="center"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:text="Sonia Wang"
+                android:text=""
                 android:textAlignment="center"
 
                 android:textColor="#004261"
@@ -92,7 +92,7 @@
             android:layout_height="45dp"
             android:fontFamily="@font/andada"
             android:gravity="center"
-            android:text="STUDENT"
+            android:text=""
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
             android:textAlignment="center"

@@ -1,5 +1,7 @@
 package com.example.tutrong6.BEANS;
 
+import java.util.Arrays;
+
 public class Tutor extends User{
     //attributs
     private String education_level;
@@ -90,5 +92,19 @@ public class Tutor extends User{
         return this.getClass().getSimpleName();
     }
 
-
+    @Override
+    public String toString() {
+        return "Tutor{" +
+                "education_level='" + education_level + '\'' +
+                ", native_language='" + native_language + '\'' +
+                ", description='" + description + '\'' +
+                ", profile_picture=" + Arrays.toString(profile_picture) +
+                ", ID=" + ID +
+                ", first_name='" + first_name + '\'' +
+                ", last_name='" + last_name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", roleID=" + roleID +
+                '}';
+    }
 }

@@ -44,7 +44,7 @@ public class StudentSignUp extends Activity {
         EditText studentCountry = findViewById(R.id.Country_student_input);
         EditText studentPostal = findViewById(R.id.postal_student_input);
 
-        TextView warningSign = findViewById(R.id.warning_sign_student);
+
 
         EditText studentCardHolderName = findViewById(R.id.cardholder_name_input);
         EditText studentCardNumber = findViewById(R.id.card_number_input);
@@ -52,7 +52,7 @@ public class StudentSignUp extends Activity {
         EditText studentExDate = findViewById(R.id.card_exdate_input);
         Button studentSubmit = findViewById(R.id.submit_student_button);
         //TextView warningSign = findViewById(R.id.warning_sign_student);
-        TextView warningSignExDate = findViewById(R.id.warning_sign_exdate);
+
         //TextView warningSignEmail = findViewById(R.id.warning_sign_email_student);
 
         studentSubmit.setOnClickListener(new View.OnClickListener() {

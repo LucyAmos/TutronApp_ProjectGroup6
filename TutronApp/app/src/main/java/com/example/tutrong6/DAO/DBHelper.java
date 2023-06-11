@@ -481,7 +481,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
     public static String getRoleNameByRoleID(int roleID)
     {
-        return(roleID==Administrator.getStaticRoleID()?"ADMINISTRATEUR":roleID==Student.getStaticRoleID()?"STUDENT":"TUTOR");
+        return(roleID==Administrator.getStaticRoleID()?"ADMINISTRATOR":roleID==Student.getStaticRoleID()?"STUDENT":"TUTOR");
     }
 
 
