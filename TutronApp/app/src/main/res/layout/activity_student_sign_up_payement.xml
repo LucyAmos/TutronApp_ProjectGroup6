@@ -4,6 +4,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	android:background="#CADEE8"
 	tools:context=".GUI.StudentSignUpPayment">
 
 	<ScrollView
@@ -32,7 +33,9 @@
 				android:gravity="center"
 				android:textColor="#0088C8"
 				android:textSize="36sp"
-				android:textStyle="bold" />
+				android:textStyle="bold"
+				android:paddingLeft="10dp"
+				android:paddingRight="10dp"/>
 
 			<Space
 				android:layout_width="match_parent"
@@ -48,6 +51,8 @@
 				android:gravity="center"
 				android:textAlignment="center"
 				android:textColor="#4E4E4E"
+				android:paddingLeft="10dp"
+				android:paddingRight="10dp"
 				android:text="@string/we_assure_you_that_your_personal_and_credit_card_information_will_not_be_used_without_your_explicit_consent__string" />
 
 			<Space
@@ -151,7 +156,7 @@
 				android:textStyle="bold"
 				android:textSize="20sp"
 				android:textColor="#000000"
-				android:text="@string/expiration_number_string" />
+				android:text="Expiration Date" />
 
 			<Space
 				android:layout_width="match_parent"
@@ -167,12 +172,12 @@
 				android:paddingLeft="2mm"
 				android:inputType="number"
 				android:background="@drawable/signup_input"
-				android:hint="@string/expiration_prompt_string"/>
+				android:hint="MM/YY"/>
 
 
 			<Space
 				android:layout_width="match_parent"
-				android:layout_height="20dp" />
+				android:layout_height="5dp" />
 
 
 
@@ -215,9 +220,10 @@
 				android:layout_height="50dp"
 				android:background="@drawable/rounded_button"
 				android:fontFamily="@font/andada"
-				android:textStyle="bold"
+				android:text="@string/submit_string"
 				android:textSize="28dp"
-				android:text="@string/submit_string" />
+				android:textColor="#FFFFFF"
+				android:textStyle="bold" />
 
 			<Space
 				android:layout_width="match_parent"

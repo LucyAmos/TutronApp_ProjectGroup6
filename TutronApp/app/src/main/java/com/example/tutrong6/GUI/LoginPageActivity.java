@@ -2,13 +2,18 @@ package com.example.tutrong6.GUI;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tutrong6.BEANS.User;
+import com.example.tutrong6.DAO.DBHelper;
+import com.example.tutrong6.DAO.SessionManagement;
 import com.example.tutrong6.R;
 
 public class LoginPageActivity extends AppCompatActivity {
@@ -16,6 +21,7 @@ public class LoginPageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        DBHelper DataBase = new DBHelper(this);
 
 
         EditText loginEmail = findViewById(R.id.email_login_input);
@@ -30,24 +36,48 @@ public class LoginPageActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                String lEM = loginEmail.getText().toString();
-                String lPS = loginPassword.getText().toString();
+                String email = loginEmail.getText().toString().trim();
+                String pass = loginPassword.getText().toString().trim();
 
 
-                if (lEM.isEmpty() || lPS.isEmpty()) {
-                    warningSign.setVisibility(View.VISIBLE);
+                if(email.equals("") || pass.equals(""))
+                    Toast.makeText(LoginPageActivity.this, "please, fill ALL the fields", Toast.LENGTH_SHORT).show();
+                else{
 
-                    //COMPARE INPUT TO DATABASE VALUE.  CHECK WHETHER EMAIL IS IN DB!!
-                //}else if (){
-                    //warningSignEmail.setVisibility(View.VISIBLE);
+                    Boolean check_user_pass = DataBase.checkEmailPassword(email,pass);
+                    if(check_user_pass==true){
 
-                    //COMPARE INPUT TO DATABASE VALUE.  CHECK WHETHER PASSWORD IS WITH ASSOCIATED EMAIL!!
-                //}else if (){
-                    //warningSignPassword.setVisibility(View.VISIBLE);
-                }   else {
-                    Intent intent = new Intent(LoginPageActivity.this, WelcomePage.class);
-                    startActivity(intent);
+                        //prendre les informations du client connecté
+                        User logged_user = DataBase.getUserLoggedInfoByEmail(email);
+
+                        //creer sa session
+                        SessionManagement sessionManagement = new SessionManagement(LoginPageActivity.this);
+                        sessionManagement.saveSession(logged_user);
+
+                        //message d approbation
+                        Toast.makeText(LoginPageActivity.this, "Log in Successfull ", Toast.LENGTH_SHORT).show();
+                        //diriger vers la page d accueil
+                         startActivity(new Intent(LoginPageActivity.this, WelcomePage.class));
+
+                    }
+                    else{
+                        int check_email_existance = DataBase.checkEmail(email) == false? 0:1;
+                        Log.i("CHECK_EMAIL", "" + check_email_existance);
+                        switch (check_email_existance)
+                        {
+                            case 0:
+                                Toast.makeText(LoginPageActivity.this, "You are NOT a member yet, SIGN UP!", Toast.LENGTH_SHORT).show();
+                                break;
+                            case 1:
+                                Toast.makeText(LoginPageActivity.this, "WRONG Credentials", Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+
+                    }
                 }
+
+               // Intent intent = new Intent(LoginPageActivity.this, WelcomePage.class);
+               // startActivity(intent);
             }
         });
 }}

@@ -1,5 +1,8 @@
 package com.example.tutrong6.BEANS;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class User {
 
     //attributs
@@ -8,10 +11,18 @@ public class User {
     protected String last_name;
     protected String email;
     protected String password;
+    protected int roleID;
 
     //constructors
 
     public User() {
+    }
+
+    public User(String first_name, String last_name, String email, String password) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.email = email;
+        this.password = password;
     }
 
     public User(int id, String first_name, String last_name, String email, String password) {
@@ -65,10 +76,27 @@ public class User {
         this.password = password;
     }
 
+    public int getRoleID() {
+        return roleID;
+    }
+
+    public void setRoleID(int roleID) {
+        this.roleID = roleID;
+    }
     //class methods and functions
 
     public String getRole()
     {
         return this.getClass().getSimpleName();
     }
+
+
+    public static boolean isValidEmailAddressFormat(String email) {
+        String emailPattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+        Pattern p = java.util.regex.Pattern.compile(emailPattern);
+        Matcher m = p.matcher(email);
+        return m.matches();
+    }
+
+
 }

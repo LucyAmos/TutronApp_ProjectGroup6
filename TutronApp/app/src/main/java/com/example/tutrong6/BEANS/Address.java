@@ -2,8 +2,11 @@ package com.example.tutrong6.BEANS;
 
 public class Address {
     //attributs
+    private int ID;
     private String street_address;
     private String city;
+
+    private String region;
     private String postal_code;
     private String country;
 
@@ -13,15 +16,24 @@ public class Address {
 
     }
 
-    public Address(String street_address, String city, String postal_code, String country) {
+    public Address(String street_address, String city, String region, String postal_code, String country) {
         this.street_address = street_address;
         this.city = city;
         this.postal_code = postal_code;
         this.country = country;
+        this.region= region;
     }
 
     //getters & setters
 
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
 
     public String getStreet_address() {
         return street_address;
@@ -39,6 +51,14 @@ public class Address {
         this.city = city;
     }
 
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
     public String getPostal_code() {
         return postal_code;
     }
@@ -54,4 +74,5 @@ public class Address {
     public void setCountry(String country) {
         this.country = country;
     }
+
 }

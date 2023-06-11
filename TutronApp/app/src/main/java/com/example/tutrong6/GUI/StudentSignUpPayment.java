@@ -44,14 +44,14 @@ public class StudentSignUpPayment extends Activity {
 				int cardMonth = Integer.parseInt(sED.substring(0, 2));
 				int cardYear = Integer.parseInt(sED.substring(2));
 
-				if (sCHN.isEmpty()||sCN.isEmpty()||sCVV.isEmpty()||sED.isEmpty()) {
+				/*if (sCHN.isEmpty()||sCN.isEmpty()||sCVV.isEmpty()||sED.isEmpty()) {
 					warningSign.setVisibility(View.VISIBLE);
 				}else if (cardYear < currentYear || (cardYear == currentYear && cardMonth <= currentMonth)){
 					warningSignExDate.setVisibility(View.VISIBLE);
 				}else {
 					Intent intent = new Intent(StudentSignUpPayment.this, WelcomePage.class);
 					startActivity(intent);
-				}
+				}*/
 			}
 		});
 	}

@@ -3,9 +3,12 @@ package com.example.tutrong6.GUI;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -13,10 +16,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.tutrong6.BEANS.*;
+import com.example.tutrong6.DAO.*;
 import com.example.tutrong6.R;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
 import java.net.CookieHandler;
 import java.util.Collections;
 
@@ -57,7 +64,7 @@ public class TutorSignUpActivity extends AppCompatActivity {
     };
 
 
-
+    ImageView profilePictureTutor;
 
     private static final int PICK_IMAGE_REQUEST = 1;
 
@@ -65,6 +72,8 @@ public class TutorSignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutor_signup);
+
+        DBHelper DataBase = new DBHelper(this);
 
         ImageView profilePictureTutor = findViewById(R.id.profile_pic_tutor);
         profilePictureTutor.setOnClickListener(new View.OnClickListener() {
@@ -98,28 +107,69 @@ public class TutorSignUpActivity extends AppCompatActivity {
         TextView warningSignDesc = findViewById(R.id.warning_sign_desc_tutor);
         TextView warningSignEmail = findViewById(R.id.warning_sign_email_tutor);
 
+        profilePictureTutor = findViewById(R.id.profile_pic_tutor);
+
+        ImageView finalProfilePictureTutor = profilePictureTutor;
         tutorSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String tFN = tutorFirstName.getText().toString();
-                String tLN = tutorLastName.getText().toString();
-                String tEM = tutorEmail.getText().toString();
-                String tPS = tutorPassword.getText().toString();
-                String tDS = tutorDescription.getText().toString();
-                String tNL = tutorNativeLanguages.getText().toString();
-                String tEL = tutorEducationLevels.getText().toString();
+                String first_name = tutorFirstName.getText().toString().trim();
+                String last_name = tutorLastName.getText().toString().trim();
+                String email = tutorEmail.getText().toString().trim();
+                String password = tutorPassword.getText().toString().trim();
 
-                if (tFN.isEmpty() || tLN.isEmpty() || tEM.isEmpty() || tPS.isEmpty() || tDS.isEmpty() || tNL.isEmpty() || tEL.isEmpty()) {
-                    warningSign.setVisibility(View.VISIBLE);
-                }else if (tDS.length() > 600){
-                    warningSignDesc.setVisibility(View.VISIBLE);
-                }else if (!tEM.contains("@")){
-                    warningSignEmail.setVisibility(View.VISIBLE);
-                }   else {
-                    Intent intent = new Intent(TutorSignUpActivity.this, WelcomePage.class);
-                    startActivity(intent);
+                String description = tutorDescription.getText().toString().trim();
+                String native_language = tutorNativeLanguages.getText().toString().trim();
+                String education_level = tutorEducationLevels.getText().toString().trim();
+                byte[] profile_picture = convertToByte(finalProfilePictureTutor);
+
+
+
+                if(first_name.isEmpty() || last_name.isEmpty() || email.isEmpty() || password.isEmpty() ||
+                        education_level.isEmpty() || native_language.isEmpty() || description.isEmpty()
+                )
+                {
+                    Toast.makeText(TutorSignUpActivity.this, "please, fill ALL the fields", Toast.LENGTH_SHORT).show();
                 }
+                else
+                {
+                    if(!User.isValidEmailAddressFormat(email))
+                    {
+                        Toast.makeText(TutorSignUpActivity.this, "email format invalid", Toast.LENGTH_SHORT).show();
+                    }
+
+                    else
+                    {
+                        int checkUser = DataBase.checkEmail(email)==false?0:1;
+
+                        switch(checkUser)
+                        {
+                            case 0:
+
+                                Tutor tutor = new Tutor(first_name,last_name,email,password,education_level,native_language,description,profile_picture);
+                                Log.i("  PROFILE PICTURE", " HUMM" + profile_picture);
+
+                                Boolean insert = DataBase.addTutor(tutor);
+                                if(insert==true){
+                                    Toast.makeText(TutorSignUpActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(TutorSignUpActivity.this, LoginPageActivity.class));
+
+                                }else{
+                                    Toast.makeText(TutorSignUpActivity.this, "Registration failed", Toast.LENGTH_SHORT).show();
+                                }
+                                break;
+                            case 1:
+                                Toast.makeText(TutorSignUpActivity.this, "you ALREADY HAVE an Account, please LOG IN", Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+
+                    }
+
+                }
+
+                /*Intent intent = new Intent(TutorSignUpActivity.this, LoginPageActivity.class);
+                startActivity(intent);*/
             }
         });
     }
@@ -135,9 +185,23 @@ public class TutorSignUpActivity extends AppCompatActivity {
             Uri imageUri = data.getData();
 
 
-            ImageView profilePictureTutor = findViewById(R.id.profile_pic_tutor);
+             profilePictureTutor = findViewById(R.id.profile_pic_tutor);
             Picasso.get().load(imageUri).into(profilePictureTutor);
 
+        }
+    }
+
+    public static byte[] convertToByte(ImageView imageView) {
+        try {
+            Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            byte[] bytesData = stream.toByteArray();
+            stream.close();
+            return bytesData;
+        } catch(Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 

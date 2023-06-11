@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#CADEE8"
     tools:context=".GUI.LandingPageActivity">
 
 
@@ -14,20 +15,19 @@
         >
 
         <TextView
+            android:paddingTop="10dp"
             android:id="@+id/app_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/andada"
-            android:text="@string/app_name"
+            android:text="Welcome to Tutron!"
             android:textAlignment="center"
             android:gravity="center"
             android:textColor="#0088C8"
             android:textSize="48sp"
             android:textStyle="bold" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
+
 
         <ImageView
             android:id="@+id/landing_image"
@@ -38,23 +38,11 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="30dp" />
+            android:layout_height="40dp" />
 
-        <TextView
-            android:id="@+id/landing_welcome_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/Tutron_landing_prompt"
-            android:textAlignment="center"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="40sp"
-            android:textStyle="bold"
-            android:fontFamily="@font/andada"/>
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
+
+
 
         <TextView
             android:id="@+id/landing_desc"
@@ -66,6 +54,8 @@
             android:textColor="@color/black"
             android:textSize="30sp"
             android:textStyle="bold"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             android:fontFamily="@font/andada"/>
 
         <Space
@@ -83,13 +73,14 @@
             android:textSize="20sp"
             android:textStyle="italic"
             android:fontFamily="@font/andada"
-            android:paddingLeft="2mm"
-            android:paddingRight="2mm"/>
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:layout_marginBottom="40dp"/>
 
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="15dp" />
+            android:layout_height="10dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -102,12 +93,13 @@
                 android:layout_width="150dp"
                 android:layout_height="60dp"
                 android:background="@drawable/rounded_button"
+                android:fontFamily="@font/andada"
                 android:gravity="center"
                 android:text="@string/login_text"
-                android:textColor="#000000"
+                android:textColor="#FFFFFF"
                 android:textSize="24sp"
-                android:textStyle="italic"
-                android:fontFamily="@font/andada"/>
+                android:textStyle="bold"
+               />
 
             <Space
                 android:layout_width="50dp"
@@ -119,12 +111,13 @@
                 android:layout_width="150dp"
                 android:layout_height="60dp"
                 android:background="@drawable/rounded_button"
+                android:fontFamily="@font/andada"
                 android:gravity="center"
                 android:text="@string/sign_up_text"
-                android:textColor="#000000"
+                android:textColor="#FFFFFF"
                 android:textSize="24sp"
-                android:textStyle="italic"
-                android:fontFamily="@font/andada"/>
+                android:textStyle="bold"
+                />
         </LinearLayout>
 
     </LinearLayout>

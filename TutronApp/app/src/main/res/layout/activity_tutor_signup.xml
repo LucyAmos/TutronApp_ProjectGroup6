@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#CADEE8"
     tools:context=".GUI.TutorSignUpActivity">
 
     <ScrollView
@@ -16,7 +17,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+           >
+
 
             <Space
                 android:layout_width="match_parent"
@@ -27,12 +30,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/andada"
-                android:text="@string/thank_you_for_signing_up_tutor_string"
+                android:text="Dear Tutor,"
                 android:textAlignment="center"
                 android:gravity="center"
                 android:textColor="#0088C8"
                 android:textSize="36sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"/>
 
             <Space
                 android:layout_width="match_parent"
@@ -47,6 +52,8 @@
                 android:textSize="24sp"
                 android:gravity="center"
                 android:textAlignment="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:textColor="#4E4E4E"
                 android:text="@string/set_up_your_details_string" />
 
@@ -62,6 +69,8 @@
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:textColor="#000000"
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp"
                 android:text="@string/first_name_string" />
 
             <Space
@@ -70,7 +79,7 @@
 
             <EditText
                 android:id="@+id/first_name_tutor_input"
-                android:layout_width="400dp"
+                android:layout_width="370dp"
                 android:layout_height="50dp"
                 android:ems="10"
                 android:textStyle="italic"
@@ -92,6 +101,8 @@
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:textColor="#000000"
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp"
                 android:text="@string/last_name_string" />
             <Space
                 android:layout_width="match_parent"
@@ -99,7 +110,7 @@
 
             <EditText
                 android:id="@+id/last_name_tutor_input"
-                android:layout_width="400dp"
+                android:layout_width="370dp"
                 android:layout_height="50dp"
                 android:ems="10"
                 android:textStyle="italic"
@@ -121,6 +132,8 @@
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:textColor="#000000"
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp"
                 android:text="@string/email_string" />
 
             <Space
@@ -129,7 +142,7 @@
 
             <EditText
                 android:id="@+id/email_tutor_input"
-                android:layout_width="400dp"
+                android:layout_width="370dp"
                 android:layout_height="50dp"
                 android:ems="10"
                 android:textStyle="italic"
@@ -151,6 +164,8 @@
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:textColor="#000000"
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp"
                 android:text="@string/password_string" />
 
             <Space
@@ -159,7 +174,7 @@
 
             <EditText
                 android:id="@+id/password_tutor_input"
-                android:layout_width="400dp"
+                android:layout_width="370dp"
                 android:layout_height="50dp"
                 android:ems="10"
                 android:textStyle="italic"
@@ -181,6 +196,8 @@
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:textColor="#000000"
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp"
                 android:text="@string/education_level_string" />
 
             <Space
@@ -189,7 +206,7 @@
 
             <AutoCompleteTextView
                 android:id="@+id/education_level_tutor_input"
-                android:layout_width="400dp"
+                android:layout_width="370dp"
                 android:layout_height="50dp"
                 android:ems="10"
                 android:textStyle="italic"
@@ -211,6 +228,8 @@
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:textColor="#000000"
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp"
                 android:text="@string/native_language_string" />
 
             <Space
@@ -219,7 +238,7 @@
 
             <AutoCompleteTextView
                 android:id="@+id/native_language_tutor_input"
-                android:layout_width="400dp"
+                android:layout_width="370dp"
                 android:layout_height="50dp"
                 android:ems="10"
                 android:textStyle="italic"
@@ -241,6 +260,8 @@
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:textColor="#000000"
+                android:paddingLeft="20dp"
+                android:paddingRight="10dp"
                 android:text="@string/description_string"  />
 
             <Space
@@ -249,7 +270,7 @@
 
             <EditText
                 android:id="@+id/description_tutor_input"
-                android:layout_width="400dp"
+                android:layout_width="370dp"
                 android:layout_height="300dp"
                 android:ems="10"
                 android:textStyle="italic"
@@ -350,6 +371,7 @@
                 android:fontFamily="@font/andada"
                 android:textStyle="bold"
                 android:textSize="28dp"
+                android:textColor="#FFFFFF"
                 android:text="@string/submit_string" />
 
             <Space

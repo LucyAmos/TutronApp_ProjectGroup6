@@ -3,7 +3,7 @@ package com.example.tutrong6.BEANS;
 public class CreditCard {
     //attribut
     private int ID;
-    private String num_carte;
+    private String num_card;
     private String holder_name;
     private String exp_date;
     private int cvc;
@@ -13,9 +13,8 @@ public class CreditCard {
 
     }
 
-    public CreditCard(int ID, String num_carte, String holder_name, String exp_date, int cvc) {
-        this.ID = ID;
-        this.num_carte = num_carte;
+    public CreditCard(String num_carte, String holder_name, String exp_date, int cvc) {
+        this.num_card = num_carte;
         this.holder_name = holder_name;
         this.exp_date = exp_date;
         this.cvc = cvc;
@@ -32,12 +31,12 @@ public class CreditCard {
         this.ID = ID;
     }
 
-    public String getNum_carte() {
-        return num_carte;
+    public String getNum_card() {
+        return num_card;
     }
 
-    public void setNum_carte(String num_carte) {
-        this.num_carte = num_carte;
+    public void setNum_card(String num_card) {
+        this.num_card = num_card;
     }
 
     public String getHolder_name() {

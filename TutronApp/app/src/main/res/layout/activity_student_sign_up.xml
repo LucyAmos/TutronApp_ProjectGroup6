@@ -4,6 +4,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	android:background="#CADEE8"
 	tools:context=".GUI.StudentSignUp">
 
 	<ScrollView
@@ -27,19 +28,21 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:fontFamily="@font/andada"
-				android:text="@string/thank_you_for_signing_up_student_string"
+				android:text="Dear Student,"
 				android:textAlignment="center"
 				android:gravity="center"
 				android:textColor="#0088C8"
 				android:textSize="36sp"
-				android:textStyle="bold" />
+				android:textStyle="bold"
+				android:paddingLeft="10dp"
+				android:paddingRight="10dp"/>
 
 			<Space
 				android:layout_width="match_parent"
 				android:layout_height="20dp" />
 
 			<TextView
-				android:id="@+id/details_prompt_student_signup"
+				android:id="@+id/details_prompt_student_signup1"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:fontFamily="@font/andada"
@@ -47,8 +50,12 @@
 				android:textSize="24sp"
 				android:gravity="center"
 				android:textAlignment="center"
-				android:textColor="#4E4E4E"
+				android:paddingLeft="10dp"
+				android:paddingRight="10dp"
+				android:textColor="#52707E"
 				android:text="@string/set_up_your_details_string" />
+
+
 
 			<Space
 				android:layout_width="match_parent"
@@ -62,6 +69,9 @@
 				android:textStyle="bold"
 				android:textSize="20sp"
 				android:textColor="#000000"
+				android:paddingLeft="20dp"
+				android:paddingRight="10dp"
+
 				android:text="@string/first_name_string" />
 
 			<Space
@@ -70,15 +80,16 @@
 
 			<EditText
 				android:id="@+id/first_name_student_input"
-				android:layout_width="400dp"
+				android:layout_width="370dp"
 				android:layout_height="50dp"
 				android:ems="10"
 				android:textStyle="italic"
 				android:inputType="text"
 				android:fontFamily="@font/andada"
-				android:paddingLeft="2mm"
 				android:background="@drawable/signup_input"
-				android:hint="@string/first_name_string" />
+				android:hint="@string/first_name_string"
+				android:paddingLeft="10dp"
+				android:paddingRight="10dp"/>
 
 			<Space
 				android:layout_width="match_parent"
@@ -92,6 +103,8 @@
 				android:textStyle="bold"
 				android:textSize="20sp"
 				android:textColor="#000000"
+				android:paddingLeft="20dp"
+				android:paddingRight="10dp"
 				android:text="@string/last_name_string" />
 			<Space
 				android:layout_width="match_parent"
@@ -99,7 +112,7 @@
 
 			<EditText
 				android:id="@+id/last_name_student_input"
-				android:layout_width="400dp"
+				android:layout_width="370dp"
 				android:layout_height="50dp"
 				android:ems="10"
 				android:textStyle="italic"
@@ -121,6 +134,8 @@
 				android:textStyle="bold"
 				android:textSize="20sp"
 				android:textColor="#000000"
+				android:paddingLeft="20dp"
+				android:paddingRight="10dp"
 				android:text="@string/email_string" />
 
 			<Space
@@ -129,7 +144,7 @@
 
 			<EditText
 				android:id="@+id/email_student_input"
-				android:layout_width="400dp"
+				android:layout_width="370dp"
 				android:layout_height="50dp"
 				android:ems="10"
 				android:textStyle="italic"
@@ -151,6 +166,8 @@
 				android:textStyle="bold"
 				android:textSize="20sp"
 				android:textColor="#000000"
+				android:paddingLeft="20dp"
+				android:paddingRight="10dp"
 				android:text="@string/password_string" />
 
 			<Space
@@ -159,7 +176,7 @@
 
 			<EditText
 				android:id="@+id/password_student_input"
-				android:layout_width="400dp"
+				android:layout_width="370dp"
 				android:layout_height="50dp"
 				android:ems="10"
 				android:textStyle="italic"
@@ -171,7 +188,26 @@
 
 			<Space
 				android:layout_width="match_parent"
-				android:layout_height="20dp" />
+				android:layout_height="40dp" />
+			<TextView
+				android:id="@+id/details_prompt_student_signup2"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/andada"
+				android:textStyle="bold"
+				android:textSize="24sp"
+				android:gravity="center"
+				android:textAlignment="center"
+				android:paddingLeft="10dp"
+				android:paddingRight="10dp"
+				android:textColor="#52707E"
+				android:text="Enter your address" />
+
+
+
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="40dp" />
 
 			<TextView
 				android:id="@+id/address_student_text"
@@ -181,7 +217,9 @@
 				android:textStyle="bold"
 				android:textSize="20sp"
 				android:textColor="#000000"
-				android:text="@string/address_string" />
+				android:paddingLeft="20dp"
+				android:paddingRight="10dp"
+				android:text="Street Address" />
 
 			<Space
 				android:layout_width="match_parent"
@@ -189,7 +227,7 @@
 
 			<EditText
 				android:id="@+id/address_student_input"
-				android:layout_width="400dp"
+				android:layout_width="370dp"
 				android:layout_height="50dp"
 				android:ems="10"
 				android:textStyle="italic"
@@ -197,7 +235,7 @@
 				android:inputType="text"
 				android:paddingLeft="2mm"
 				android:background="@drawable/signup_input"
-				android:hint="@string/address_string" />
+				android:hint="Street Address" />
 
 			<Space
 				android:layout_width="match_parent"
@@ -211,6 +249,8 @@
 				android:textStyle="bold"
 				android:textSize="20sp"
 				android:textColor="#000000"
+				android:paddingLeft="20dp"
+				android:paddingRight="10dp"
 				android:text="@string/city_string" />
 
 			<Space
@@ -219,15 +259,15 @@
 
 			<EditText
 				android:id="@+id/city_student_input"
-				android:layout_width="400dp"
+				android:layout_width="370dp"
 				android:layout_height="50dp"
 				android:ems="10"
 				android:textStyle="italic"
 				android:fontFamily="@font/andada"
 				android:inputType="text"
-				android:paddingLeft="2mm"
+				android:paddingLeft="20sp"
 				android:background="@drawable/signup_input"
-				android:text="Ottawa" />
+				android:hint="City" />
 
 			<Space
 				android:layout_width="match_parent"
@@ -241,6 +281,8 @@
 				android:textStyle="bold"
 				android:textSize="20sp"
 				android:textColor="#000000"
+				android:paddingLeft="20dp"
+				android:paddingRight="10dp"
 				android:text="@string/region_string" />
 
 			<Space
@@ -249,7 +291,7 @@
 
 			<EditText
 				android:id="@+id/Region_student_input"
-				android:layout_width="400dp"
+				android:layout_width="370dp"
 				android:layout_height="50dp"
 				android:ems="10"
 				android:textStyle="italic"
@@ -257,7 +299,7 @@
 				android:inputType="text"
 				android:paddingLeft="2mm"
 				android:background="@drawable/signup_input"
-				android:text="Ontario" />
+				android:hint="Region" />
 
 			<Space
 				android:layout_width="match_parent"
@@ -271,6 +313,8 @@
 				android:textStyle="bold"
 				android:textSize="20sp"
 				android:textColor="#000000"
+				android:paddingLeft="20dp"
+				android:paddingRight="10dp"
 				android:text="@string/country_string" />
 
 			<Space
@@ -279,7 +323,7 @@
 
 			<EditText
 				android:id="@+id/Country_student_input"
-				android:layout_width="400dp"
+				android:layout_width="370dp"
 				android:layout_height="50dp"
 				android:ems="10"
 				android:textStyle="italic"
@@ -287,7 +331,9 @@
 				android:inputType="text"
 				android:paddingLeft="2mm"
 				android:background="@drawable/signup_input"
-				android:text="Canada" />
+				android:hint="Country" />
+
+
 
 			<Space
 				android:layout_width="match_parent"
@@ -301,6 +347,8 @@
 				android:textStyle="bold"
 				android:textSize="20sp"
 				android:textColor="#000000"
+				android:paddingLeft="20dp"
+				android:paddingRight="10dp"
 				android:text="@string/postalcode_string" />
 
 			<Space
@@ -309,7 +357,7 @@
 
 			<EditText
 				android:id="@+id/postal_student_input"
-				android:layout_width="400dp"
+				android:layout_width="370dp"
 				android:layout_height="50dp"
 				android:ems="10"
 				android:textStyle="italic"
@@ -321,7 +369,172 @@
 
 			<Space
 				android:layout_width="match_parent"
+				android:layout_height="5dp" />
+
+
+
+			<!--<TextView
+				android:id="@+id/warning_sign_email_student"
+				android:layout_width="400dp"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/andada"
+				android:textStyle="bold"
+				android:textSize="16sp"
+				android:textColor="#E00000"
+				android:textAlignment="center"
+				android:text="@string/email_warning"
+				android:visibility="invisible" />
+
+
+			-->
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="40dp" />
+
+			<TextView
+				android:id="@+id/details_prompt_student_signup3"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/andada"
+				android:textStyle="bold"
+				android:textSize="24sp"
+				android:gravity="center"
+				android:textAlignment="center"
+				android:paddingLeft="10dp"
+				android:paddingRight="10dp"
+				android:textColor="#52707E"
+				android:text="Enter your credit card infos" />
+
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="40dp" />
+			<TextView
+				android:id="@+id/cardholder_name_text"
+				android:layout_width="400dp"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/andada"
+				android:textStyle="bold"
+				android:textSize="20sp"
+				android:textColor="#000000"
+				android:paddingLeft="20dp"
+				android:paddingRight="10dp"
+				android:text="@string/card_holder_name_string" />
+
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="10dp" />
+
+			<EditText
+				android:id="@+id/cardholder_name_input"
+				android:layout_width="370dp"
+				android:layout_height="50dp"
+				android:ems="10"
+				android:textStyle="italic"
+				android:inputType="text"
+				android:fontFamily="@font/andada"
+				android:paddingLeft="2mm"
+				android:background="@drawable/signup_input"
+				android:hint="@string/card_holder_name_string" />
+
+			<Space
+				android:layout_width="match_parent"
 				android:layout_height="20dp" />
+
+			<TextView
+				android:id="@+id/card_number_text"
+				android:layout_width="400dp"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/andada"
+				android:textStyle="bold"
+				android:textSize="20sp"
+				android:textColor="#000000"
+				android:paddingLeft="20dp"
+				android:paddingRight="10dp"
+				android:text="Card Number" />
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="10dp" />
+
+			<EditText
+				android:id="@+id/card_number_input"
+				android:layout_width="370dp"
+				android:layout_height="50dp"
+				android:ems="10"
+				android:textStyle="italic"
+				android:fontFamily="@font/andada"
+				android:inputType="number"
+				android:paddingLeft="2mm"
+				android:background="@drawable/signup_input"
+				android:hint="@string/credit_debit_card_numbers_prompt_string" />
+
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="20dp" />
+
+			<TextView
+				android:id="@+id/CVV_number_text"
+				android:layout_width="400dp"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/andada"
+				android:textStyle="bold"
+				android:textSize="20sp"
+				android:textColor="#000000"
+				android:paddingLeft="20dp"
+				android:paddingRight="10dp"
+				android:text="@string/cvv_number_string" />
+
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="10dp" />
+
+			<EditText
+				android:id="@+id/CVV_number_input"
+				android:layout_width="370dp"
+				android:layout_height="50dp"
+				android:ems="10"
+				android:textStyle="italic"
+				android:fontFamily="@font/andada"
+				android:paddingLeft="2mm"
+				android:background="@drawable/signup_input"
+				android:inputType="number"
+				android:hint="@string/cvv_prompt_string"/>
+
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="20dp" />
+
+			<TextView
+				android:id="@+id/card_exdate_text"
+				android:layout_width="400dp"
+				android:layout_height="wrap_content"
+				android:fontFamily="@font/andada"
+				android:textStyle="bold"
+				android:textSize="20sp"
+				android:textColor="#000000"
+				android:paddingLeft="20dp"
+				android:paddingRight="10dp"
+				android:text="Expiration Date" />
+
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="10dp" />
+
+			<EditText
+				android:id="@+id/card_exdate_input"
+				android:layout_width="370dp"
+				android:layout_height="50dp"
+				android:ems="10"
+				android:textStyle="italic"
+				android:fontFamily="@font/andada"
+				android:paddingLeft="2mm"
+				android:inputType="number"
+				android:background="@drawable/signup_input"
+				android:hint="MM/YY"/>
+
+
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="5dp" />
 
 
 
@@ -334,6 +547,7 @@
 				android:textSize="16sp"
 				android:textColor="#E00000"
 				android:textAlignment="center"
+
 				android:text="@string/signup_warning"
 				android:visibility="invisible" />
 
@@ -343,7 +557,7 @@
 
 
 			<TextView
-				android:id="@+id/warning_sign_email_student"
+				android:id="@+id/warning_sign_exdate"
 				android:layout_width="400dp"
 				android:layout_height="wrap_content"
 				android:fontFamily="@font/andada"
@@ -351,22 +565,32 @@
 				android:textSize="16sp"
 				android:textColor="#E00000"
 				android:textAlignment="center"
-				android:text="@string/email_warning"
+				android:text="@string/expiration_warning"
 				android:visibility="invisible" />
 
 			<Space
 				android:layout_width="match_parent"
 				android:layout_height="10dp" />
 
+			<Space
+				android:layout_width="match_parent"
+				android:layout_height="20dp" />
+
+
+
 			<Button
-				android:id="@+id/continue_student_button"
+				android:id="@+id/submit_student_button"
 				android:layout_width="200dp"
 				android:layout_height="50dp"
 				android:background="@drawable/rounded_button"
 				android:fontFamily="@font/andada"
 				android:textStyle="bold"
 				android:textSize="28dp"
-				android:text="@string/continue_string" />
+				android:textColor="#FFFFFF"
+				android:text="SUBMIT" />
+
+
+
 
 			<Space
 				android:layout_width="match_parent"

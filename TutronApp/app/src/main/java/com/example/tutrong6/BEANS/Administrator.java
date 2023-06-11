@@ -1,15 +1,30 @@
 package com.example.tutrong6.BEANS;
 
 public class Administrator extends User{
+    //attributs
+    private final static int ROLE = 1;
 
     //constructors
 
     public Administrator() {
+        this.roleID = ROLE;
     }
 
-    public Administrator(int id, String first_name, String last_name, String email, String password) {
-        super(id, first_name, last_name, email, password);
+    public Administrator(User user) {
+        super( user.ID, user.first_name, user.last_name, user.email, user.password);
+        this.roleID = ROLE;
     }
+
+    public Administrator(String first_name, String last_name, String email, String password) {
+        super(first_name, last_name, email, password);
+        this.roleID = ROLE;
+    }
+
+    public static int getStaticRoleID()
+    {
+        return ROLE;
+    }
+
 
     //class methods and functions
 

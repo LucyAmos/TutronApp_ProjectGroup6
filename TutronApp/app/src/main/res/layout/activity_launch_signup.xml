@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#CADEE8"
     tools:context=".GUI.SignUpLauncherActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFFFFF"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,6 +18,25 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
+
+        <TextView
+            android:id="@+id/welcome_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/andada"
+            android:text="Sign Up!"
+            android:textAlignment="center"
+            android:textColor="#0088C8"
+            android:textSize="48sp"
+            android:textStyle="bold"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
         <ImageView
             android:id="@+id/logo_image"
             android:layout_width="400dp"
@@ -27,22 +46,8 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="50dp" />
+            android:layout_height="40dp" />
 
-        <TextView
-            android:id="@+id/welcome_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/andada"
-            android:text="@string/welcome_to_string"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="30dp" />
 
         <TextView
             android:id="@+id/intro_text"
@@ -53,11 +58,13 @@
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"/>
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="30dp" />
+            android:layout_height="25dp" />
 
         <TextView
             android:id="@+id/tutor_text_prompt"
@@ -67,11 +74,12 @@
             android:text="@string/sign_up_prompt_string"
             android:textColor="#000000"
             android:textSize="24sp"
-            android:textStyle="bold" />
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="15dp" />
+            android:layout_height="25dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -82,14 +90,14 @@
             <Button
                 android:id="@+id/tutor_btn"
                 android:layout_width="180dp"
-                android:layout_height="100dp"
+                android:layout_height="70dp"
                 android:background="@drawable/rounded_button"
-                android:fontFamily="@font/andada"
                 android:text="@string/tutor_btn_string"
-                android:textColor="#000000"
+                android:textColor="#FFFFFF"
                 android:textSize="30sp"
                 android:gravity="center"
-                android:textStyle="italic" />
+                android:textStyle="bold"
+                 />
 
             <Space
                 android:layout_width="15dp"
@@ -99,14 +107,14 @@
             <Button
                 android:id="@+id/student_btn"
                 android:layout_width="180dp"
-                android:layout_height="100dp"
+                android:layout_height="70dp"
                 android:background="@drawable/rounded_button"
-                android:fontFamily="@font/andada"
                 android:gravity="center"
                 android:text="@string/student_btn_string"
-                android:textColor="#000000"
+                android:textColor="#FFFFFF"
                 android:textSize="30sp"
-                android:textStyle="italic" />
+                android:textStyle="bold"
+                 />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

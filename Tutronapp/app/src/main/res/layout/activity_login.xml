@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#CADEE8"
     tools:context=".GUI.LoginPageActivity">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp">
+
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,39 +21,28 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="20dp" />
+                android:layout_height="50dp" />
 
             <TextView
                 android:id="@+id/welcome_back_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/andada"
-                android:text="@string/welcome_back"
+                android:text="@string/enter_credentials_string"
                 android:textAlignment="center"
                 android:gravity="center"
                 android:textColor="#0088C8"
                 android:textSize="36sp"
-                android:textStyle="bold" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="20dp" />
-
-            <TextView
-                android:id="@+id/details_prompt_login_prompt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/andada"
                 android:textStyle="bold"
-                android:textSize="24sp"
-                android:gravity="center"
-                android:textAlignment="center"
-                android:textColor="#4E4E4E"
-                android:text="@string/enter_credentials_string" />
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                />
+
+
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="50dp" />
+                android:layout_height="60dp" />
 
 
             <TextView
@@ -63,6 +53,8 @@
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:textColor="#000000"
+                android:paddingLeft="15dp"
+                android:paddingRight="10dp"
                 android:text="@string/email_string" />
 
             <Space
@@ -71,13 +63,14 @@
 
             <EditText
                 android:id="@+id/email_login_input"
-                android:layout_width="400dp"
+                android:layout_width="375dp"
                 android:layout_height="50dp"
                 android:ems="10"
                 android:textStyle="italic"
-                android:paddingLeft="2mm"
                 android:background="@drawable/signup_input"
                 android:inputType="textEmailAddress"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:hint="@string/email_generic_com_string"/>
 
             <Space
@@ -92,6 +85,8 @@
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:textColor="#000000"
+                android:paddingLeft="15dp"
+                android:paddingRight="10dp"
                 android:text="@string/password_string" />
 
             <Space
@@ -100,7 +95,7 @@
 
             <EditText
                 android:id="@+id/password_login_input"
-                android:layout_width="400dp"
+                android:layout_width="375dp"
                 android:layout_height="50dp"
                 android:ems="10"
                 android:textStyle="italic"
@@ -167,6 +162,7 @@
                 android:fontFamily="@font/andada"
                 android:textStyle="bold"
                 android:textSize="28dp"
+                android:textColor="#FFFFFF"
                 android:text="@string/login_text" />
 
             <Space
