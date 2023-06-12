@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#CADEE8"
     tools:context=".GUI.WelcomePage">
 
 
@@ -18,38 +19,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/andada"
-            android:text="@string/app_name"
+            android:text="WELCOME,"
             android:textAlignment="center"
             android:gravity="center"
             android:textColor="#0088C8"
-            android:textSize="48sp"
-            android:textStyle="bold" />
+            android:textSize="72sp"
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"/>
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
 
-        <ImageView
-            android:id="@+id/landing_image"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_gravity="center"
-            android:src="@drawable/tutor_and_student" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="30dp" />
 
-        <TextView
-            android:id="@+id/welcome_page_welcome_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/andada"
-            android:text="@string/welcome_welcome_page"
-            android:paddingLeft="2mm"
-            android:textColor="#0015A6"
-            android:textSize="40sp"
-            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,29 +38,19 @@
 
             <TextView
                 android:id="@+id/user_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="68dp"
                 android:fontFamily="@font/andada"
                 android:gravity="center"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
                 android:text=""
                 android:textAlignment="center"
-                android:paddingLeft="2mm"
-                android:textColor="@color/black"
-                android:textSize="40sp"
-                android:textStyle="bold|italic" />
 
-            <TextView
-                android:id="@+id/exclaimation_welcome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="2mm"
-                android:fontFamily="@font/andada"
-                android:gravity="center"
-                android:text="!"
-                android:textAlignment="center"
-                android:textColor="@color/black"
+                android:textColor="#004261"
                 android:textSize="40sp"
                 android:textStyle="bold" />
+
 
         </LinearLayout>
 
@@ -88,11 +58,26 @@
             android:layout_width="match_parent"
             android:layout_height="20dp" />
 
+        <ImageView
+            android:id="@+id/landing_image"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:layout_gravity="center"
+            android:src="@drawable/tutor_and_student" />
+
+
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
         <TextView
             android:id="@+id/login_status_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/login_status_text_string"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             android:textAlignment="center"
             android:gravity="center"
             android:textColor="@color/black"
@@ -101,20 +86,37 @@
             android:fontFamily="@font/andada"/>
 
         <TextView
-            android:id="@+id/account_status"
+            android:id="@+id/user_role"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textAlignment="center"
+            android:layout_height="45dp"
+            android:fontFamily="@font/andada"
             android:gravity="center"
-            android:textColor="#E00000"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:fontFamily="@font/andada"/>
+            android:text=""
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textAlignment="center"
+            android:textColor="#C800A7"
+            android:textSize="40sp"
+            android:textStyle="bold" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="15dp" />
+
+        <Button
+            android:id="@+id/Logout_btn"
+            android:layout_width="211dp"
+            android:layout_height="61dp"
+            android:layout_marginLeft="100dp"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/andada"
+            android:gravity="center"
+            android:text="LOG OUT"
+            android:textColor="#FFFFFF"
+            android:textSize="28dp"
+            android:textStyle="bold" />
+
+
 
 
     </LinearLayout>
