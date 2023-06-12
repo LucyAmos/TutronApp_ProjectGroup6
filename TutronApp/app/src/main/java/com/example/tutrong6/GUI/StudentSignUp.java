@@ -81,12 +81,12 @@ public class StudentSignUp extends Activity {
                         street_address.isEmpty() || city.isEmpty() || region.isEmpty() || country.isEmpty() || postal.isEmpty() ||
                         card_holder_name.isEmpty() || card_number.isEmpty() || cvc.isEmpty() || exp_date.isEmpty())
 
-                    Toast.makeText(StudentSignUp.this, "please, fill ALL the fields", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(StudentSignUp.this, "Please, fill in ALL the fields", Toast.LENGTH_SHORT).show();
 
                 else {
 
                     if (!User.isValidEmailAddressFormat(email)) {
-                        Toast.makeText(StudentSignUp.this, "email format invalid", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(StudentSignUp.this, "Invalid Email Format", Toast.LENGTH_SHORT).show();
                     } else {
 
                         Log.i("email Value=", " " + email);
@@ -109,7 +109,7 @@ public class StudentSignUp extends Activity {
                                 }
                                 break;
                             case 1:
-                                Toast.makeText(StudentSignUp.this, "you ALREADY HAVE an Account, please LOG IN", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(StudentSignUp.this, "You ALREADY HAVE an Account, please LOG IN", Toast.LENGTH_SHORT).show();
                                 break;
                         }
 

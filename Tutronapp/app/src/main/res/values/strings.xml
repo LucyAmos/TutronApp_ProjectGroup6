@@ -60,7 +60,7 @@
     <string name="card_holder_name_string">Card Holder Name</string>
 
     <string name="credit_debit_card_numbers_string">Credit/Debit Card Numbers</string>
-    <string name="credit_debit_card_numbers_prompt_string">#### #### #### ####</string>
+    <string name="credit_debit_card_numbers_prompt_string">################</string>
 
     <string name="cvv_number_string">CVV Number</string>
     <string name="cvv_prompt_string">CVV</string>
@@ -86,7 +86,7 @@
 
     <string name="description_string">Description</string>
 
-    <string name="description_prompt_string">Description...(600 characters max.)</string>
+    <string name="description_prompt_string">Personal Short Description...(600 characters max.)</string>
 
     <string name="profile_picture_prompt_string">Click Image To Set A Profile Picture (optional)</string>
 

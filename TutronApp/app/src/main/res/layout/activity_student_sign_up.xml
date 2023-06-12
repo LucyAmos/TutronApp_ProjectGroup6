@@ -204,7 +204,6 @@
 				android:text="Enter your address" />
 
 
-
 			<Space
 				android:layout_width="match_parent"
 				android:layout_height="40dp" />
@@ -403,7 +402,7 @@
 				android:paddingLeft="10dp"
 				android:paddingRight="10dp"
 				android:textColor="#52707E"
-				android:text="Enter your credit card infos" />
+				android:text="Enter your credit card information" />
 
 			<Space
 				android:layout_width="match_parent"
@@ -465,7 +464,8 @@
 				android:inputType="number"
 				android:paddingLeft="2mm"
 				android:background="@drawable/signup_input"
-				android:hint="@string/credit_debit_card_numbers_prompt_string" />
+				android:hint="@string/credit_debit_card_numbers_prompt_string"
+				android:maxLength="16"/>
 
 			<Space
 				android:layout_width="match_parent"
@@ -497,6 +497,7 @@
 				android:paddingLeft="2mm"
 				android:background="@drawable/signup_input"
 				android:inputType="number"
+				android:maxLength="3"
 				android:hint="@string/cvv_prompt_string"/>
 
 			<Space
@@ -529,6 +530,7 @@
 				android:paddingLeft="2mm"
 				android:inputType="number"
 				android:background="@drawable/signup_input"
+				android:maxLength="4"
 				android:hint="MMYY"/>
 
 

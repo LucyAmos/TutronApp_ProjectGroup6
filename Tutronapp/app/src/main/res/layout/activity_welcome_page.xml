@@ -19,11 +19,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/andada"
-            android:text="Hello,"
+            android:text="WELCOME,"
             android:textAlignment="center"
             android:gravity="center"
             android:textColor="#0088C8"
-            android:textSize="80sp"
+            android:textSize="72sp"
             android:textStyle="bold"
             android:layout_marginTop="30dp"/>
 
@@ -52,7 +52,6 @@
                 android:textStyle="bold" />
 
 
-
         </LinearLayout>
 
         <Space
@@ -70,7 +69,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="50dp" />
+            android:layout_height="30dp" />
 
         <TextView
             android:id="@+id/login_status_text"
@@ -102,7 +101,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="50dp" />
+            android:layout_height="15dp" />
 
         <Button
             android:id="@+id/Logout_btn"

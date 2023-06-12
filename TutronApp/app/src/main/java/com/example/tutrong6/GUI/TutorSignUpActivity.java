@@ -130,13 +130,12 @@ public class TutorSignUpActivity extends AppCompatActivity {
                         education_level.isEmpty() || native_language.isEmpty() || description.isEmpty()
                 )
                 {
-                    Toast.makeText(TutorSignUpActivity.this, "please, fill ALL the fields", Toast.LENGTH_SHORT).show();
-                }
-                else
+                    Toast.makeText(TutorSignUpActivity.this, "Please, fill in ALL the fields", Toast.LENGTH_SHORT).show();
+                } else
                 {
                     if(!User.isValidEmailAddressFormat(email))
                     {
-                        Toast.makeText(TutorSignUpActivity.this, "email format invalid", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TutorSignUpActivity.this, "Invalid Email Format", Toast.LENGTH_SHORT).show();
                     }
 
                     else
@@ -160,7 +159,7 @@ public class TutorSignUpActivity extends AppCompatActivity {
                                 }
                                 break;
                             case 1:
-                                Toast.makeText(TutorSignUpActivity.this, "you ALREADY HAVE an Account, please LOG IN", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(TutorSignUpActivity.this, "You ALREADY HAVE an Account, please LOG IN", Toast.LENGTH_SHORT).show();
                                 break;
                         }
 

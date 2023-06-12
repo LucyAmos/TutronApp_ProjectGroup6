@@ -41,7 +41,7 @@ public class LoginPageActivity extends AppCompatActivity {
 
 
                 if(email.equals("") || pass.equals(""))
-                    Toast.makeText(LoginPageActivity.this, "please, fill ALL the fields", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginPageActivity.this, "Please, fill in ALL the fields", Toast.LENGTH_SHORT).show();
                 else{
 
                     Boolean check_user_pass = DataBase.checkEmailPassword(email,pass);
@@ -56,7 +56,7 @@ public class LoginPageActivity extends AppCompatActivity {
                         sessionManagement.saveSession(logged_user);
 
                         //message d approbation
-                        Toast.makeText(LoginPageActivity.this, "Log in Successfull ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginPageActivity.this, "Log in Successful ", Toast.LENGTH_SHORT).show();
                         //diriger vers la page d accueil
                          startActivity(new Intent(LoginPageActivity.this, WelcomePage.class));
 
@@ -67,10 +67,10 @@ public class LoginPageActivity extends AppCompatActivity {
                         switch (check_email_existance)
                         {
                             case 0:
-                                Toast.makeText(LoginPageActivity.this, "You are NOT a member yet, SIGN UP!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginPageActivity.this, "This account does not exist, SIGN UP!", Toast.LENGTH_SHORT).show();
                                 break;
                             case 1:
-                                Toast.makeText(LoginPageActivity.this, "WRONG Credentials", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginPageActivity.this, "INCORRECT Credentials", Toast.LENGTH_SHORT).show();
                                 break;
                         }
 

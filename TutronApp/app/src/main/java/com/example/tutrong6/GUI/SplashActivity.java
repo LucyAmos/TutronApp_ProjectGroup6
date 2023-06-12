@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.tutrong6.R;
 
 public class SplashActivity extends AppCompatActivity {
-    private static final long SPLASH_DURATION = 500;
+    private static final long SPLASH_DURATION = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
