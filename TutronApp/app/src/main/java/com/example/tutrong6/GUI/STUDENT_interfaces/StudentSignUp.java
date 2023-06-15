@@ -1,14 +1,13 @@
 
-package com.example.tutrong6.GUI;
+package com.example.tutrong6.GUI.STUDENT_interfaces;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
 import com.example.tutrong6.BEANS.*;
 import com.example.tutrong6.DAO.*;
+import com.example.tutrong6.GUI.LoginPageActivity;
 import com.example.tutrong6.R;
 
 
@@ -16,13 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.ImageView;
 import android.widget.Toast;
-
-import java.io.ByteArrayOutputStream;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class StudentSignUp extends Activity {
 

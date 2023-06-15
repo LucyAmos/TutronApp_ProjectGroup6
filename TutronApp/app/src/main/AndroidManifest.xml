@@ -27,11 +27,11 @@
             android:exported="true"
             tools:ignore="ExtraText">
         </activity>
-        <activity android:name=".GUI.TutorSignUpActivity"
+        <activity android:name=".GUI.TUTOR_interfaces.TutorSignUpActivity"
             android:exported="true"
             tools:ignore="ExtraText">
         </activity>
-        <activity android:name=".GUI.StudentSignUp"
+        <activity android:name=".GUI.STUDENT_interfaces.StudentSignUp"
             android:exported="true"
             tools:ignore="ExtraText">
         </activity>

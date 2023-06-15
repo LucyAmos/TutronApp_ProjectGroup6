@@ -1,4 +1,4 @@
-package com.example.tutrong6.GUI;
+package com.example.tutrong6.GUI.TUTOR_interfaces;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,12 +20,11 @@ import android.widget.Toast;
 
 import com.example.tutrong6.BEANS.*;
 import com.example.tutrong6.DAO.*;
+import com.example.tutrong6.GUI.LoginPageActivity;
 import com.example.tutrong6.R;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
-import java.net.CookieHandler;
-import java.util.Collections;
 
 public class TutorSignUpActivity extends AppCompatActivity {
 
