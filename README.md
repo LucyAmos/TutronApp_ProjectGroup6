@@ -1,7 +1,4 @@
-Administrator credential:
-
-email: admin1@tutron.ca
-password: 1234
+Administrator credential ==> email: admin1@tutron.ca |  password: 1234
 
 
 tutor with permanent suspension ==> email:  tut@gmail.com | password: 5555
