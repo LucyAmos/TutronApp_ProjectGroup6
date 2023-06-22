@@ -9,13 +9,18 @@ import android.util.Log;
 
 import com.example.tutrong6.BEANS.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DBHelper extends SQLiteOpenHelper {
 
 //attribut
     private static final String DATABASE_NAME = "tutronDB";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     // creation de la base de donnee
     public DBHelper(Context context) {
@@ -71,12 +76,39 @@ public class DBHelper extends SQLiteOpenHelper {
                 "  addressID INTEGER DEFAULT NULL,\n" +
                 "  credit_card_id INTEGER DEFAULT NULL,\n" +
 
+                "  is_suspended BOOLEAN DEFAULT 0,\n" +
+
 
                 "  FOREIGN KEY (roleID) REFERENCES role (ID),\n" +
                 "  FOREIGN KEY (credit_card_id) REFERENCES creditcard (ID),\n" +
                 "  FOREIGN KEY (addressID) REFERENCES address (ID)\n" +
                 "\n" +
                 ")");
+
+        //decision table
+
+        sqLiteDatabase.execSQL("CREATE TABLE decision (\n" +
+                "  ID INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "  name TEXT NOT NULL\n" +
+                ")");
+
+        // complaint table
+        sqLiteDatabase.execSQL("CREATE TABLE complaint(\n" +
+                "  ID INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "  StudentID INTEGER NOT NULL,\n" +
+                "  TutorID INTEGER NOT NULL,\n" +
+                "  title TEXT NOT NULL,\n" +
+                "  description TEXT NOT NULL,\n" +
+                "  is_processed BOOLEAN NOT NULL,\n" +
+                "  DecisionsID INTEGER DEFAULT NULL,\n" +
+                "  suspension_end_date TEXT DEFAULT NULL,\n" +
+                "  FOREIGN KEY (StudentID) REFERENCES user (ID),\n" +
+                "  FOREIGN KEY (TutorID) REFERENCES user (ID),\n" +
+                "  FOREIGN KEY (DecisionsID) REFERENCES decision (ID)\n" +
+                ")");
+
+
+
 
         //POPULER LES TABLES
 
@@ -86,11 +118,47 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(\"Student\"),\n" +
                 "(\"Tutor\")");
 
-        //populate somes admins in the database
+        //populate some admins in the database
         sqLiteDatabase.execSQL("INSERT INTO user (roleID, first_name, last_name, email, password, education_level, native_language, description, profile_picture, addressID, credit_card_id) VALUES\n" +
                 "( 1, 'Admin1', 'Java', 'admin1@tutron.ca', '1234', NULL, NULL, NULL, NULL, NULL, NULL),\n" +
                 "( 1, 'Admin2', 'Android', 'admin2@tutron.ca', '5678', NULL, NULL, NULL, NULL, NULL, NULL)");
 
+
+        //add 3 possibles decision for a complaint
+        sqLiteDatabase.execSQL("INSERT INTO decision (name) VALUES\n" +
+                "(\"DISMISSED\"),\n" +
+                "(\"TEMPORARILY SUSPENDED\"),\n" +
+                "(\"PERMANENT SUSPENDED\")");
+
+
+        //populate some tutors
+        sqLiteDatabase.execSQL("INSERT INTO user (roleID, first_name, last_name, email, password, education_level, native_language, description, profile_picture, addressID, credit_card_id, is_suspended) VALUES\n" +
+                "( 3, 'Kris', 'Klool','kk@gmail.com', '0000', 'Master', 'english', 'extremely patient tutor', NULL, NULL,NULL, 0),\n" +
+                "( 3, 'Gordon', 'Loutou', 'gl@gmail.com', '0000', 'Bachelor', 'french', 'provide clear and simple explanation', NULL, NULL,NULL, 0),\n" +
+                "( 3, 'Puistas', 'Coukap', 'tut@gmail.com', '5555', 'Phd', 'english', 'science enthousiast at your service', NULL, NULL,NULL, 1),\n" +
+                "( 3, 'Roodie', 'Clok','rc@gmail.com', '9999', 'Master', 'french', 'adore teaching ', NULL, NULL,NULL, 1)");
+
+        //populate A student
+
+        //create address
+
+        sqLiteDatabase.execSQL("INSERT INTO creditcard (holder_name, card_number, expiration_date, cvc) VALUES\n" +
+                "                ('Samuel Champagne','2000 0005 2361 2985', '2029-11-25', 123)");
+
+        //create credit card
+        sqLiteDatabase.execSQL("INSERT INTO address (street_address, city, region, postal_code, country) VALUES\n" +
+                "                ('563 javac street','Ottawa', 'Ontario', 'K5R 6E9', 'Canada')");
+
+        //create student
+        sqLiteDatabase.execSQL("INSERT INTO user (roleID, first_name, last_name, email, password, education_level, native_language, description, profile_picture, addressID, credit_card_id, is_suspended) VALUES\n" +
+                "( 2, 'Samuel', 'Champagne','samy@gmail.com', '8888', NULL, NULL, NULL, NULL, 1,1, 0)");
+
+        // populate some complaintS
+        sqLiteDatabase.execSQL("INSERT INTO complaint (StudentID, TutorID, title, description, is_processed, DecisionsID, suspension_end_date) VALUES\n" +
+                "(7, 3, 'NO NO', 'always make mistake in his explanation', 0, NULL, NULL),\n" +
+                "(7, 4, 'Extremely mediocre as a tutor', 'Not patient at all', 0, NULL, NULL),\n" +
+                "(7, 5, 'Horrible Experience', 'always yelling at me and make me feel stupid', 1, 3, NULL),\n" +
+                "(7, 6, 'SPEACHLESS', 'zero patience', 1, 2, '28/12/2023')");
 
     }
 
@@ -484,6 +552,190 @@ public class DBHelper extends SQLiteOpenHelper {
         return(roleID==Administrator.getStaticRoleID()?"ADMINISTRATOR":roleID==Student.getStaticRoleID()?"STUDENT":"TUTOR");
     }
 
+
+    //endregion
+
+
+
+    //region FUNCTIONS DELIVERABLE 2
+
+    /**
+     *
+     * @param c complaint to add in te DB
+     * @return true if the complaint is successfully added in the DB, false if not
+     */
+    public boolean addComplaint(Complaint c)
+    {
+        SQLiteDatabase MyData = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("StudentID",c.getStudentID());
+        contentValues.put("TutorID",c.getTutorID());
+        contentValues.put("title",c.getTitle());
+        contentValues.put("description",c.getDescription());
+        int is_processed = c.getIs_processed()==false?0:1;
+        contentValues.put("is_processed",is_processed);
+        String strDate  = new SimpleDateFormat(Complaint.getDATE_FORMAT()).format(c.getSuspension_end_date());
+        contentValues.put("date_arret_suspension",strDate);
+
+        long result = MyData.insert("complaint",null,contentValues);
+        if(result==-1) return false;
+        else
+            return true;
+
+    }
+
+    /**
+     * This function updates the decision and the date of return of the Chef's suspension
+     * @param ComplaintID the ID of the complaint that the admin is processing
+     * @param decision type of the decision taken by the admin
+     * @param dateRetourSuspension date on which the suspension ends
+     * @return true if the complaint decision  was successfully modified in the DB, false if not
+     */
+    public boolean make_complaint_decision (int ComplaintID, Complaint.Decisions decision, Date dateRetourSuspension)
+    {
+
+        SQLiteDatabase MyData = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        int decisionID = decision == Complaint.Decisions.DISMISSED? 1 :  decision == Complaint.Decisions.TemporarilySuspended? 2 : 3;
+        contentValues.put("DecisionsID",decisionID);
+        String strDate  =  dateRetourSuspension == null? null: new SimpleDateFormat(Complaint.getDATE_FORMAT()).format(dateRetourSuspension);
+        contentValues.put("suspension_end_date",strDate);
+        contentValues.put("is_processed",1);
+        Cursor cursor = MyData.rawQuery("Select * from complaint where ID = ?", new String[]{String.valueOf(ComplaintID)});
+        if(cursor.getCount() > 0)
+        {
+            long update = MyData.update("complaint",contentValues,"ID=?",new String[]{String.valueOf(ComplaintID)});
+            return (update==-1? false:true);
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    /**
+     *
+     * @return the list of complaints not processed by the admin
+     */
+    public ArrayList<Complaint> activeComplaintsList()
+    {
+        ArrayList<Complaint> activeComplaints = new ArrayList<Complaint>();
+
+        SQLiteDatabase MyData = this.getWritableDatabase();
+
+        Cursor res = MyData.rawQuery("SELECT * FROM complaint WHERE is_processed = ?",new String[] {"0"});
+
+        while (res.moveToNext()) {
+            Complaint temp= new Complaint();
+
+            temp.setID(res.getInt(0));
+            temp.setStudentID(res.getInt(1));
+            temp.setTutorID(res.getInt(2));
+            temp.setTitle(res.getString(3));
+            temp.setDescription(res.getString(4));
+            Boolean is_Processed =res.getInt(5) ==0? false:true;
+            temp.setIs_processed(is_Processed);
+            int decisionID = res.getInt(6);
+            Complaint.Decisions decision = decisionID == 1? Complaint.Decisions.DISMISSED : decisionID == 2? Complaint.Decisions.TemporarilySuspended : Complaint.Decisions.PermanentSuspended;
+            temp.setDecision(decision);
+
+            try {
+                Date date  = res.getString(7)==null?null: new SimpleDateFormat(Complaint.getDATE_FORMAT()).parse(res.getString(7));
+                temp.setSuspension_end_date(date);
+            } catch (ParseException e) {
+                Log.e("ParseException", "activeComplaintsList: "+ e.getStackTrace() );
+            }
+
+            activeComplaints.add(temp);
+        }
+
+        return activeComplaints;
+    }
+
+
+    /**
+     *
+     * @return true if the tutor is suspended
+     */
+    public Boolean tutorSuspensionStatusByUserID(int tutorID)
+    {
+        //return user.getIs_suspended();
+        Boolean result= false;
+        SQLiteDatabase MyData = this.getWritableDatabase();
+        //SELECT is_suspended FROM user WHERE ID = 4
+        Cursor res = MyData.rawQuery("SELECT is_suspended FROM user WHERE ID =  ?",new String[] {String.valueOf(tutorID)});
+
+        while (res.moveToNext()) {
+            result = res.getInt(0)==0?false:true;
+        }
+
+        return result;
+    }
+
+
+    /**
+     *
+     * @param decisionID
+     * @return the decision of the complaint given by the administrator in the form of String
+     */
+    public String getDecisionByDecisionID(int decisionID)
+    {
+        return(decisionID ==1?"REJEDISMISSEDTER":decisionID==2?"TEMPORARILY SUSPENDED":"PERMANENT SUSPENDED");
+    }
+
+    /**
+     *
+     * @param TutorID the identifier of the tutor whose ID we want
+     * @return a map<type_of_the_suspension, Date_of_return_after_suspension>
+     *  https://www.w3schools.com/java/java_hashmap.asp
+     */
+    public Map<String, Date> infoEtatSsuspension(int TutorID)
+    {
+        Map<String, Date> result = new HashMap<String, Date>();
+        SQLiteDatabase MyData = this.getWritableDatabase();
+
+        Cursor res = MyData.rawQuery("SELECT DecisionsID, suspension_end_date FROM complaint WHERE TutorID = ?",new String[] {String.valueOf(TutorID)});
+
+        while (res.moveToNext()) {
+            String type_suspension = getDecisionByDecisionID(res.getInt(0));
+            Date date = null;
+            try {
+                String dateStr = res.getString(1);
+                date = dateStr == null?null:new SimpleDateFormat(Complaint.getDATE_FORMAT()).parse(dateStr);
+
+            } catch (ParseException e) {
+                Log.e("ParseException", "infoEtatSsuspension: "+ e.getStackTrace() );
+            }
+            result.put(type_suspension, date);
+        }
+
+        return result;
+
+    }
+
+    /**
+     * This function updates the guardian's suspension return decision
+     * @param TutorID the ID of the accused tutor
+     * @param is_suspended_state state of suspension of the cook
+     * @return true if the update was successful
+     */
+    public Boolean updateTutorSuspensionState(int TutorID, boolean is_suspended_state )
+    {
+        SQLiteDatabase MyData = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        int is_susp = is_suspended_state == false?0:1;
+        contentValues.put("is_suspended",is_susp);
+        Cursor cursor = MyData.rawQuery("Select * from user where ID = ?", new String[]{String.valueOf(TutorID)});
+        if(cursor.getCount() > 0)
+        {
+            long update = MyData.update("user",contentValues,"ID=?",new String[]{String.valueOf(TutorID)});
+            return (update==-1? false:true);
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     //endregion
 
