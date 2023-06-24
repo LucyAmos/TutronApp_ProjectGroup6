@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical">
+
+<TextView
+    android:id="@+id/dialog_TutorName"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:hint="@string/tutorname"
+    android:textSize="25sp"
+    android:gravity="center"
+    android:textAlignment="center"/>
+
+<TextView
+    android:id="@+id/dialog_DateSuspension"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:hint="@string/date_suspension"
+    android:textSize="18sp"
+    android:gravity="center"
+    android:textAlignment="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonTemporarySuspension"
+            android:layout_width="wrap_content"
+            android:layout_height="78dp"
+            android:layout_margin="16dp"
+            android:fontFamily="@font/andada"
+            android:gravity="center"
+            android:text="@string/suspend_temporary"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/buttonPermanentSuspension"
+            android:layout_width="wrap_content"
+            android:layout_height="78dp"
+            android:layout_margin="16dp"
+            android:fontFamily="@font/andada"
+            android:gravity="center"
+            android:text="@string/suspend_permanently"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/buttonDismiss"
+        android:layout_width="382dp"
+        android:layout_height="62dp"
+        android:layout_margin="16dp"
+        android:layout_weight="1"
+        android:text="@string/dismiss"
+        android:gravity="center"
+        android:textSize="15sp"
+        android:textAlignment="center"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -133,5 +133,10 @@
 
     <string name="welcome_welcome_page">Welcome, </string>
     <string name="login_status_text_string">YOU ARE LOGGED IN AS: </string>
+    <string name="suspend_permanently">Suspend Permanently</string>
+    <string name="suspend_temporary">Suspend Temporary</string>
+    <string name="tutorname">Tutor Name</string>
+    <string name="date_suspension">Date Suspension</string>
+    <string name="dismiss">Dismiss</string>
 
 </resources>
