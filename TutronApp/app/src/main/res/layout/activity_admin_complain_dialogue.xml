@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="#CADEE8"
     android:orientation="vertical"
-    tools:context=".GUI.ComplaintOverviewActivity">
+    tools:context=".GUI.ADMIN_interfaces.ComplaintOverviewActivity">
 
 
     <LinearLayout

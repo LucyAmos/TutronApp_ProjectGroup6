@@ -43,11 +43,11 @@
             android:exported="true"
             tools:ignore="ExtraText">
         </activity>
-        <activity android:name=".GUI.ComplaintOverviewActivity"
+        <activity android:name=".GUI.ADMIN_interfaces.ComplaintOverviewActivity"
             android:exported="true"
             tools:ignore="ExtraText">
         </activity>
-        <activity android:name=".GUI.AdminInboxActivity"
+        <activity android:name=".GUI.ADMIN_interfaces.AdminInboxActivity"
             android:exported="true"
             tools:ignore="ExtraText">
         </activity>

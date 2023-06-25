@@ -587,16 +587,15 @@ public class DBHelper extends SQLiteOpenHelper {
     /**
      * This function updates the decision and the date of return of the Chef's suspension
      * @param ComplaintID the ID of the complaint that the admin is processing
-     * @param decision type of the decision taken by the admin
+     * @param decisionID type of the decision taken by the admin
      * @param dateRetourSuspension date on which the suspension ends
      * @return true if the complaint decision  was successfully modified in the DB, false if not
      */
-    public boolean make_complaint_decision (int ComplaintID, Complaint.Decisions decision, Date dateRetourSuspension)
+    public boolean make_complaint_decision (int ComplaintID, int decisionID, Date dateRetourSuspension)
     {
 
         SQLiteDatabase MyData = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        int decisionID = decision == Complaint.Decisions.DISMISSED? 1 :  decision == Complaint.Decisions.TemporarilySuspended? 2 : 3;
         contentValues.put("DecisionsID",decisionID);
         String strDate  =  dateRetourSuspension == null? null: new SimpleDateFormat(Complaint.getDATE_FORMAT()).format(dateRetourSuspension);
         contentValues.put("suspension_end_date",strDate);
@@ -635,9 +634,7 @@ public class DBHelper extends SQLiteOpenHelper {
             temp.setDescription(res.getString(4));
             Boolean is_Processed =res.getInt(5) ==0? false:true;
             temp.setIs_processed(is_Processed);
-            int decisionID = res.getInt(6);
-            Complaint.Decisions decision = decisionID == 1? Complaint.Decisions.DISMISSED : decisionID == 2? Complaint.Decisions.TemporarilySuspended : Complaint.Decisions.PermanentSuspended;
-            temp.setDecision(decision);
+            temp.setDecisionID(res.getInt(6));
 
             try {
                 Date date  = res.getString(7)==null?null: new SimpleDateFormat(Complaint.getDATE_FORMAT()).parse(res.getString(7));
@@ -680,7 +677,7 @@ public class DBHelper extends SQLiteOpenHelper {
      */
     public String getDecisionByDecisionID(int decisionID)
     {
-        return(decisionID ==1?"REJEDISMISSEDTER":decisionID==2?"TEMPORARILY SUSPENDED":"PERMANENT SUSPENDED");
+        return(decisionID ==1?"DISMISSED":decisionID==2?"TEMPORARILY SUSPENDED":"PERMANENT SUSPENDED");
     }
 
     /**
@@ -736,6 +733,7 @@ public class DBHelper extends SQLiteOpenHelper {
             return false;
         }
     }
+
 
     //endregion
 

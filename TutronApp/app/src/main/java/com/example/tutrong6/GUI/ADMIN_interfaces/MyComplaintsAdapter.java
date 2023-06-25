@@ -1,4 +1,4 @@
-package com.example.tutrong6.GUI;
+package com.example.tutrong6.GUI.ADMIN_interfaces;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tutrong6.R;
 
-import java.text.BreakIterator;
 import java.util.ArrayList;
 
 public class MyComplaintsAdapter extends RecyclerView.Adapter<MyComplaintsAdapter.MyViewHolder> {

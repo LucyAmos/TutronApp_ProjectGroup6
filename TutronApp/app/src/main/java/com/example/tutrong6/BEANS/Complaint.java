@@ -14,7 +14,7 @@ public class Complaint {
     private String title;
 
     private String description;
-    private Decisions decision;
+    private int decisionID;
     private boolean is_processed;
     private Date suspension_end_date;
 
@@ -23,12 +23,12 @@ public class Complaint {
     public Complaint() {
 
     }
-    public Complaint( int studentID, int tutorID, String title, String description,Decisions decision, boolean id_processed, Date suspension_end_date) {
+    public Complaint( int studentID, int tutorID, String title, String description,int decision, boolean id_processed, Date suspension_end_date) {
         StudentID = studentID;
         TutorID = tutorID;
         this.title = title;
         this.description = description;
-        this.decision = decision;
+        this.decisionID = decision;
         this.is_processed = id_processed;
         this.suspension_end_date = suspension_end_date;
     }
@@ -76,12 +76,12 @@ public class Complaint {
         this.title = title;
     }
 
-    public Decisions getDecision() {
-        return decision;
+    public int getDecisionID() {
+        return decisionID;
     }
 
-    public void setDecision(Decisions decision) {
-        this.decision = decision;
+    public void setDecisionID(int decisionID) {
+        this.decisionID = decisionID;
     }
 
     public boolean getIs_processed() {
@@ -113,7 +113,7 @@ public class Complaint {
                 ", TutorID=" + TutorID +
                 ", title='" + title + '\'' +
                 ", description=" + description +
-                ", decision=" + decision +
+                ", decision=" + decisionID +
                 ", id_processed=" + is_processed +
                 ", suspension_end_date=" + suspension_end_date +
                 '}';
