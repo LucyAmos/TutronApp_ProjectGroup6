@@ -43,6 +43,14 @@
             android:exported="true"
             tools:ignore="ExtraText">
         </activity>
+        <activity android:name=".GUI.ComplaintOverviewActivity"
+            android:exported="true"
+            tools:ignore="ExtraText">
+        </activity>
+        <activity android:name=".GUI.AdminInboxActivity"
+            android:exported="true"
+            tools:ignore="ExtraText">
+        </activity>
     </application>
 
 

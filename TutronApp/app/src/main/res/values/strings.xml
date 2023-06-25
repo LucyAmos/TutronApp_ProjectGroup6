@@ -139,4 +139,9 @@
     <string name="date_suspension">Date Suspension</string>
     <string name="dismiss">Dismiss</string>
 
+    <!-- Admin Inbox -->
+    <string name="admin_inbox_title">Complaints Inbox</string>
+    <string name="admin_inbox_desc">Active complaints pending decision</string>
+
+
 </resources>

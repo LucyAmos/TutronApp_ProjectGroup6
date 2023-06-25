@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -104,6 +104,24 @@
             android:layout_height="15dp" />
 
         <Button
+            android:id="@+id/complaints_inbox_btn"
+            android:layout_width="211dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="100dp"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/andada"
+            android:gravity="center"
+            android:text="Complaints Inbox"
+            android:textColor="#FFFFFF"
+            android:visibility="invisible"
+            android:textSize="28dp"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
+
+        <Button
             android:id="@+id/Logout_btn"
             android:layout_width="211dp"
             android:layout_height="61dp"
@@ -122,4 +140,4 @@
     </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

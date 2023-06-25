@@ -10,4 +10,5 @@
     <color name="colorPrimary">#FF0000</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#00FF00</color>
+    <color name="tutronBluePrimary">#0088C8</color>
 </resources>

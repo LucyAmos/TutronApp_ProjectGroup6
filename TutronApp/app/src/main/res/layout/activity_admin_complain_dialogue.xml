@@ -1,73 +1,241 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical">
-
-<TextView
-    android:id="@+id/dialog_TutorName"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:hint="@string/tutorname"
-    android:textSize="25sp"
-    android:gravity="center"
-    android:textAlignment="center"/>
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#CADEE8"
+    android:orientation="vertical"
+    tools:context=".GUI.ComplaintOverviewActivity">
 
-<TextView
-    android:id="@+id/dialog_DateSuspension"
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:hint="@string/date_suspension"
-    android:textSize="18sp"
-    android:gravity="center"
-    android:textAlignment="center"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/buttonTemporarySuspension"
-            android:layout_width="wrap_content"
-            android:layout_height="78dp"
-            android:layout_margin="16dp"
-            android:fontFamily="@font/andada"
-            android:gravity="center"
-            android:text="@string/suspend_temporary"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textSize="15sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/buttonPermanentSuspension"
-            android:layout_width="wrap_content"
-            android:layout_height="78dp"
-            android:layout_margin="16dp"
-            android:fontFamily="@font/andada"
+            <TextView
+                android:id="@+id/complaint_id_textdesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:fontFamily="@font/andada"
+                android:textStyle="bold"
+                android:text="Complaint: #" />
+
+            <TextView
+                android:id="@+id/complaint_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:fontFamily="@font/andada"
+                android:textStyle="bold"
+                android:text="ID" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="35sp"
             android:gravity="center"
-            android:text="@string/suspend_permanently"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textSize="15sp" />
+            android:fontFamily="@font/andada"
+            android:textStyle="bold"
+            android:textColor="@color/tutronBluePrimary"
+            android:text="Title" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/accused_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:text="Accused: " />
+
+            <TextView
+                android:id="@+id/tutorID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textSize="24sp"
+                android:textStyle="italic"
+                android:text="Tutor ID" />
+
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="35dp" />
+
+        <TextView
+            android:id="@+id/complaint_desc_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/andada"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:text="Complaint Description:" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <TextView
+            android:id="@+id/complaint_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/andada"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            android:text="Complaint..." />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/madeby_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:text="Submitted By: " />
+
+            <TextView
+                android:id="@+id/studentID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textSize="24sp"
+                android:textStyle="italic"
+                android:text="Student ID" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/dismiss_btn"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:background="@drawable/button"
+                android:fontFamily="@font/andada"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:text="DISMISS" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
+
+            <TextView
+                android:id="@+id/Pick_a_date_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:fontFamily="@font/andada"
+                android:textSize="20sp"
+                android:text="Pick A Date To End Suspension" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="15dp" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textSize="20sp"
+                android:gravity="center" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="15dp" />
+
+            <Button
+                android:id="@+id/date_picker"
+                android:layout_width="150dp"
+                android:layout_height="70dp"
+                android:background="#000"
+                android:fontFamily="@font/andada"
+                android:textSize="20sp"
+                android:textColor="#FFFFFF"
+                android:text="Open Date Pick" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
+
+            <Button
+                android:id="@+id/temporary_btn"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:background="@drawable/button"
+                android:fontFamily="@font/andada"
+                android:textSize="25sp"
+                android:textColor="#FFE400"
+                android:textStyle="bold"
+                android:text="TEMPORARY SUSPENSION" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
+
+            <Button
+                android:id="@+id/permanent_btn"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:background="@drawable/button"
+                android:textColor="#AC0000"
+                android:textStyle="bold"
+                android:fontFamily="@font/andada"
+                android:textSize="25sp"
+                android:text="PERMANENT SUSPENSION"  />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
 
     </LinearLayout>
-
-    <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-
-    <Button
-        android:id="@+id/buttonDismiss"
-        android:layout_width="382dp"
-        android:layout_height="62dp"
-        android:layout_margin="16dp"
-        android:layout_weight="1"
-        android:text="@string/dismiss"
-        android:gravity="center"
-        android:textSize="15sp"
-        android:textAlignment="center"/>
-    </LinearLayout>
-
-</LinearLayout>
+</ScrollView>
