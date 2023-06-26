@@ -143,5 +143,32 @@
     <string name="admin_inbox_title">Complaints Inbox</string>
     <string name="admin_inbox_desc">Active complaints pending decision</string>
 
+    <!-- Test for Complaints -->
+
+    <string-array name="titles">
+        <item>I hate my tutor</item>
+        <item>My tutor sucks</item>
+        <item>Fire my tutor</item>
+        <item>My tutor is mean</item>
+        <item>My tutor</item>
+    </string-array>
+
+    <string-array name="desc">
+        <item>My tutor is not good at teaching</item>
+        <item>My tutor is bad</item>
+        <item>My tutor should not be working</item>
+        <item>My tutor said something mean</item>
+        <item>My tutor doesn\'t know what they are doing</item>
+    </string-array>
+
+    <string-array name="id">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+
 
 </resources>

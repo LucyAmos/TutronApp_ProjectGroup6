@@ -1,20 +1,26 @@
 package com.example.tutrong6.GUI.ADMIN_interfaces;
 
 public class ComplaintModel {
-    int tutorID;
-    int studentID;
+    String title;
+    String sneak_peek;
+    String complaint_id;
 
 
-    public ComplaintModel(int tutorID, int studentID) {
-        this.tutorID = tutorID;
-        this.studentID = studentID;
+    public ComplaintModel(String title, String sneak_peek, String complaint_id) {
+        this.title = title;
+        this.sneak_peek = sneak_peek;
+        this.complaint_id = complaint_id;
     }
 
-    public int getTutorID() {
-        return tutorID;
+    public String getTitle() {
+        return title;
     }
 
-    public int getStudentID() {
-        return studentID;
+    public String getSneak_peek() {
+        return sneak_peek;
+    }
+
+    public String getComplaint_id() {
+        return complaint_id;
     }
 }

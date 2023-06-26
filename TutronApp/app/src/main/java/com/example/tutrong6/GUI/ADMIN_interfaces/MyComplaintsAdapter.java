@@ -16,14 +16,17 @@ import java.util.ArrayList;
 public class MyComplaintsAdapter extends RecyclerView.Adapter<MyComplaintsAdapter.MyViewHolder> {
     private final ComplainsRecyclerViewInterface complainsRecyclerViewInterface;
     private Context context;
+    ArrayList<ComplaintModel> complaintModels;
     private ArrayList title, sneak_peek, complaint_id;
 
-    public MyComplaintsAdapter(Context context, ArrayList title, ArrayList sneak_peek, ArrayList complaint_id, ComplainsRecyclerViewInterface complainsRecyclerViewInterface) {
+    public MyComplaintsAdapter(Context context,/*ArrayList title, ArrayList sneak_peek, ArrayList complaint_id,*/ ComplainsRecyclerViewInterface complainsRecyclerViewInterface, ArrayList<ComplaintModel> complaintModels) {
         this.context = context;
-        this.title = title;
+        /*this.title = title;
         this.sneak_peek = sneak_peek;
-        this.complaint_id=complaint_id;
+        this.complaint_id=complaint_id;*/
         this.complainsRecyclerViewInterface=complainsRecyclerViewInterface;
+        this.complaintModels=complaintModels;
+
     }
 
     @NonNull
@@ -35,16 +38,17 @@ public class MyComplaintsAdapter extends RecyclerView.Adapter<MyComplaintsAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.title.setText(String.valueOf(title.get(position)));
-        holder.sneak_peek.setText(String.valueOf(sneak_peek.get(position)));
-        holder.complaint_id.setText(String.valueOf(complaint_id.get(position)));
+        holder.title.setText(complaintModels.get(position).getTitle());
+        holder.sneak_peek.setText(complaintModels.get(position).getSneak_peek());
+        holder.complaint_id.setText(complaintModels.get(position).getComplaint_id());
 
 
     }
 
     @Override
     public int getItemCount() {
-        return title.size();
+        //return title.size();
+        return complaintModels.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
