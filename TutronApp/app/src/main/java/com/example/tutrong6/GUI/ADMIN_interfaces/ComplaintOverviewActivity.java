@@ -24,6 +24,16 @@ public class ComplaintOverviewActivity extends AppCompatActivity implements Date
         setContentView(R.layout.activity_admin_complain_dialogue);
 
         Button datePickerButton = findViewById(R.id.date_picker);
+        Button dismiss = findViewById(R.id.dismiss_btn);
+        Button tempSuspend = findViewById(R.id.temporary_btn);
+        Button permSuspend = findViewById(R.id.permanent_btn);
+        TextView tutorId = findViewById(R.id.tutorID);
+        TextView studentId = findViewById(R.id.studentID);
+        TextView title = findViewById(R.id.title);
+        TextView complaint = findViewById(R.id.complaint_desc);
+        TextView complaintId = findViewById(R.id.complaint_id);
+
+
         datePickerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
