@@ -15,7 +15,7 @@
         >
 
         <TextView
-            android:id="@+id/app_name"
+            android:id="@+id/welcomeTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/andada"
@@ -88,7 +88,7 @@
         <TextView
             android:id="@+id/user_role"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="55dp"
             android:fontFamily="@font/andada"
             android:gravity="center"
             android:text=""
@@ -101,38 +101,45 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="15dp" />
+            android:layout_height="30dp" />
 
-        <Button
-            android:id="@+id/complaints_inbox_btn"
-            android:layout_width="211dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="100dp"
-            android:background="@drawable/rounded_button"
-            android:fontFamily="@font/andada"
-            android:gravity="center"
-            android:text="Complaints Inbox"
-            android:textColor="#FFFFFF"
-            android:visibility="invisible"
-            android:textSize="28dp"
-            android:textStyle="bold" />
-
-        <Space
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="15dp" />
+            android:layout_height="70dp"
+            android:orientation="horizontal"
+            android:gravity="center">
 
-        <Button
-            android:id="@+id/Logout_btn"
-            android:layout_width="211dp"
-            android:layout_height="61dp"
-            android:layout_marginLeft="100dp"
-            android:background="@drawable/rounded_button"
-            android:fontFamily="@font/andada"
-            android:gravity="center"
-            android:text="LOG OUT"
-            android:textColor="#FFFFFF"
-            android:textSize="28dp"
-            android:textStyle="bold" />
+            <Button
+                android:id="@+id/Logout_btn"
+                android:layout_width="150dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/rounded_button"
+                android:fontFamily="@font/andada"
+                android:gravity="center"
+                android:text="LOG OUT"
+                android:textColor="#FFFFFF"
+                android:textSize="28dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/start_btn"
+                android:layout_width="150dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="60dp"
+                android:background="@drawable/rounded_button"
+                android:fontFamily="@font/andada"
+                android:gravity="center"
+                android:text="Start"
+                android:textColor="#FFFFFF"
+                android:textSize="28dp"
+                android:textStyle="bold" />
+
+
+
+
+        </LinearLayout>
+
 
 
 

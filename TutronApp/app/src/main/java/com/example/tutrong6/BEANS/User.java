@@ -13,6 +13,8 @@ public class User {
     protected String password;
     protected int roleID;
 
+    protected boolean is_suspended;
+
     //constructors
 
     public User() {
@@ -32,6 +34,7 @@ public class User {
         this.email = email;
         this.password = password;
     }
+
 
     //getters and setters
 
@@ -83,6 +86,17 @@ public class User {
     public void setRoleID(int roleID) {
         this.roleID = roleID;
     }
+
+
+    public boolean getIs_suspended() {
+        return is_suspended;
+    }
+
+    public void setIs_suspended(boolean is_suspended) {
+        this.is_suspended = is_suspended;
+    }
+
+
     //class methods and functions
 
     public String getRole()

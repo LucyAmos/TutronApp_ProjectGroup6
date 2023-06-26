@@ -8,7 +8,7 @@ public class Tutor extends User{
     private String native_language;
     private String description;
     private byte[] profile_picture;
-    private boolean is_suspended;
+    //private boolean is_suspended;
     private static final int ROLE = 3;
 
     //private Blob test;
@@ -81,14 +81,6 @@ public class Tutor extends User{
         this.profile_picture = profile_picture;
     }
 
-
-    public boolean getIs_suspended() {
-        return is_suspended;
-    }
-
-    public void setIs_suspended(boolean is_suspended) {
-        this.is_suspended = is_suspended;
-    }
 
     public static int getStaticRoleID()
     {

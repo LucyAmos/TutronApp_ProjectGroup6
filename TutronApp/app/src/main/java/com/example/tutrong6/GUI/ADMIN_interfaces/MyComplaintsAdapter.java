@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tutrong6.BEANS.Complaint;
 import com.example.tutrong6.R;
 
 import java.util.ArrayList;
@@ -16,16 +17,13 @@ import java.util.ArrayList;
 public class MyComplaintsAdapter extends RecyclerView.Adapter<MyComplaintsAdapter.MyViewHolder> {
     private final ComplainsRecyclerViewInterface complainsRecyclerViewInterface;
     private Context context;
-    ArrayList<ComplaintModel> complaintModels;
-    private ArrayList title, sneak_peek, complaint_id;
+    ArrayList<Complaint> complaints;
 
-    public MyComplaintsAdapter(Context context,/*ArrayList title, ArrayList sneak_peek, ArrayList complaint_id,*/ ComplainsRecyclerViewInterface complainsRecyclerViewInterface, ArrayList<ComplaintModel> complaintModels) {
+
+    public MyComplaintsAdapter(Context context,/*ArrayList title, ArrayList sneak_peek, ArrayList complaint_id,*/ ComplainsRecyclerViewInterface complainsRecyclerViewInterface, ArrayList<Complaint> complaints) {
         this.context = context;
-        /*this.title = title;
-        this.sneak_peek = sneak_peek;
-        this.complaint_id=complaint_id;*/
         this.complainsRecyclerViewInterface=complainsRecyclerViewInterface;
-        this.complaintModels=complaintModels;
+        this.complaints =complaints;
 
     }
 
@@ -38,9 +36,9 @@ public class MyComplaintsAdapter extends RecyclerView.Adapter<MyComplaintsAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.title.setText(complaintModels.get(position).getTitle());
-        holder.sneak_peek.setText(complaintModels.get(position).getSneak_peek());
-        holder.complaint_id.setText(complaintModels.get(position).getComplaint_id());
+        holder.title.setText(complaints.get(position).getTitle());
+        holder.sneak_peek.setText(complaints.get(position).getDescription());
+        holder.complaint_id.setText(complaints.get(position).getID());
 
 
     }
@@ -48,7 +46,7 @@ public class MyComplaintsAdapter extends RecyclerView.Adapter<MyComplaintsAdapte
     @Override
     public int getItemCount() {
         //return title.size();
-        return complaintModels.size();
+        return complaints.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

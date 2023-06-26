@@ -15,6 +15,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Map;
 
 public class WelcomePage extends Activity {
 
@@ -30,7 +36,9 @@ public class WelcomePage extends Activity {
 		TextView userName = findViewById(R.id.user_name);
 		TextView user_role = findViewById(R.id.user_role);
 		Button logout_btn = findViewById(R.id.Logout_btn);
-		Button complaintsInboxBtn = findViewById(R.id.complaints_inbox_btn);
+		Button start_btn = findViewById(R.id.start_btn);
+		TextView welcome_TV = findViewById(R.id.welcomeTextView);
+		TextView login_status_text = findViewById(R.id.login_status_text);
 
 
 		//get the ID of the logged user
@@ -42,40 +50,63 @@ public class WelcomePage extends Activity {
 
 		//display the name and role of the logged user
 		userName.setText(session_user.getFirst_name().toString()+ " "+ session_user.getLast_name().toString());
-		user_role.setText(DataBase.getRoleNameByRoleID(session_user.getRoleID()));
 
-		if (user_role.getText().equals("ADMINISTRATOR")){
-			complaintsInboxBtn.setVisibility(View.VISIBLE);
+		String role = DataBase.getRoleNameByRoleID(session_user.getRoleID());
+		//user_role.setText();
+
+		if (session_user.getRoleID() == Tutor.getStaticRoleID())
+		{
+			Map<String, Date> suspension_state = DataBase.infoEtatSsuspension(userID);
+			String suspensionType = "";
+			Date suspension_end_date = null;
+			// dateStr = new SimpleDateFormat(Plainte.getDATE_FORMAT()).format(etat_de_suspension.get(i));
+			for (String i : suspension_state.keySet()) {
+				suspensionType = i;
+				suspension_end_date = suspension_state.get(i);
+				Log.e("MAP", "key: " + i + " value: " + suspension_state.get(i));
+				// System.out.println("key: " + i + " value: " + etat_de_suspension.get(i));
+			}
+			Timestamp now_timestap = new Timestamp(System.currentTimeMillis());
+			int compareDate = suspension_end_date== null?-404:now_timestap.compareTo(suspension_end_date);
+			Log.e("COMPARE_DATE", ""+compareDate );
+			if(session_user.getIs_suspended() && compareDate <= 0)
+			{
+				start_btn.setEnabled(false);
+				welcome_TV.setText("SORRY");
+				String dateStr = suspension_end_date ==null?"": new SimpleDateFormat(Complaint.getDATE_FORMAT()).format(suspension_end_date);
+				String msg_susp= "You got a "+ suspensionType;
+				String return_date = suspensionType.equalsIgnoreCase("TEMPORARILY SUSPENDED")? " until "+dateStr:"";
+				login_status_text.setText(msg_susp);
+				user_role.setText(return_date);
+			}
+			else
+			{
+				user_role.setText(role);
+			}
+
+		}
+		else {
+			user_role.setText(role);
+
 		}
 
-	/*	String role = DataBase.getRoleNameByRoleID(session_user.getRoleID()) ;
-		switch (session_user.getRoleID())
-		{
-			case 1:
-				Administrator admin = (Administrator) session_user;
-				userName.setText(admin.getFirst_name()+ " " + admin.getLast_name());
-				user_role.setText(admin.getRole());
-				break;
-			case 2:
-				Student student = (Student) session_user;
-				userName.setText(student.getFirst_name() + " " + student.getLast_name() +" "+ student.getAddress().getStreet_address() );
-				user_role.setText(student.getRole());
-				complaintsInboxBtn.setVisible("false");
-				break;
-			case 3:
-				Tutor tutor = (Tutor) session_user;
-				userName.setText(tutor.getFirst_name() + " " + tutor.getLast_name() +" "+ tutor.getDescription());
-				user_role.setText(tutor.getRole());
-				complaintsInboxBtn.setVisible("false");
-				break;
-		}*/
 
-		complaintsInboxBtn.setOnClickListener(new View.OnClickListener() {
+		start_btn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// Handle button click
-				Intent intent = new Intent(com.example.tutrong6.GUI.WelcomePage.this, AdminInboxActivity.class);
-				startActivity(intent);
+
+				if(session_user.getRoleID() == Administrator.getStaticRoleID()){
+
+
+						Intent intent = new Intent(com.example.tutrong6.GUI.WelcomePage.this, AdminInboxActivity.class);
+						startActivity(intent);
+
+
+				}else{
+					Toast.makeText(WelcomePage.this, "Not implement yet for Students and Tutors", Toast.LENGTH_SHORT).show();
+				}
+
 			}
 
 

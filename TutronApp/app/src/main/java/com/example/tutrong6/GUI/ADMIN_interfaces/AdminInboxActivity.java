@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tutrong6.BEANS.Complaint;
 import com.example.tutrong6.DAO.DBHelper;
 import com.example.tutrong6.R;
 
@@ -19,7 +20,7 @@ public class AdminInboxActivity extends AppCompatActivity implements ComplainsRe
     RecyclerView recyclerView;
     ArrayList<String> title, sneakPeek, complaintId;
 
-    ArrayList<ComplaintModel> complaintModels = new ArrayList<>();
+    ArrayList<Complaint> complaints = new ArrayList<>();
     DBHelper DB;
     MyComplaintsAdapter adapter;
 
@@ -28,9 +29,12 @@ public class AdminInboxActivity extends AppCompatActivity implements ComplainsRe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_complaints_inbox);
         recyclerView = findViewById(R.id.complaints_recycler);
-        setUpComplaintModels();
 
-        MyComplaintsAdapter adapter = new MyComplaintsAdapter(this,this, complaintModels);
+        DB = new DBHelper(this);
+
+        complaints = DB.activeComplaintsList();
+
+        MyComplaintsAdapter adapter = new MyComplaintsAdapter(this,this, complaints);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 /*
@@ -47,16 +51,7 @@ public class AdminInboxActivity extends AppCompatActivity implements ComplainsRe
     }
 
 
-    private void setUpComplaintModels(){
-        String[] title = getResources().getStringArray(R.array.titles);
-        String[] sneak_peek = getResources().getStringArray(R.array.desc);
-        //int[] complaint_id = {0, 1, 2, 3, 4};
-        String[] complaint_id = getResources().getStringArray(R.array.id);
 
-        for(int i = 0; i < title.length; i++){
-            complaintModels.add(new ComplaintModel(title[i], sneak_peek[i], complaint_id[i]));
-        }
-    }
 
     @Override
     public void onItemClick(int position) {

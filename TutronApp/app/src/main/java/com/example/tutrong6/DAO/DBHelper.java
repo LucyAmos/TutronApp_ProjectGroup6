@@ -475,9 +475,10 @@ public class DBHelper extends SQLiteOpenHelper {
     public User getUserbyID(int id)
     {
         User logged_user = new User();
-        ArrayList<Object> infos_logged_user = new ArrayList<Object>();
+        ArrayList<Object>infos_logged_user = new ArrayList<Object>();
         int logged_user_roleID =0;
         int userID =0;
+        boolean is_susp = false;
 
         SQLiteDatabase MyData = this.getWritableDatabase();
         //SELECT ID, nom FROM user WHERE email = "admin1@mealer.ca"
@@ -506,6 +507,9 @@ public class DBHelper extends SQLiteOpenHelper {
             infos_logged_user.add(res.getInt(10));  //addressID
             infos_logged_user.add(res.getInt(11));  //credit_card_id
 
+             is_susp = res.getInt(12) ==0? false:true;  // is_suspended
+            infos_logged_user.add(is_susp);
+
         }
 
         User tempUser = new User( String.valueOf(infos_logged_user.get(2)),
@@ -517,6 +521,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         tempUser.setID((int) infos_logged_user.get(0));
         Log.e("user ID" ,  "ici " + infos_logged_user.get(0));
+        tempUser.setIs_suspended(is_susp);
 
 /*        if(logged_user_roleID == Administrator.getStaticRoleID())
         {
@@ -645,7 +650,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
             activeComplaints.add(temp);
         }
-
+        for(Complaint c : activeComplaints)
+        {
+            Log.e("LISTE COMPLAINTS", "= "+ c );
+        }
         return activeComplaints;
     }
 
