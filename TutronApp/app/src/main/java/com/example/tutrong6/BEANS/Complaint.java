@@ -104,6 +104,21 @@ public class Complaint {
         return DATE_FORMAT;
     }
 
+    //class function
+
+    public static int getComplaintIdByDecisions(Decisions d)
+    {
+
+        switch(d){
+            case DISMISSED:
+                return 1;
+            case PermanentSuspended:
+                return 2;
+            case TemporarilySuspended:
+                return 3;
+        }
+        return 0;
+    }
 
     @Override
     public String toString() {

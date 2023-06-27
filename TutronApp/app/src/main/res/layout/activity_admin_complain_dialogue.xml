@@ -144,7 +144,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="50dp" />
+            android:layout_height="40dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -152,15 +152,41 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/dismiss_btn"
-                android:layout_width="300dp"
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="80dp"
-                android:background="@drawable/button"
-                android:fontFamily="@font/andada"
-                android:textSize="25sp"
-                android:textStyle="bold"
-                android:text="DISMISS" />
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/dismiss_btn"
+                    android:layout_width="190dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/button"
+                    android:textColor="#C7ECD9"
+                    android:fontFamily="@font/andada"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:text="DISMISS" />
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content"
+                    />
+
+                <Button
+                    android:id="@+id/permanent_btn"
+                    android:layout_width="180dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/button"
+                    android:textColor="#D88282"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/andada"
+                    android:textSize="25sp"
+                    android:text="PERMANENT SUSPENSION"  />
+            </LinearLayout>
 
             <Space
                 android:layout_width="match_parent"
@@ -178,7 +204,7 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="15dp" />
+                android:layout_height="10dp" />
 
             <TextView
                 android:id="@+id/date"
@@ -190,12 +216,12 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="15dp" />
+                android:layout_height="10dp" />
 
             <Button
                 android:id="@+id/date_picker"
                 android:layout_width="150dp"
-                android:layout_height="70dp"
+                android:layout_height="50dp"
                 android:background="#000"
                 android:fontFamily="@font/andada"
                 android:textSize="20sp"
@@ -217,20 +243,9 @@
                 android:textStyle="bold"
                 android:text="TEMPORARY SUSPENSION" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="25dp" />
 
-            <Button
-                android:id="@+id/permanent_btn"
-                android:layout_width="300dp"
-                android:layout_height="80dp"
-                android:background="@drawable/button"
-                android:textColor="#AC0000"
-                android:textStyle="bold"
-                android:fontFamily="@font/andada"
-                android:textSize="25sp"
-                android:text="PERMANENT SUSPENSION"  />
+
+
         </LinearLayout>
 
         <Space

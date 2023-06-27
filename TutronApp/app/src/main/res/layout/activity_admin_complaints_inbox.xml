@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#CADEE8"
     android:layout_height="match_parent"
     tools:context=".GUI.ADMIN_interfaces.AdminInboxActivity">
 
@@ -25,7 +26,7 @@
             android:textSize="34sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/admin_inbox_title" />
+            android:text="COMPLAINTS" />
 
         <Space
             android:layout_width="match_parent"
@@ -38,7 +39,8 @@
             android:textSize="24sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/admin_inbox_desc" />
+            android:textColor="#638FA3"
+            android:text="complaints with pending decision" />
 
         <Space
             android:layout_width="match_parent"
