@@ -51,12 +51,23 @@ public class AdminInboxActivity extends AppCompatActivity implements ComplainsRe
     }
 
 
-
-
     @Override
     public void onItemClick(int position) {
 
+        Complaint selected = complaints.get(position);
+        String complaintId = String.valueOf(selected.getID());
+        String title = String.valueOf(selected.getTitle());
+        String tutorId = String.valueOf(selected.getTutorID());
+        String studentId = String.valueOf(selected.getStudentID());
+        String description = String.valueOf(selected.getDescription());
+
         Intent intent = new Intent (AdminInboxActivity.this, ComplaintOverviewActivity.class);
+
+        intent.putExtra("complaintId", complaintId);
+        intent.putExtra("title", title);
+        intent.putExtra("tutorId", tutorId);
+        intent.putExtra("studentId", studentId);
+        intent.putExtra("description", description);
 
         startActivity(intent);
 

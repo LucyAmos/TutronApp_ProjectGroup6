@@ -38,7 +38,7 @@ public class MyComplaintsAdapter extends RecyclerView.Adapter<MyComplaintsAdapte
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.title.setText(complaints.get(position).getTitle());
         holder.sneak_peek.setText(complaints.get(position).getDescription());
-        holder.complaint_id.setText(complaints.get(position).getID());
+        holder.complaint_id.setText(String.valueOf(complaints.get(position).getID()));
 
 
     }

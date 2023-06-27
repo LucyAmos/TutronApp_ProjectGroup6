@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
@@ -33,6 +34,37 @@ public class ComplaintOverviewActivity extends AppCompatActivity implements Date
         TextView complaint = findViewById(R.id.complaint_desc);
         TextView complaintId = findViewById(R.id.complaint_id);
 
+        String complaintIdIntent = getIntent().getStringExtra("complaintId");
+        String tutorIdIntent = getIntent().getStringExtra("tutorId");
+        String studentIdIntent = getIntent().getStringExtra("studentId");
+        String titleIntent = getIntent().getStringExtra("title");
+        String descriptionIntent = getIntent().getStringExtra("description");
+
+        tutorId.setText(tutorIdIntent);
+        studentId.setText(studentIdIntent);
+        complaintId.setText(complaintIdIntent);
+        complaint.setText(descriptionIntent);
+        title.setText(titleIntent);
+
+        dismiss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        permSuspend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        tempSuspend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
 
         datePickerButton.setOnClickListener(new View.OnClickListener() {
             @Override
