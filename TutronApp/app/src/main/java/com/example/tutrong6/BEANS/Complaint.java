@@ -112,10 +112,11 @@ public class Complaint {
         switch(d){
             case DISMISSED:
                 return 1;
-            case PermanentSuspended:
-                return 2;
             case TemporarilySuspended:
+                return 2;
+            case PermanentSuspended:
                 return 3;
+
         }
         return 0;
     }

@@ -2,6 +2,9 @@ package com.example.tutrong6.GUI.ADMIN_interfaces;
 
 import android.os.Bundle;
 import android.content.Intent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tutrong6.BEANS.Complaint;
 import com.example.tutrong6.DAO.DBHelper;
+import com.example.tutrong6.DAO.SessionManagement;
+import com.example.tutrong6.GUI.WelcomePage;
 import com.example.tutrong6.R;
 
 import java.util.ArrayList;
@@ -72,8 +77,29 @@ public class AdminInboxActivity extends AppCompatActivity implements ComplainsRe
         startActivity(intent);
 
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
 
-    //private void displaydata() {
-        //Cursor cursor = DB.activeComplaintsList();
-    //}
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(item.getItemId() == R.id.logout_item)
+        {
+            SessionManagement sessionManagement = new SessionManagement(AdminInboxActivity.this);
+            sessionManagement.removeSession();
+            //aller a la page d accueil.
+            startActivity(new Intent(AdminInboxActivity.this, WelcomePage.class));
+           return true;
+        }
+        else {
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+
 }

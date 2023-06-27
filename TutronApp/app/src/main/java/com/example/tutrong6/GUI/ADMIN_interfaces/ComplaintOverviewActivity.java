@@ -3,6 +3,7 @@ package com.example.tutrong6.GUI.ADMIN_interfaces;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -18,12 +19,18 @@ import com.example.tutrong6.DAO.DBHelper;
 import com.example.tutrong6.R;
 
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class ComplaintOverviewActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
 
+    Date date_end_sus;
+    DBHelper DB;
+    int complaintID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +45,9 @@ public class ComplaintOverviewActivity extends AppCompatActivity implements Date
         TextView title = findViewById(R.id.title);
         TextView complaint = findViewById(R.id.complaint_desc);
         TextView complaintId = findViewById(R.id.complaint_id);
-        DBHelper DB = new DBHelper(this);
+        TextView date_TextView = findViewById(R.id.date);
+         DB = new DBHelper(this);
+        date_end_sus = new Date();
 
 
 
@@ -57,7 +66,8 @@ public class ComplaintOverviewActivity extends AppCompatActivity implements Date
         complaint.setText(descriptionIntent);
         title.setText(titleIntent);
 
-        int complaintID = Integer.parseInt(complaintIdIntent);
+        complaintID = Integer.parseInt(complaintIdIntent);
+
         int accused_tutorID = Integer.parseInt(tutorIdIntent);
         dismiss.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,6 +123,31 @@ public class ComplaintOverviewActivity extends AppCompatActivity implements Date
         tempSuspend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if(date_TextView.getText().equals("") || date_TextView.getText() == null|| date_end_sus == null)
+                {
+                    Toast.makeText(ComplaintOverviewActivity.this, "choose the end date of the suspension", Toast.LENGTH_SHORT).show();
+                }
+                else{
+
+                    int decisionID = Complaint.getComplaintIdByDecisions(Complaint.Decisions.TemporarilySuspended);
+                    boolean validation_complaint_update = DB.make_complaint_decision(complaintID, decisionID, date_end_sus);
+
+                    boolean validation_tutor_update =  DB.updateTutorSuspensionState(accused_tutorID, true);
+
+                    if(validation_complaint_update == true && validation_tutor_update == true){
+
+                        Toast.makeText(ComplaintOverviewActivity.this, "The complaint has been processed", Toast.LENGTH_SHORT).show();
+
+
+                        Intent i = new Intent(ComplaintOverviewActivity.this,AdminInboxActivity.class);
+
+                        startActivity(i);
+                    }else{
+                        Toast.makeText(ComplaintOverviewActivity.this, "The complaint  hasn't been processed", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
             }
         });
 
@@ -134,6 +169,15 @@ public class ComplaintOverviewActivity extends AppCompatActivity implements Date
         String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
         TextView date = findViewById(R.id.date);
         date.setText(currentDateString);
+
+        String real_month = month>=0&&month<=8?"0"+(month+1):""+(month+1);
+        try {
+            date_end_sus = new SimpleDateFormat(Complaint.getDATE_FORMAT()).parse(day +"/"+real_month+"/"+year);
+        } catch (ParseException e) {
+            Log.e("ERROR TEMP_BTN", "onDateSet: "+e.getStackTrace() );
+        }
+
+
     }
 
 }
