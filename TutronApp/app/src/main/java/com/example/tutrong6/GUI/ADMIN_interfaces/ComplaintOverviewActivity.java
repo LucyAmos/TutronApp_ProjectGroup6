@@ -95,15 +95,15 @@ public class ComplaintOverviewActivity extends AppCompatActivity implements Date
 
                 if(validation_complaint_update == true && validation_tutor_update == true){
 
-                    Toast.makeText(ComplaintOverviewActivity.this, "the complaint has been processed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ComplaintOverviewActivity.this, "The complaint has been processed", Toast.LENGTH_SHORT).show();
 
 
 
-                    Intent i = new Intent(ComplaintOverviewActivity.this,ComplaintOverviewActivity.class);
+                    Intent i = new Intent(ComplaintOverviewActivity.this,AdminInboxActivity.class);
 
                     startActivity(i);
                 }else{
-                    Toast.makeText(ComplaintOverviewActivity.this, "he complaint  hasn't been processed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ComplaintOverviewActivity.this, "The complaint  hasn't been processed", Toast.LENGTH_SHORT).show();
                 }
 
 
