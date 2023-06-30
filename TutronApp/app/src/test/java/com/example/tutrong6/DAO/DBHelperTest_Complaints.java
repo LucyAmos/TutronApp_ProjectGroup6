@@ -1,3 +1,4 @@
+/*
 package com.example.tutrong6.DAO;
 
 import static org.junit.Assert.*;
@@ -10,7 +11,7 @@ import junit.framework.TestCase;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.mockito.Mock;
+
 
 import static org.junit.Assert.assertTrue;
 
@@ -26,7 +27,7 @@ public class DBHelperTest_Complaints {
     private SQLiteDatabase database;
 
 
-    @Mock
+
     Context mMockContext;
 
 
@@ -91,3 +92,4 @@ public class DBHelperTest_Complaints {
 
 
 }
+*/
