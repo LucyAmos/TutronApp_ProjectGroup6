@@ -50,7 +50,6 @@ public class UserTest {
        user_test.setPassword("New Password");
        assertEquals("New Password",user_test.getPassword());
 
-
    }
 
    @Test

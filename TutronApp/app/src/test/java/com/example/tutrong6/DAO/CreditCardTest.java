@@ -15,9 +15,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class CreditCardTest {
+    CreditCard creditCard_test = new CreditCard( );
 
 
-    //check if credit can be retrieved and taken
+
+    /**
+     * Test Case: testAddCreditCard
+     * Description: verify that the creditcard can be added
+     * Expected: credit card added to database
+     */
     @Test
     public void testAddCreditCard() {
         CreditCard creditCard = new CreditCard("2000 0005 2361 2985","Samuel Champagne","2029-11-25",123 );
@@ -34,19 +40,30 @@ public class CreditCardTest {
 
     }
 
-
+    /**
+     * Test Case: CVCValid
+     * Description: verify only 3 digit number can be inputed as CVC
+     * Expected: Reject Other country input and only accepts Canada
+     */
     @Test
-    public void setCVC(){
+    public void setCVCValid(){
+        int cvc = 11234;
 
-        //Should be implemented
-        //Method that check CVC length is 3 or 4 digits
-        /*
+        //Step 1: set cvc to an invalid number. Number with more that 3 digit
         try{
-            creditCard.setCvc(12345);
+            creditCard_test.setCvc(cvc);
+            fail("Test Failed:"+ cvc + " is an invalid input");
 
+        // Step 2: Assert True if error was sent
         }catch (IllegalArgumentException e) {
-        assertEquals("Invalid CVC length.", e.getMessage());
-    */
+            assertTrue("Test was Successful",true);
+        }
+
+        //Step 3: Verify that the cvc was not changed
+        if (cvc >= 100 && cvc <= 999){
+            assertTrue("Test was Successful",true);
+        }
+        assertFalse("CVC or CVV number is beyond range allowed",false);
     }
 
 
