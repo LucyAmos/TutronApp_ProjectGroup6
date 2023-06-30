@@ -18,7 +18,7 @@
             android:layout_height="10dp" />
 
         <TextView
-            android:id="@+id/admin_inbox_title"
+            android:id="@+id/purchase_request_title"
             android:fontFamily="@font/andada"
             android:textColor="@color/tutronBluePrimary"
             android:textStyle="bold"
@@ -26,28 +26,28 @@
             android:textSize="34sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="COMPLAINTS" />
+            android:text="PURCHASE REQUESTS" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="15dp" />
 
         <TextView
-            android:id="@+id/admin_inbox_desc"
+            android:id="@+id/purchase_request_desc"
             android:fontFamily="@font/andada"
             android:gravity="center"
             android:textSize="24sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#638FA3"
-            android:text="Complaints Pending Decision" />
+            android:text="Purchase Requests Pending Decision" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="25dp" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/complaints_recycler"
+            android:id="@+id/purchase_request_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>

@@ -1,0 +1,74 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="@drawable/rounded_linear_layout1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/request_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="PROCESS REQUEST"
+            android:fontFamily="@font/andada"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/request_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="#00507F"
+            android:fontFamily="@font/andada"
+            android:text="WOULD YOU LIKE TO ACCEPT THIS REQUEST?" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/acceptBtn"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/andada"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:background="@drawable/rounded_button"
+                android:text="ACCEPT" />
+
+            <Space
+            android:layout_width="30dp"
+            android:layout_height="match_parent" />
+
+            <Button
+                android:id="@+id/rejectBtn"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/andada"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@drawable/rounded_button2"
+                android:text="REJECT" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
