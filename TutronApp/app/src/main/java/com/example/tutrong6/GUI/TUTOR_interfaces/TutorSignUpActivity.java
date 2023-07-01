@@ -135,7 +135,7 @@ public class TutorSignUpActivity extends AppCompatActivity {
 
                 boolean validEducationLevel = false;
                 for (String educationLevel : educationLevelsArray) {
-                    if (educationLevel.equals(native_language)) {
+                    if (educationLevel.equals(education_level)) {
                         validEducationLevel = true;
                         break;
                     }
