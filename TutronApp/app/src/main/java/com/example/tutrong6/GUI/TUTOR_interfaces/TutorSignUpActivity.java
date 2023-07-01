@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -124,6 +125,23 @@ public class TutorSignUpActivity extends AppCompatActivity {
                 byte[] profile_picture = convertToByte(finalProfilePictureTutor);
 
 
+                boolean validLanguage = false;
+                for (String language : nativeLanguagesArray) {
+                    if (language.equals(native_language)) {
+                        validLanguage = true;
+                        break;
+                    }
+                }
+
+                boolean validEducationLevel = false;
+                for (String educationLevel : educationLevelsArray) {
+                    if (educationLevel.equals(native_language)) {
+                        validEducationLevel = true;
+                        break;
+                    }
+                }
+
+
 
                 if(first_name.isEmpty() || last_name.isEmpty() || email.isEmpty() || password.isEmpty() ||
                         education_level.isEmpty() || native_language.isEmpty() || description.isEmpty()
@@ -135,6 +153,15 @@ public class TutorSignUpActivity extends AppCompatActivity {
                     if(!User.isValidEmailAddressFormat(email))
                     {
                         Toast.makeText(TutorSignUpActivity.this, "Invalid Email Format", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (!validLanguage) {
+                        Toast.makeText(TutorSignUpActivity.this, "Invalid Language", Toast.LENGTH_SHORT).show();
+                        tutorNativeLanguages.setText("");
+                    }
+
+                    else if (!validEducationLevel) {
+                        Toast.makeText(TutorSignUpActivity.this, "Invalid Education Level", Toast.LENGTH_SHORT).show();
+                        tutorEducationLevels.setText("");
                     }
 
                     else
