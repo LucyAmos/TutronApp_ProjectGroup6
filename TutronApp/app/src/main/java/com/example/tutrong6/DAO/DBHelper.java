@@ -924,6 +924,12 @@ public class DBHelper extends SQLiteOpenHelper {
     //endregion
 
 
+    //region FUNCTIONS DELIVERABLE 4
 
+    public Tutor getTutorByID()
+    {
+        
+    }
 
+    // endregion
 }
