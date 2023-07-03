@@ -9,6 +9,7 @@ public class Tutor extends User{
     private String description;
     private byte[] profile_picture;
     //private boolean is_suspended;
+    private double hourly_rate ;
     private static final int ROLE = 3;
 
     //private Blob test;
@@ -81,6 +82,13 @@ public class Tutor extends User{
         this.profile_picture = profile_picture;
     }
 
+    public double getHourly_rate() {
+        return hourly_rate;
+    }
+
+    public void setHourly_rate(double hourly_rate) {
+        this.hourly_rate = hourly_rate;
+    }
 
     public static int getStaticRoleID()
     {
@@ -106,7 +114,8 @@ public class Tutor extends User{
                 ", last_name='" + last_name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", is_suspended=" + is_suspended +
+                ", is_suspended=" + is_suspended + '\''+
+                ", hourly_rate=" + hourly_rate + '\''+
                 ", roleID=" + roleID +
                 '}';
     }

@@ -20,7 +20,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 //attribut
     private static final String DATABASE_NAME = "tutronDB";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     // creation de la base de donnee
     public DBHelper(Context context) {
@@ -78,6 +78,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
                 "  is_suspended BOOLEAN DEFAULT 0,\n" +
 
+                "  hourly_rate REAL DEFAULT NULL,\n" +
+
 
                 "  FOREIGN KEY (roleID) REFERENCES role (ID),\n" +
                 "  FOREIGN KEY (credit_card_id) REFERENCES creditcard (ID),\n" +
@@ -99,13 +101,25 @@ public class DBHelper extends SQLiteOpenHelper {
                 "  TutorID INTEGER NOT NULL,\n" +
                 "  title TEXT NOT NULL,\n" +
                 "  description TEXT NOT NULL,\n" +
-                "  is_processed BOOLEAN NOT NULL,\n" +
+                "  is_processed BOOLEAN DEFAULT 0,\n" +
                 "  DecisionsID INTEGER DEFAULT NULL,\n" +
                 "  suspension_end_date TEXT DEFAULT NULL,\n" +
                 "  FOREIGN KEY (StudentID) REFERENCES user (ID),\n" +
                 "  FOREIGN KEY (TutorID) REFERENCES user (ID),\n" +
                 "  FOREIGN KEY (DecisionsID) REFERENCES decision (ID)\n" +
                 ")");
+
+        //topic table
+        sqLiteDatabase.execSQL("CREATE TABLE topic(\n" +
+                "  ID INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "  TutorID INTEGER NOT NULL,\n" +
+                "  name TEXT NOT NULL,\n" +
+                "  years_of_experience INTEGER NOT NULL,\n" +
+                "  description TEXT NOT NULL,\n" +
+                "  is_offered BOOLEAN DEFAULT 0,\n" +
+                "  FOREIGN KEY (TutorID) REFERENCES user (ID)\n" +
+                ")");
+
 
 
 
@@ -744,5 +758,172 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     //endregion
+
+
+
+    //region FUNCTIONS DELIVERABLE 3
+
+    /**
+     * add a topic in the database
+     * @param topic the topic that will be added in the DB
+     * @return true if the addition in the DB was successfull, otherwise return false
+     */
+    public boolean addTopic(Topic topic)
+    {
+        SQLiteDatabase MyData = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("TutorID",topic.getTutorID());
+        contentValues.put("name",topic.getName());
+        contentValues.put("years_of_experience",topic.getYears_of_experience());
+        contentValues.put("description",topic.getDescription());
+        int is_offered= topic.getIs_offered()==false?0:1;
+        contentValues.put("is_offered",is_offered);
+
+        long result = MyData.insert("topic",null,contentValues);
+
+        if(result==-1) return false;
+        else
+            return true;
+    }
+
+    /**
+     * delete a topic in the DB
+     * @param topicID ID of the topic to delete
+     * @return true if the deletion in the DB was successfull, otherwise return false
+     */
+    public boolean deleteTopic(int topicID)
+    {
+
+        SQLiteDatabase MyData = this.getWritableDatabase();
+        Cursor cursor = MyData.rawQuery("Select * from topic where  ID =  ?", new String[]{String.valueOf(topicID)});
+        if (cursor.getCount() > 0)
+        {
+            long result = MyData.delete("topic", "ID=?", new String[]{String.valueOf(topicID)});
+            return (result==-1? false:true);
+        }
+        else {
+            return false;
+        }
+
+    }
+
+    /**
+     * This function updates the topic status: if it is an offered topic or not
+     * @param topicID the ID of the topic whose offer must be updated
+     * @param offer_state new value of topic offer status
+     * @return true if the update has been carried out correctly
+     */
+    public boolean updateTopicOffer(int topicID, boolean offer_state)
+    {
+        SQLiteDatabase MyData = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        int is_offered = offer_state == false?0:1;
+        contentValues.put("is_offered",is_offered);
+        Cursor cursor = MyData.rawQuery("Select * from topic where ID = ?", new String[]{String.valueOf(topicID)});
+        if(cursor.getCount() > 0)
+        {
+            long update = MyData.update("topic",contentValues,"ID=?",new String[]{String.valueOf(topicID)});
+            return (update==-1? false:true);
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    /**
+     * finds a topic based on its ID
+     * @param topicID the ID of the topic whose information we want
+     * @return the topic corresponding to the ID given as a parameter
+     */
+    public Topic getTopicByID(int topicID)
+    {
+
+        Topic topic = new Topic();
+        SQLiteDatabase MyData = this.getWritableDatabase();
+
+        Cursor res = MyData.rawQuery("SELECT * FROM topic WHERE ID = ? ",new String[] {String.valueOf(topicID)});
+
+        while (res.moveToNext()) {
+
+            topic.setID(res.getInt(0));
+            topic.setTutorID(res.getInt(1));
+            topic.setName(res.getString(2));
+            topic.setYears_of_experience(res.getInt(3));
+            topic.setDescription(res.getString(4));
+            boolean is_offered =res.getInt(5) ==0? false:true;
+            topic.setIs_offered(is_offered);
+        }
+//        MyData.close();
+        return topic;
+
+    }
+
+    /**
+     * gives all the topics created by a tutor
+     * @param tutorID the ID of the tutor whose topics we want
+     * @return list of all the topics created by a tutor whose ID was given as a parameter
+     */
+    public ArrayList<Topic> getAllTopics(int tutorID)
+    {
+        ArrayList<Topic> topics = new ArrayList<Topic>();
+
+        SQLiteDatabase MyData = this.getWritableDatabase();
+
+        Cursor res = MyData.rawQuery("SELECT * FROM topic WHERE TutorID = ?",new String[] {String.valueOf(tutorID)});
+
+        while (res.moveToNext()) {
+            Topic temp= new Topic();
+
+            temp.setID(res.getInt(0));
+            temp.setTutorID(res.getInt(1));
+            temp.setName(res.getString(2));
+            temp.setYears_of_experience(res.getInt(3));
+            temp.setDescription(res.getString(4));
+            boolean is_offered =res.getInt(5) ==0? false:true;
+            temp.setIs_offered(is_offered);
+
+            topics.add(temp);
+        }
+
+//        MyData.close();
+        return topics;
+    }
+
+    /**
+     *gives the topics offered by a tutor
+     * @param tutorID the ID of the tutor whose topics we want
+     * @return list of  topics offered by the tutor whose ID was given as a parameter
+     */
+    public ArrayList<Topic> getOfferedTopics(int tutorID)
+    {
+        ArrayList<Topic> offered_topics = new ArrayList<Topic>();
+
+        SQLiteDatabase MyData = this.getWritableDatabase();
+        Cursor res = MyData.rawQuery("SELECT * FROM topic WHERE TutorID = ? AND is_offered = ?",new String[] {String.valueOf(tutorID),"1"});
+
+        while (res.moveToNext()) {
+            Topic temp= new Topic();
+
+            temp.setID(res.getInt(0));
+            temp.setTutorID(res.getInt(1));
+            temp.setName(res.getString(2));
+            temp.setYears_of_experience(res.getInt(3));
+            temp.setDescription(res.getString(4));
+            boolean is_offered =res.getInt(5) ==0? false:true;
+            temp.setIs_offered(is_offered);
+
+            offered_topics.add(temp);
+        }
+
+//        MyData.close();
+        return offered_topics;
+    }
+
+    //endregion
+
+
+
 
 }
