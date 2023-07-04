@@ -1,7 +1,7 @@
 package com.example.tutrong6.BEANS;
 
 public class Administrator extends User{
-    //attributs
+    //attributes
     private final static int ROLE = 1;
 
     //constructors

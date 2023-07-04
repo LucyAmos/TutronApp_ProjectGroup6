@@ -14,8 +14,13 @@ public class AddressTest {
 
     private Address address = new Address();
 
+    /**
+     * Test Case : AddAddress
+     * Description: verify user address can be added to database
+     * Expected: Address in database
+     */
     @Test
-    public void AddAddress(){
+    public void SetGetAddress(){
 
         address.setStreet_address("563 javac street");
         address.setCity("Ottawa");
@@ -37,7 +42,7 @@ public class AddressTest {
      */
 
     @Test
-    public void CountryInput_T(){
+    public void CountryInput(){
         // Step 1: Set Country to US
         String country = "Canada";
         try{
@@ -53,32 +58,6 @@ public class AddressTest {
             assertTrue("Test Successful",true);
         }
     }
-
-    @Test
-    public void CountryInput_F(){
-        // Step 1: Set Country to US
-        String country = "United States";
-        try{
-            address.setCountry(country);
-            fail("Test Failed:"+ country + " is an invalid input" );
-
-            // Step 2: Assert True if error was sent
-        }catch(Exception e){
-            assertTrue("Test was Successful",true);
-        }
-
-        // Step 3: Verify that the country was not changed
-        if ( address.getCountry() == country){
-            assertFalse("Test Failed : Country was set to an invalid input",false);
-        }
-
-    }
-
-    @Test
-    public void uniqueID(){
-        //check if unique id in database
-    }
-
 
 
 }

@@ -15,16 +15,31 @@ public class TutorTest {
     private Tutor tutor= new Tutor();
 
 
-    @Test
-    public void EducationLvl(){
 
-        // test if education input in options
+    /**
+     * Test Case : Native Language
+     * Description: check if the language by tutor is properly registered
+     * Expected: 3
+     */
+    @Test
+    public void NativeLanguage() {
+        String Language = "English";
+        tutor.setNative_language(Language);
+
+        assertEquals(Language, tutor.getNative_language());
     }
 
+    /**
+     * Test Case : StaticRole
+     * Description: Static role of student == 3
+     * Expected: 3
+     */
     @Test
-    public void NativeLanguages(){
+    public void StaticRole() {
+        int expected= 3;
+        int actual = Tutor.getStaticRoleID();
 
-        //test if native languages in options
+        assertEquals(expected, actual);
     }
 
 }

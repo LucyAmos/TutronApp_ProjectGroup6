@@ -3,7 +3,7 @@ package com.example.tutrong6.BEANS;
 import java.util.Arrays;
 
 public class Tutor extends User{
-    //attributs
+    //attributes
     private String education_level;
     private String native_language;
     private String description;

@@ -34,7 +34,12 @@ public class UserTest {
         //assert
 
     }
-
+    /**
+     * Test Case : Change Info
+     * Description: check if user information inputed and saved in database
+     * Expected: values inputed
+     *
+     */
    @Test
     public void ChangeInfo(){
 
@@ -72,8 +77,40 @@ public class UserTest {
        boolean result3 = "pass" == user_test.getPassword();
        assertFalse(result3);
    }
+    /**
+     * Test Case : Roles
+     * Description: check if user role can be set
+     * Expected: user role inputed
+     *
+     */
+   @Test
+    public void Roles(){
+       User user_admin = new Administrator();
+       assertEquals("Administrator", user_admin.getRole());
 
+       User user_T = new Tutor();
+       assertEquals("Tutor", user_T.getRole());
 
+       User user_st = new Student();
+       assertEquals("Student", user_st.getRole());
+
+   }
+
+    /**
+     * Test Case : ValidEmailTest
+     * Description: check if only valid email accepted
+     * Expected: only valid email with Alphanumerique and right format accepted
+     *
+     */
+    @Test
+    public void ValidEmailTest(){
+
+        assertTrue(User.isValidEmailAddressFormat("sunshine45688llol@example.com"));
+        assertTrue(User.isValidEmailAddressFormat("johnsoncompany.doe@example.com"));
+        assertFalse(User.isValidEmailAddressFormat("invalid_email"));
+        assertFalse(User.isValidEmailAddressFormat("john@example"));
+        assertTrue(User.isValidEmailAddressFormat("445687@example.com"));
+    }
 
 
 }
