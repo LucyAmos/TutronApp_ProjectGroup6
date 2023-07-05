@@ -1,5 +1,5 @@
 package com.example.tutrong6.DAO;
-
+import android.content.SharedPreferences;
 import android.content.Context;
 
 import org.junit.Test;
@@ -9,15 +9,19 @@ import com.example.tutrong6.BEANS.Tutor;
 import com.example.tutrong6.BEANS.Student;
 import com.example.tutrong6.BEANS.User;
 import android.content.Context;
-import android.content.SharedPreferences;
+import android.os.PerformanceHintManager;
+
 
 import org.junit.Before;
 import org.junit.Test;
 
 public class SessionManagementTest {
-/*
-    private SharedPreferences sharedPreferences;
-    //private SessionManagement sessionMgmnt= new SessionManagement();
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    private SessionManagement session;
+
+
     User user = new User();
     @Test
     public void CreateSession(){

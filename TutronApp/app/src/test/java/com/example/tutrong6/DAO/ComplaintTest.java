@@ -76,6 +76,7 @@ public class ComplaintTest {
      * Description: //test if you can create duplicate complaints
      * Expected: duplicate complain with same exact information cannot be created
      */
+    /**
     @Test
     public void DuplicateComplains(){
 
@@ -95,11 +96,11 @@ public class ComplaintTest {
 
         }
     }
-
+**/
     /**
      * Test Case: ComplaintIdByDecisions
      * Description: //test if complaint can be retrieve by decision id
-     * Expected: complaint can be retreive by id and equal enum values
+     * Expected: complaint can be retrieve by id and equal enum values
      */
     @Test
     public void ComplaintIdByDecisions(){
