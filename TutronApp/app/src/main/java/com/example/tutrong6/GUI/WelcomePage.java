@@ -5,6 +5,7 @@ package com.example.tutrong6.GUI;
 import com.example.tutrong6.BEANS.*;
 import com.example.tutrong6.DAO.*;
 import com.example.tutrong6.GUI.ADMIN_interfaces.AdminInboxActivity;
+import com.example.tutrong6.GUI.TUTOR_interfaces.TutorHubActivity;
 import com.example.tutrong6.R;
 import android.app.Activity;
 import android.content.Intent;
@@ -103,6 +104,11 @@ public class WelcomePage extends Activity {
 						startActivity(intent);
 
 
+				}else if(session_user.getRoleID() == Tutor.getStaticRoleID()){
+
+
+						Intent intent = new Intent(com.example.tutrong6.GUI.WelcomePage.this, TutorHubActivity.class);
+						startActivity(intent);
 				}else{
 					Toast.makeText(WelcomePage.this, "Not implement yet for Students and Tutors", Toast.LENGTH_SHORT).show();
 				}

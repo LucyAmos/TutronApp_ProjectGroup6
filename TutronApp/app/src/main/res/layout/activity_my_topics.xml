@@ -70,13 +70,13 @@
 
             <TextView
                 android:id="@+id/total_topics_number"
-                android:layout_width="match_parent"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/andada"
-                android:textSize="20sp"
-                android:textStyle="bold"
                 android:gravity="right"
-                android:text="0" />
+                android:text="0"
+                android:textSize="20sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <Space
@@ -105,7 +105,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/offered_topics_numbers"
+                android:id="@+id/offered_topics_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/andada"
@@ -120,7 +120,7 @@
             android:layout_height="20dp" />
 
         <Button
-            android:id="@+id/my_topics_button"
+            android:id="@+id/add_topics_button"
             android:layout_width="150dp"
             android:layout_height="60dp"
             android:fontFamily="@font/andada"

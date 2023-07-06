@@ -16,9 +16,10 @@
         tools:layout_editor_absoluteY="324dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#A68A00"
+            android:background="#A6A6A6"
             android:layout_gravity="center_vertical">
 
             <LinearLayout

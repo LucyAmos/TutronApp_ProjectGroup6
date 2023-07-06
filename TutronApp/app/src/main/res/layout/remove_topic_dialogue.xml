@@ -15,9 +15,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="REMOVE TOPIC"
+            android:text="STOP OFFERING TOPIC"
             android:fontFamily="@font/andada"
-            android:textSize="36sp"
+            android:textSize="30sp"
             android:textStyle="bold" />
 
         <TextView
@@ -32,7 +32,7 @@
             android:paddingLeft="8dp"
             android:textColor="#FF0000"
             android:fontFamily="@font/andada"
-            android:text="ARE YOU SURE YOU WANT TO REMOVE THIS TOPIC?  STUDENTS WILL NO LONGER BE ABLE TO SEARCH FOR IT!" />
+            android:text="ARE YOU SURE YOU WANT TO STOP OFFERING THIS TOPIC?  STUDENTS WILL NO LONGER BE ABLE TO SEARCH FOR IT!" />
 
         <Space
             android:layout_width="match_parent"
@@ -53,7 +53,7 @@
                 android:textStyle="bold"
                 android:textSize="24sp"
                 android:background="@drawable/rounded_button2"
-                android:text="REMOVE TOPIC" />
+                android:text="STOP OFFERING TOPIC" />
         </LinearLayout>
 
     </LinearLayout>
