@@ -6,9 +6,9 @@ import android.content.Intent;
 import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,15 +17,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tutrong6.BEANS.Complaint;
 import com.example.tutrong6.BEANS.Topic;
-import com.example.tutrong6.BEANS.Tutor;
-import com.example.tutrong6.BEANS.User;
 import com.example.tutrong6.DAO.DBHelper;
 import com.example.tutrong6.DAO.SessionManagement;
-import com.example.tutrong6.GUI.SignUpLauncherActivity;
-import com.example.tutrong6.GUI.TUTOR_interfaces.TopicsRecyclerInterface;
-import com.example.tutrong6.GUI.WelcomePage;
 import com.example.tutrong6.R;
 
 import java.util.ArrayList;
@@ -53,7 +47,7 @@ public class TutorTopicsActivity extends AppCompatActivity implements TopicsRecy
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_topics);
-        adapter.setLongClickListner(this);
+        //adapter.setLongClickListner(this);
 
         SessionManagement sessionManagement = new SessionManagement(TutorTopicsActivity.this);
         int userID = sessionManagement.getSession();
@@ -64,14 +58,16 @@ public class TutorTopicsActivity extends AppCompatActivity implements TopicsRecy
 
         DB = new DBHelper(this);
 
-        //topics = DB.activeComplaintsList();
+        topics = DB.getAllTopics(userID);
+
+
+        totalTopics = DataBase.getAllTopics(userID).toArray().length;
+        offeredTopics = DataBase.getOfferedTopics(userID).toArray().length;
 
         TopicsAdapter adapter = new TopicsAdapter(this,this, topics);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        totalTopics = DataBase.getAllTopics(userID).toArray().length;
-        offeredTopics = DataBase.getOfferedTopics(userID).toArray().length;
 
         TextView totalTopicsNumber = findViewById(R.id.total_topics_number);
         TextView offeredTopicsNumber = findViewById(R.id.offered_topics_number);
@@ -115,7 +111,7 @@ public class TutorTopicsActivity extends AppCompatActivity implements TopicsRecy
 
 
     @Override
-    public void onItemLongClick(int position) {
+    public void onItemClick(int position) {
 
         Topic selected = topics.get(position);
         String topicId = String.valueOf(selected.getID());
@@ -128,7 +124,7 @@ public class TutorTopicsActivity extends AppCompatActivity implements TopicsRecy
 
         Intent intent = new Intent (TutorTopicsActivity.this, UpdateTopicsActivity.class);
 
-        intent.putExtra("selectedTopic", (Parcelable) selected);
+        //intent.putExtra("selectedTopic", (Parcelable) selected);
         intent.putExtra("yearsOfExperience", yearsOfExperience);
         intent.putExtra("topic", topic);
         intent.putExtra("tutorId", tutorId);
@@ -141,7 +137,7 @@ public class TutorTopicsActivity extends AppCompatActivity implements TopicsRecy
     }
 
     @Override
-    public void onItemClick(int position) {
+    public void onItemLongClick(int position) {
         //I will add the parameters for the maximum and minimum after the value can be set in the database
 
         unofferDialog = new Dialog(TutorTopicsActivity.this);
@@ -151,20 +147,32 @@ public class TutorTopicsActivity extends AppCompatActivity implements TopicsRecy
         Topic selected = topics.get(position);
         Boolean offer = selected.getIs_offered();
 
-        if(offer == false || offeredTopics < 5){
+        if(!offer && offeredTopics < 5){
             offerDialog = new Dialog(TutorTopicsActivity.this);
             offerDialog.setContentView(R.layout.offer_topic_dialogue);
+            offerDialog.show();
             offerDialog.setCancelable(true);
 
-            Button offerTopic = unofferDialog.findViewById(R.id.offerBtn);
+            Window windowOffer = offerDialog.getWindow();
+            if (windowOffer != null) {
+                WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+                layoutParams.copyFrom(windowOffer.getAttributes());
+                layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+                layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                windowOffer.setAttributes(layoutParams);
+            }
+
+            Button offerTopic = offerDialog.findViewById(R.id.offerBtn);
 
             offerTopic.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     // Handle button click
                     selected.setIs_offered(true);
+                    DataBase.updateTopicOffer(selected.getID(),true);
+                    offerDialog.dismiss();
+                    recreate();
                     Toast.makeText(TutorTopicsActivity.this, "You Are Now Offering This Topic", Toast.LENGTH_SHORT).show();
-                    unofferDialog.dismiss();
                 }
 
 
@@ -175,7 +183,17 @@ public class TutorTopicsActivity extends AppCompatActivity implements TopicsRecy
         } else if (offer == true) {
             unofferDialog = new Dialog(TutorTopicsActivity.this);
             unofferDialog.setContentView(R.layout.remove_topic_dialogue);
+            unofferDialog.show();
             unofferDialog.setCancelable(true);
+
+            Window windowUnoffer = unofferDialog.getWindow();
+            if (windowUnoffer != null) {
+                WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+                layoutParams.copyFrom(windowUnoffer.getAttributes());
+                layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+                layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                windowUnoffer.setAttributes(layoutParams);
+            }
 
             Button unoffer = unofferDialog.findViewById(R.id.removeBtn);
 
@@ -184,15 +202,17 @@ public class TutorTopicsActivity extends AppCompatActivity implements TopicsRecy
                 public void onClick(View v) {
                     // Handle button click
                     selected.setIs_offered(false);
-                    Toast.makeText(TutorTopicsActivity.this, "You Are No Longer Offering This Topic", Toast.LENGTH_SHORT).show();
+                    DataBase.updateTopicOffer(selected.getID(),false);
                     unofferDialog.dismiss();
+                    recreate();
+                    Toast.makeText(TutorTopicsActivity.this, "You Are No Longer Offering This Topic", Toast.LENGTH_SHORT).show();
                 }
 
 
             });
 
         }else{
-
+            Toast.makeText(TutorTopicsActivity.this, "You are already offering 5 topics", Toast.LENGTH_SHORT).show();
         }
 
 

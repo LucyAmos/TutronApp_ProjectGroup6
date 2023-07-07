@@ -86,7 +86,7 @@
                     android:id="@+id/money_image"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    app:srcCompat="@drawable/Money" />
+                    app:srcCompat="@drawable/money" />
 
                 <Space
                     android:layout_width="30dp"

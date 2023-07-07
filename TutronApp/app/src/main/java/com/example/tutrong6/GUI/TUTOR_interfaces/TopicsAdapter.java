@@ -24,10 +24,10 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.MyViewHold
     ArrayList<Topic> topics;
 
 
-    public TopicsAdapter(Context context,/*ArrayList title, ArrayList sneak_peek, ArrayList complaint_id,*/ TopicsRecyclerInterface topicsRecyclerInterface, ArrayList<Topic> topics) {
+    public TopicsAdapter(Context context, TopicsRecyclerInterface topicsRecyclerInterface, ArrayList<Topic> topics) {
         this.context = context;
         this.topicsRecyclerInterface=topicsRecyclerInterface;
-        this.topics =topics;
+        this.topics = topics;
 
     }
 
@@ -43,19 +43,13 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.MyViewHold
         holder.topic.setText(topics.get(position).getName());
         boolean offer = topics.get(position).getIs_offered();
 
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                if (longClickListener != null) {
-                    longClickListener.onItemLongClick(position);
-                    return true;
-                }
-                return false;
-            }
-        });
 
-        if(offer == true){
-            holder.container.setBackgroundColor(Color.parseColor("#87E449"));
+        if(offer){
+            holder.container.setBackgroundColor(Color.parseColor("#E5BE28"));
+            holder.offerText.setText("Offered");
+        }else{
+            holder.container.setBackgroundColor(Color.parseColor("#A6A6A6"));
+            holder.offerText.setText("Not Offered");
         }
 
     }
@@ -66,18 +60,36 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.MyViewHold
         return topics.size();
     }
 
-    public void setLongClickListner(TopicsRecyclerInterface listener) {
-        this.longClickListener = listener;
-    }
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView topic;
+
+        TextView offerText;
         ConstraintLayout container;
 
         public MyViewHolder(@NonNull View itemView, TopicsRecyclerInterface topicsRecyclerInterface) {
             super(itemView);
             topic = itemView.findViewById(R.id.topic_name);
             container = itemView.findViewById(R.id.container);
+            offerText = itemView.findViewById(R.id.offer_type);
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    if (topicsRecyclerInterface != null) {
+                        int pos = getAdapterPosition();
+
+                        if (pos != RecyclerView.NO_POSITION) {
+                            topicsRecyclerInterface.onItemLongClick(pos);
+                        }
+                    }
+                return true;
+
+            }
+
+
+            });
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

@@ -175,7 +175,7 @@
                 android:textStyle="bold"
                 android:textSize="28dp"
                 android:textColor="#000000"
-                android:text="Remove" />
+                android:text="Delete" />
 
             <Space
                 android:layout_width="match_parent"

@@ -51,6 +51,22 @@
             android:exported="true"
             tools:ignore="ExtraText">
         </activity>
+        <activity android:name=".GUI.TUTOR_interfaces.TutorHubActivity"
+            android:exported="true"
+            tools:ignore="ExtraText">
+        </activity>
+        <activity android:name=".GUI.TUTOR_interfaces.AddTopicActivity"
+            android:exported="true"
+            tools:ignore="ExtraText">
+        </activity>
+        <activity android:name=".GUI.TUTOR_interfaces.UpdateTopicsActivity"
+            android:exported="true"
+            tools:ignore="ExtraText">
+        </activity>
+        <activity android:name=".GUI.TUTOR_interfaces.TutorTopicsActivity"
+            android:exported="true"
+            tools:ignore="ExtraText">
+        </activity>
     </application>
 
 
