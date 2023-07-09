@@ -1,18 +1,9 @@
 package com.example.tutrong6.DAO;
 
-import org.junit.After;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.Before;
 
-import com.example.tutrong6.BEANS.Administrator;
-import com.example.tutrong6.BEANS.Complaint;
-import com.example.tutrong6.BEANS.Tutor;
-import com.example.tutrong6.BEANS.Student;
-import com.example.tutrong6.BEANS.User;
 import com.example.tutrong6.BEANS.Topic;
-
-import java.util.Date;
 
 public class TopicTest {
 
@@ -51,7 +42,7 @@ public class TopicTest {
     @Test
     public void testCreatedMax() {
 
-        int createdMax = Topic.getCREATED_MAX();
+        int createdMax = Topic.getCREATION_MAX();
 
         // Verify that the value is expected
         assertEquals(20, createdMax);

@@ -3,7 +3,7 @@ package com.example.tutrong6.GUI.TUTOR_interfaces;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.content.Intent;
-import android.os.Parcelable;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -23,7 +23,7 @@ import com.example.tutrong6.DAO.SessionManagement;
 import com.example.tutrong6.R;
 
 import java.util.ArrayList;
-
+import java.util.Map;
 
 
 public class TutorTopicsActivity extends AppCompatActivity implements TopicsRecyclerInterface {
@@ -59,10 +59,15 @@ public class TutorTopicsActivity extends AppCompatActivity implements TopicsRecy
         DB = new DBHelper(this);
 
         topics = DB.getAllTopics(userID);
+        Map<Integer, Integer> topicTotals = DataBase.countTopics(userID);
+        // dateStr = new SimpleDateFormat(Plainte.getDATE_FORMAT()).format(etat_de_suspension.get(i));
+        for (int i : topicTotals.keySet()) {
+            totalTopics = i;
+            offeredTopics = topicTotals.get(i);
+            Log.e("MAP", "key: " + i + " value: " + topicTotals.get(i));
 
+        }
 
-        totalTopics = DataBase.getAllTopics(userID).toArray().length;
-        offeredTopics = DataBase.getOfferedTopics(userID).toArray().length;
 
         TopicsAdapter adapter = new TopicsAdapter(this,this, topics);
         recyclerView.setAdapter(adapter);
@@ -88,10 +93,10 @@ public class TutorTopicsActivity extends AppCompatActivity implements TopicsRecy
 
 
         });
-
-        if(totalTopics >= 20){
+        int creation_max = Topic.getCREATION_MAX();
+        if(totalTopics >= creation_max){
             addButton.setVisibility(View.INVISIBLE);
-        }else if(totalTopics < 20){
+        }else if(totalTopics < creation_max){
             addButton.setVisibility(View.VISIBLE);
         }
 
@@ -147,7 +152,7 @@ public class TutorTopicsActivity extends AppCompatActivity implements TopicsRecy
         Topic selected = topics.get(position);
         Boolean offer = selected.getIs_offered();
 
-        if(!offer && offeredTopics < 5){
+        if(!offer && offeredTopics < Topic.getOFFERING_MAX()){
             offerDialog = new Dialog(TutorTopicsActivity.this);
             offerDialog.setContentView(R.layout.offer_topic_dialogue);
             offerDialog.show();
@@ -220,7 +225,7 @@ public class TutorTopicsActivity extends AppCompatActivity implements TopicsRecy
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
+        inflater.inflate(R.menu.tutron_menu, menu);
         return true;
     }
 

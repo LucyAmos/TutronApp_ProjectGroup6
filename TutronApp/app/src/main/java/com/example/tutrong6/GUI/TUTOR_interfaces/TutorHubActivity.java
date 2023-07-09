@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -35,11 +36,15 @@ public class TutorHubActivity extends AppCompatActivity {
 
         int userID = sessionManagement.getSession();
 
-        User session_user = DataBase.getUserbyID(userID);
+        Tutor session_tutor = DataBase.getTutorByID(userID);
 
-        //double tutorHourlyRate = DataBase.ge
+        double tutorHourlyRate = session_tutor.getHourly_rate();
+        String hourlyRate_str = tutorHourlyRate == Tutor.getNOT_ASSIGNED()? "Not Given yet" : String.valueOf(tutorHourlyRate);
+        hourlyRate.setText(hourlyRate_str);
 
-        //hourlyRate.setText(DataBase.getHourl);
+        totalLessons.setText("0");
+        myRating.setRating(0);
+
 
 
 
@@ -60,8 +65,9 @@ public class TutorHubActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Handle button click
-                Intent intent = new Intent(TutorHubActivity.this, PurchaseRequestInboxActivity.class);
-                startActivity(intent);
+                Toast.makeText(TutorHubActivity.this, "Not implemented yet", Toast.LENGTH_SHORT).show();
+               /* Intent intent = new Intent(TutorHubActivity.this, PurchaseRequestInboxActivity.class);
+                startActivity(intent);*/
             }
 
 

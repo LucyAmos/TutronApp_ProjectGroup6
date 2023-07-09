@@ -142,7 +142,6 @@ public class TutorSignUpActivity extends AppCompatActivity {
                 }
 
 
-
                 if(first_name.isEmpty() || last_name.isEmpty() || email.isEmpty() || password.isEmpty() ||
                         education_level.isEmpty() || native_language.isEmpty() || description.isEmpty()
                 )

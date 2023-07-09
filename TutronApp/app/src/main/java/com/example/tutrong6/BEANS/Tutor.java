@@ -11,12 +11,17 @@ public class Tutor extends User{
     //private boolean is_suspended;
     private double hourly_rate ;
     private static final int ROLE = 3;
+    private static final int NOT_ASSIGNED = -1;
 
     //private Blob test;
 
     //contructors
 
-    public Tutor(){this.roleID = ROLE;}
+    public Tutor()
+    {
+        this.roleID = ROLE;
+
+    }
 
     public Tutor(User user,String education_level,String native_language, String description, byte[] profile_picture )
     {
@@ -26,6 +31,7 @@ public class Tutor extends User{
         this.description = description;
         this.profile_picture = profile_picture;
         this.roleID = ROLE;
+
     }
 
     public Tutor(String education_level,String native_language, String description, byte[] profile_picture) {
@@ -34,6 +40,7 @@ public class Tutor extends User{
         this.description = description;
         this.profile_picture = profile_picture;
         this.roleID = ROLE;
+
     }
 
     public Tutor(String first_name, String last_name, String email, String password, String education_level,String native_language, String description, byte[] profile_picture) {
@@ -101,6 +108,8 @@ public class Tutor extends User{
     public String getRole() {
         return this.getClass().getSimpleName();
     }
+
+    public static double getNOT_ASSIGNED(){return NOT_ASSIGNED;}
 
     @Override
     public String toString() {

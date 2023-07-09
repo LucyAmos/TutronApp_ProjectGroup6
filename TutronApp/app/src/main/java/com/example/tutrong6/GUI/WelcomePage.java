@@ -24,7 +24,7 @@ import java.util.Date;
 import java.util.Map;
 
 public class WelcomePage extends Activity {
-
+	String tutorToastStart = "";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,7 @@ public class WelcomePage extends Activity {
 		String role = DataBase.getRoleNameByRoleID(session_user.getRoleID());
 		//user_role.setText();
 
+
 		if (session_user.getRoleID() == Tutor.getStaticRoleID())
 		{
 			Map<String, Date> suspension_state = DataBase.infoEtatSsuspension(userID);
@@ -72,10 +73,11 @@ public class WelcomePage extends Activity {
 			Log.e("COMPARE_DATE", ""+compareDate );
 			if(session_user.getIs_suspended() && compareDate <= 0)
 			{
-				start_btn.setEnabled(false);
+				//start_btn.setEnabled(false);
 				welcome_TV.setText("SORRY");
 				String dateStr = suspension_end_date ==null?"": new SimpleDateFormat(Complaint.getDATE_FORMAT()).format(suspension_end_date);
 				String msg_susp= "You got a "+ suspensionType;
+				tutorToastStart = suspensionType.equalsIgnoreCase("TEMPORARILY SUSPENDED")? "functionality available at the end of your suspension":"you can no longer use the application";
 				String return_date = suspensionType.equalsIgnoreCase("TEMPORARILY SUSPENDED")? " until "+dateStr:"";
 				login_status_text.setText(msg_susp);
 				user_role.setText(return_date);
@@ -105,10 +107,16 @@ public class WelcomePage extends Activity {
 
 
 				}else if(session_user.getRoleID() == Tutor.getStaticRoleID()){
+						if(session_user.getIs_suspended())
+						{
+							Toast.makeText(WelcomePage.this, tutorToastStart, Toast.LENGTH_SHORT).show();
+						}
+						else
+						{
+							Intent intent = new Intent(com.example.tutrong6.GUI.WelcomePage.this, TutorHubActivity.class);
+							startActivity(intent);
+						}
 
-
-						Intent intent = new Intent(com.example.tutrong6.GUI.WelcomePage.this, TutorHubActivity.class);
-						startActivity(intent);
 				}else{
 					Toast.makeText(WelcomePage.this, "Not implement yet for Students and Tutors", Toast.LENGTH_SHORT).show();
 				}

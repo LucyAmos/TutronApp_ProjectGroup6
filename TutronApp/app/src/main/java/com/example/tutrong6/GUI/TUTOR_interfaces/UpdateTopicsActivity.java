@@ -35,47 +35,37 @@ public class UpdateTopicsActivity extends AppCompatActivity {
 
 
 
-        String topicIntent = getIntent().getStringExtra("topic");
+        String topicNameIntent = getIntent().getStringExtra("topic");
         String descriptionIntent = getIntent().getStringExtra("description");
         String yearsOfExperienceIntent = getIntent().getStringExtra("yearsOfExperience");
         String tutorIdIntent = getIntent().getStringExtra("tutorId");
         String topicIdIntent = getIntent().getStringExtra("topicId");
         String offerIntent = getIntent().getStringExtra("offer");
-        //Topic selectedIntent = getIntent().getParcelableExtra("selectedTopic");
-
-        Topic selected = DB.getTopicByID(Integer.parseInt(topicIdIntent));
 
 
-        topicText.setText(topicIntent);
+        topicText.setText(topicNameIntent);
         descriptionText.setText(descriptionIntent);
         yearsOfExperienceText.setText(yearsOfExperienceIntent);
+
+        int topicId = Integer.parseInt(topicIdIntent);
 
         updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String topic = topicText.getText().toString().trim();
+                String topic_name = topicText.getText().toString().trim();
                 String description = descriptionText.getText().toString().trim();
                 int yearsOfExperience = Integer.parseInt(yearsOfExperienceText.getText().toString().trim());
-                int topicId = Integer.parseInt(topicIdIntent);
-                int tutorId = Integer.parseInt(tutorIdIntent);
-                boolean offer = Boolean.parseBoolean(offerIntent);
-                //Topic selected = selectedIntent;
 
-
-
-
-                if(topic.isEmpty() || description.isEmpty() || String.valueOf(yearsOfExperience).isEmpty()
+                if(topic_name.isEmpty() || description.isEmpty() || String.valueOf(yearsOfExperience).isEmpty()
                 )
                 {
                     Toast.makeText(UpdateTopicsActivity.this, "Please, fill in ALL the fields", Toast.LENGTH_SHORT).show();
                 }else{
-                    Topic updateTopicAdd = new Topic(tutorId, topic, yearsOfExperience, description, offer);
-                    Boolean addedUpdate = DataBase.addTopic(updateTopicAdd);
-                    Topic updateTopicRemove = selected;
-                    Boolean removedUpdate = DataBase.deleteTopic(updateTopicRemove.getID());
+                    Topic updateTopic = new Topic(topic_name,yearsOfExperience, description);
+                    Boolean addedUpdate = DataBase.updateTopic(topicId, updateTopic);
 
-                    if(addedUpdate && removedUpdate) {
+                    if(addedUpdate) {
                         Toast.makeText(UpdateTopicsActivity.this, "Topic Updated Successfully", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(UpdateTopicsActivity.this, TutorTopicsActivity.class));
                     }else{
@@ -88,10 +78,7 @@ public class UpdateTopicsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //Topic selected = selectedIntent;
-
-                Topic removeTopic = selected;
-                Boolean removed = DataBase.deleteTopic(removeTopic.getID());
+                Boolean removed = DataBase.deleteTopic(topicId);
                 if (removed) {
                     Toast.makeText(UpdateTopicsActivity.this, "Topic Removed Successfully", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(UpdateTopicsActivity.this, TutorTopicsActivity.class));

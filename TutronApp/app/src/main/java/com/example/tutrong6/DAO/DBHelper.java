@@ -20,7 +20,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 //attribut
     private static final String DATABASE_NAME = "tutronDB";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     // creation de la base de donnee
     public DBHelper(Context context) {
@@ -76,7 +76,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "  addressID INTEGER DEFAULT NULL,\n" +
                 "  credit_card_id INTEGER DEFAULT NULL,\n" +
 
-                "  is_suspended BOOLEAN DEFAULT 0,\n" +
+                "  is_suspended BOOLEAN DEFAULT -1,\n" +
 
                 "  hourly_rate REAL DEFAULT NULL,\n" +
 
@@ -120,7 +120,38 @@ public class DBHelper extends SQLiteOpenHelper {
                 "  FOREIGN KEY (TutorID) REFERENCES user (ID)\n" +
                 ")");
 
+        //status table
+        sqLiteDatabase.execSQL("CREATE TABLE status (\n" +
+                "  ID INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "  name TEXT NOT NULL\n" +
+                ")");
 
+        //lesson table
+        sqLiteDatabase.execSQL("CREATE TABLE lesson(\n" +
+                "  ID INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "  StudentID INTEGER NOT NULL,\n" +
+                "  TutorID INTEGER NOT NULL,\n" +
+                "  TopicID INTEGER NOT NULL,\n" +
+                "  StatusID INTEGER DEFAULT NULL,\n" +
+                "  date_time_appointment TEXT NOT NULL,\n" +
+                "  duration INTEGER NOT NULL,\n" +
+                "  price REAL DEFAULT NULL,\n" +
+                "  rating REAL DEFAULT -1,\n" +
+                "  rating_date TEXT NOT NULL,\n" +
+                "  is_rating_anonymous BOOLEAN DEFAULT 0,\n" +
+                "  FOREIGN KEY (StudentID) REFERENCES user (ID),\n" +
+                "  FOREIGN KEY (TutorID) REFERENCES user (ID),\n" +
+                "  FOREIGN KEY (TopicID) REFERENCES topic (ID),\n" +
+                "  FOREIGN KEY (StatusID) REFERENCES status (ID)\n" +
+                ")");
+
+        //avaibilities table
+
+        sqLiteDatabase.execSQL("CREATE TABLE avaibilities(\n" +
+                "  TutorID INTEGER NOT NULL,\n" +
+                "  date_time  TEXT NOT NULL,\n" +
+                "  FOREIGN KEY (TutorID) REFERENCES user (ID)\n" +
+                ")");
 
 
 
@@ -173,6 +204,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(7, 4, 'Extremely mediocre as a tutor', 'Not patient at all', 0, NULL, NULL),\n" +
                 "(7, 5, 'Horrible Experience', 'always yelling at me and make me feel stupid', 1, 3, NULL),\n" +
                 "(7, 6, 'SPEACHLESS', 'zero patience', 1, 2, '28/12/2023')");
+
+
+        //add 3 possibles status for lesson
+        sqLiteDatabase.execSQL("INSERT INTO status (name) VALUES\n" +
+                "(\"PENDING\"),\n" +
+                "(\"APPROVED\"),\n" +
+                "(\"REJECTED\")");
 
     }
 
@@ -481,10 +519,11 @@ public class DBHelper extends SQLiteOpenHelper {
         return tempUser;
     }
 
+
     /**
      *
      * @param id
-     * @return ll the informations of the user with this id
+     * @return all the informations of the user with this id
      */
     public User getUserbyID(int id)
     {
@@ -833,6 +872,32 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * This function updates the topic
+     * @param topicID the ID of the topic whose offer must be updated
+     * @return true if the update has been carried out correctly
+     */
+    public boolean updateTopic(int topicID, Topic topic)
+    {
+        SQLiteDatabase MyData = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("name",topic.getName());
+        contentValues.put("years_of_experience", topic.getYears_of_experience());
+        contentValues.put("description", topic.getDescription());
+
+        Cursor cursor = MyData.rawQuery("Select * from topic where ID = ?", new String[]{String.valueOf(topicID)});
+        if(cursor.getCount() > 0)
+        {
+            long update = MyData.update("topic",contentValues,"ID=?",new String[]{String.valueOf(topicID)});
+            return (update==-1? false:true);
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    /**
      * finds a topic based on its ID
      * @param topicID the ID of the topic whose information we want
      * @return the topic corresponding to the ID given as a parameter
@@ -921,12 +986,136 @@ public class DBHelper extends SQLiteOpenHelper {
         return offered_topics;
     }
 
+    /**
+     *
+     * @param tutorID ID of the tutor we want
+     * @return all the informations of the tutor with this id
+     */
+    public Tutor getTutorByID(int tutorID)
+    {
+        Tutor tutor = new Tutor();
+        SQLiteDatabase MyData = this.getWritableDatabase();
+
+        Cursor res = MyData.rawQuery("SELECT * FROM user WHERE ID = ? ",new String[] {String.valueOf(tutorID)});
+
+        while (res.moveToNext()) {
+
+            tutor.setID(res.getInt(0));
+            tutor.setRoleID(res.getInt(1));
+            tutor.setFirst_name(res.getString(2));
+            tutor.setLast_name(res.getString(3));
+            tutor.setEmail(res.getString(4));
+            tutor.setPassword(res.getString(5));
+
+            tutor.setEducation_level(res.getString(6));
+            tutor.setNative_language(res.getString(7));
+            tutor.setDescription(res.getString(8));
+            tutor.setProfile_picture(res.getBlob(9));
+
+            Boolean is_susp = res.getInt(12) ==0? false:true;
+            tutor.setIs_suspended(is_susp);
+            tutor.setHourly_rate(res.getDouble(13));
+
+        }
+//        MyData.close();
+        return tutor;
+    }
+
+    /**
+     *
+     * @param tutorID Id of the interrested tutor
+     * @return a map<total_created_topics, total_offered_topics>
+     *     https://www.w3schools.com/java/java_hashmap.asp
+     */
+    public  Map<Integer, Integer> countTopics(int tutorID)
+    {
+        Map<Integer, Integer> result = new HashMap<Integer, Integer>();
+        int total_created_topics =0;
+        int total_offered_topics = 0;
+        SQLiteDatabase MyData = this.getWritableDatabase();
+        //SELECT COUNT(ID) from topic where is_offered=1 AND TutorID = 8
+        Cursor res = MyData.rawQuery("SELECT COUNT(ID) from topic where is_offered = ? AND TutorID = ? ",new String[] {"1",String.valueOf(tutorID)});
+        while (res.moveToNext()) {
+            total_offered_topics = res.getInt(0);
+        }
+        res = MyData.rawQuery("SELECT COUNT(ID) from topic where TutorID = ? ",new String[] {String.valueOf(tutorID)});
+        while (res.moveToNext()) {
+            total_created_topics = res.getInt(0);
+        }
+        result.put(total_created_topics, total_offered_topics);
+        return result;
+    }
+
+
     //endregion
 
 
     //region FUNCTIONS DELIVERABLE 4
 
-   
+
+    public Student getStudentByID(int StudentID)
+    {
+        Student student = new Student();
+        SQLiteDatabase MyData = this.getWritableDatabase();
+        //SELECT ID, nom FROM user WHERE email = "admin1@mealer.ca"
+        Cursor res = MyData.rawQuery("SELECT * FROM user WHERE ID = ? ",new String[] {String.valueOf(StudentID)});
+
+        while (res.moveToNext()) {
+
+            student.setID(res.getInt(0));
+            student.setRoleID(res.getInt(1));
+            student.setFirst_name(res.getString(2));
+            student.setLast_name(res.getString(3));
+            student.setEmail(res.getString(4));
+            student.setPassword(res.getString(5));
+
+            Address addr = this.getAddressByID(res.getInt(10));
+            CreditCard cc = this.getCreditCardByID(res.getInt(11));
+            student.setAddress(addr);
+            student.setCredit_card(cc);
+
+
+        }
+//        MyData.close();
+        return student;
+    }
+    public String getStatusByID;
+    public String getStatusByLessonID;
+    //regrouper ceci
+    public ArrayList<Tutor> findTutorByName;
+    public ArrayList<Tutor> findTutorBySpokenLanguage;
+    public ArrayList<Tutor> findTutorByTopic;
+
+    public boolean addLesson;
+    public boolean updateStatusLesson;
+    public boolean updateRatingLesson;
+    public int totalLessonGiven;
+
+    /**
+     *
+     * @param tutorID ID of the tutor we want
+     * @return
+     */
+    public double getAverageTutorRating(int tutorID)
+    {
+        double result=-1;
+        SQLiteDatabase MyData = this.getWritableDatabase();
+        //SELECT AVG(lesson.rating) FROM lesson JOIN topic ON lesson.TopicID = topic.ID WHERE lesson.TutorID = 5 AND lesson.rating != 0
+        Cursor res = MyData.rawQuery("SELECT AVG(lesson.rating) FROM lesson JOIN topic ON lesson.TopicID = topic.ID WHERE lesson.TutorID = ? AND lesson.rating != ? ",new String[] {String.valueOf(tutorID),"-1"});
+        while (res.moveToNext()) {
+            result = res.getDouble(0);
+        }
+        return result;
+    }
+    public double getTopicRating;
+    public ArrayList<Lesson> getStudentEntireLessons;
+    public ArrayList<Lesson> getStudentLessonNonEvaluate;
+    public ArrayList<Lesson> getTutorLessonDemand;
+    public ArrayList<Lesson> getLessonByStatusID;
+
+
+
+
 
     // endregion
 }
