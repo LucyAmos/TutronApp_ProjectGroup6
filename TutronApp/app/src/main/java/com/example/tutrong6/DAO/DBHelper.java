@@ -22,6 +22,18 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "tutronDB";
     private static final int DATABASE_VERSION = 4;
 
+    public static final int SORT_BY_RATINGS = 0;
+    public static final int SORT_BY_HOURLY_RATE = 1;
+    public static final int SORT_BY_NUMBER_OF = 2;
+    public static final int NO_SORT = 3;
+
+    public static final int FIND_TAB_LENGTH = 3;
+
+    public static final int FIND_TAB_POS_TUTOR_NAME = 0;
+    public static final int FIND_TAB_POS_LANGUAGE_SPOKEN = 1;
+    public static final int FIND_TAB_POS_TOPIC_NAME = 2;
+
+
     // creation de la base de donnee
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -76,9 +88,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 "  addressID INTEGER DEFAULT NULL,\n" +
                 "  credit_card_id INTEGER DEFAULT NULL,\n" +
 
-                "  is_suspended BOOLEAN DEFAULT -1,\n" +
+                "  is_suspended BOOLEAN DEFAULT 0,\n" +
 
-                "  hourly_rate REAL DEFAULT NULL,\n" +
+                "  hourly_rate REAL DEFAULT -1,\n" +
 
 
                 "  FOREIGN KEY (roleID) REFERENCES role (ID),\n" +
@@ -126,31 +138,52 @@ public class DBHelper extends SQLiteOpenHelper {
                 "  name TEXT NOT NULL\n" +
                 ")");
 
+
+
+
         //lesson table
         sqLiteDatabase.execSQL("CREATE TABLE lesson(\n" +
                 "  ID INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                 "  StudentID INTEGER NOT NULL,\n" +
                 "  TutorID INTEGER NOT NULL,\n" +
                 "  TopicID INTEGER NOT NULL,\n" +
-                "  StatusID INTEGER DEFAULT NULL,\n" +
-                "  date_time_appointment TEXT NOT NULL,\n" +
-                "  duration INTEGER NOT NULL,\n" +
+                "  StatusID INTEGER NOT NULL,\n" +
+
+                "  date_appointment TEXT NOT NULL,\n" +
+                "  start_time TEXT NOT NULL,\n" +
+                "  end_time TEXT NOT NULL,\n" +
                 "  price REAL DEFAULT NULL,\n" +
+
                 "  rating REAL DEFAULT -1,\n" +
-                "  rating_date TEXT NOT NULL,\n" +
+                "  rating_date TEXT DEFAULT NULL,\n" +
                 "  is_rating_anonymous BOOLEAN DEFAULT 0,\n" +
+                "  is_topic_reviewed BOOLEAN DEFAULT 0,\n" +
+                "  review TEXT DEFAULT NULL,\n" +
+
+
                 "  FOREIGN KEY (StudentID) REFERENCES user (ID),\n" +
                 "  FOREIGN KEY (TutorID) REFERENCES user (ID),\n" +
                 "  FOREIGN KEY (TopicID) REFERENCES topic (ID),\n" +
                 "  FOREIGN KEY (StatusID) REFERENCES status (ID)\n" +
                 ")");
 
-        //avaibilities table
+        //avaibility table
 
-        sqLiteDatabase.execSQL("CREATE TABLE avaibilities(\n" +
+        sqLiteDatabase.execSQL("CREATE TABLE avaibility(\n" +
+                "  ID INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                 "  TutorID INTEGER NOT NULL,\n" +
-                "  date_time  TEXT NOT NULL,\n" +
+                "  date TEXT NOT NULL,\n" +
                 "  FOREIGN KEY (TutorID) REFERENCES user (ID)\n" +
+                ")");
+
+        //table slot
+        sqLiteDatabase.execSQL("CREATE TABLE slot(\n" +
+                "  ID INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "  AvaibilityID INTEGER NOT NULL,\n" +
+                "  start_time TEXT NOT NULL,\n" +
+                "  end_time TEXT NOT NULL,\n" +
+                "  is_reserved BOOLEAN DEFAULT 0,\n" +
+                "  FOREIGN KEY (AvaibilityID) REFERENCES avaibility (ID)\n" +
                 ")");
 
 
@@ -210,7 +243,8 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO status (name) VALUES\n" +
                 "(\"PENDING\"),\n" +
                 "(\"APPROVED\"),\n" +
-                "(\"REJECTED\")");
+                "(\"REJECTED\"),\n" +
+                "(\"COMPLETED\")");
 
     }
 
@@ -341,7 +375,7 @@ public class DBHelper extends SQLiteOpenHelper {
     /**
      *
      * @param id
-     * @return
+     * @return credit card found in the DB
      */
     public CreditCard getCreditCardByID(int id)
     {
@@ -1017,7 +1051,7 @@ public class DBHelper extends SQLiteOpenHelper {
             tutor.setHourly_rate(res.getDouble(13));
 
         }
-//        MyData.close();
+//      MyData.close();
         return tutor;
     }
 
@@ -1079,14 +1113,60 @@ public class DBHelper extends SQLiteOpenHelper {
 //        MyData.close();
         return student;
     }
-    public String getStatusByID;
-    public String getStatusByLessonID;
-    //regrouper ceci
-    public ArrayList<Tutor> findTutorByName;
-    public ArrayList<Tutor> findTutorBySpokenLanguage;
-    public ArrayList<Tutor> findTutorByTopic;
 
-    public boolean addLesson;
+    /**
+     *
+     * @param statusID
+     * @return status in String form
+     */
+    public String getStatusByID(int statusID)
+    {
+        return(statusID ==1?"PENDING":statusID==2?"APPROVED":statusID==3?"REJECTED":"COMPLETED");
+    }
+
+    /**
+     *
+     * @param lessonID
+     * @return status in String form
+     */
+    public String getStatusByLessonID(int lessonID)
+    {
+        int statutID = -1;
+        SQLiteDatabase MyData = this.getWritableDatabase();
+
+        Cursor res = MyData.rawQuery("SELECT StatusID FROM lesson WHERE ID = ? ",new String[] {String.valueOf(lessonID)});
+        while (res.moveToNext()) {
+            statutID = res.getInt(0);
+        }
+        return this.getStatusByID(statutID);
+    }
+
+    //regrouper ceci
+
+    /**
+     *
+     * @param findBy table of values to look for in the DB.findBy[0]=tutor_name, findBy[1]= language_spoken, findBy[2]=Topic_name
+     * @param sortBy sorting value. 0 = user-rtings, 1 = hourly_rate and 3 = number_of and -1 = no sort
+     * @return the tutor matching the values given in parameters
+     */
+    public ArrayList<Tutor> findTutor(String[] findBy, int sortBy)
+    {
+         ArrayList<Tutor> result = new ArrayList<Tutor>();
+        String tutorName = findBy[FIND_TAB_POS_TUTOR_NAME];
+        String language_spoken = findBy[FIND_TAB_POS_LANGUAGE_SPOKEN];
+        String topic_name = findBy[FIND_TAB_POS_TOPIC_NAME];
+
+        //TODO oontinue this function
+
+         return result;
+    }
+
+    public boolean addLesson(Lesson lesson)
+    {
+
+
+        return false;
+    }
     public boolean updateStatusLesson;
     public boolean updateRatingLesson;
     public int totalLessonGiven;
@@ -1107,6 +1187,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return result;
     }
+
     public double getTopicRating;
     public ArrayList<Lesson> getStudentEntireLessons;
     public ArrayList<Lesson> getStudentLessonNonEvaluate;
