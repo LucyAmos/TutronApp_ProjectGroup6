@@ -1,46 +1,54 @@
 package com.example.tutrong6.BEANS;
 
-import java.time.Duration;
+
 import java.util.Date;
 
 public class Lesson {
     // attributes
-    private static final String DATE_FORMAT = "dd/MM/yyyy hh:mm";
-    private static final String RATING_DATE_FORMAT = "dd/MM/yyyy";
-    private enum Status{PENDING, APPROVED, REJECTED};
+    private static final String DATE_FORMAT = "dd/MM/yyyy";
+    private enum Status{PENDING, APPROVED, REJECTED, COMPLETED};
     private int ID;
     private int studentID;
     private int tutorID;
     private int topicID;
     private Status status;
-    private Date date_time_appointment;
-    private Duration duration;
-    private double rating;
+    private Date date_appointment;
+    private Slot slot;
     private double price;
-    private boolean is_rating_anonymous;
-    private Date rating_date;
+
+    private ReviewSystem review_system;
 
     //constructors
 
     public Lesson() {}
-
-    public Lesson(int studentID, int tutorID, int topicID, Status status, Date date_time_appointment, Duration duration) {
+    public Lesson(int studentID, int tutorID, int topicID,  Date date_time_appointment, Slot slot,  ReviewSystem review_system) {
         this.studentID = studentID;
         this.tutorID = tutorID;
         this.topicID = topicID;
-        this.status = status;
-        this.date_time_appointment = date_time_appointment;
-        this.duration = duration;
+        this.date_appointment = date_time_appointment;
+        this.slot = slot;
+        this.review_system = review_system;
     }
-    public Lesson(int ID, int studentID, int tutorID, int topicID, Status status, Date date_time_appointment, Duration duration, double rating) {
+
+    public Lesson(int studentID, int tutorID, int topicID,  Date date_time_appointment, Slot slot, double price, ReviewSystem review_system) {
+        this.studentID = studentID;
+        this.tutorID = tutorID;
+        this.topicID = topicID;
+        this.date_appointment = date_time_appointment;
+        this.slot = slot;
+        this.price = price;
+        this.review_system = review_system;
+    }
+    public Lesson(int ID, int studentID, int tutorID, int topicID, Date date_time_appointment, Slot slot, double price, ReviewSystem review_system) {
         this.ID = ID;
         this.studentID = studentID;
         this.tutorID = tutorID;
         this.topicID = topicID;
-        this.status = status;
-        this.date_time_appointment = date_time_appointment;
-        this.duration = duration;
-        this.rating = rating;
+        this.date_appointment = date_time_appointment;
+        this.slot = slot;
+        this.price = price;
+        this.review_system = review_system;
+
     }
 
     //getters and setters
@@ -85,29 +93,22 @@ public class Lesson {
         this.status = status;
     }
 
-    public Date getDate_time_appointment() {
-        return date_time_appointment;
+    public Date getDate_appointment() {
+        return date_appointment;
     }
 
-    public void setDate_time_appointment(Date date_time_appointment) {
-        this.date_time_appointment = date_time_appointment;
+    public void setDate_appointment(Date date_appointment) {
+        this.date_appointment = date_appointment;
     }
 
-    public Duration getDuration() {
-        return duration;
+    public Slot getSlot() {
+        return slot;
     }
 
-    public void setDuration(Duration duration) {
-        this.duration = duration;
+    public void setSlot(Slot slot) {
+        this.slot = slot;
     }
 
-    public double getRating() {
-        return rating;
-    }
-
-    public void setRating(double rating) {
-        this.rating = rating;
-    }
 
     public static String DATE_FORMAT()
     {
@@ -122,20 +123,12 @@ public class Lesson {
         this.price = price;
     }
 
-    public boolean getIs_rating_anonymous() {
-        return is_rating_anonymous;
+    public ReviewSystem getReview_system() {
+        return review_system;
     }
 
-    public void setIs_rating_anonymous(boolean is_rating_anonymous) {
-        this.is_rating_anonymous = is_rating_anonymous;
-    }
-
-    public Date getRating_date() {
-        return rating_date;
-    }
-
-    public void setRating_date(Date rating_date) {
-        this.rating_date = rating_date;
+    public void setReview_system(ReviewSystem review_system) {
+        this.review_system = review_system;
     }
 
     public static int getstatusIDByEnum(Status status)
@@ -148,6 +141,8 @@ public class Lesson {
                 return 2;
             case REJECTED:
                 return 3;
+            case COMPLETED:
+                return 4;
 
         }
         return 0;
@@ -161,12 +156,9 @@ public class Lesson {
                 ", tutorID=" + tutorID +
                 ", topicID=" + topicID +
                 ", status=" + status +
-                ", date_time_appointment=" + date_time_appointment +
-                ", duration=" + duration +
-                ", rating=" + rating +
-                ", price=" + price +
-                ", is_rating_anonymous=" + is_rating_anonymous +
-                ", rating_date=" + rating_date +
+                ", date_time_appointment=" + date_appointment +
+                ", slot=" + slot +
+                ", Review_system=" + review_system +
                 '}';
     }
 }
