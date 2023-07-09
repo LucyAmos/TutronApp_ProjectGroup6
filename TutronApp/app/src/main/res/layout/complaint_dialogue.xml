@@ -1,0 +1,115 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="480dp"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="@drawable/rounded_linear_layout4"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/complaint_dialogue_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="MAKE A COMPLAINT"
+            android:textColor="#FF0000"
+            android:fontFamily="@font/andada"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/andada"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:paddingLeft="20dp"
+            android:paddingRight="10dp"
+            android:text="TITLE:"  />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <EditText
+            android:id="@+id/complaint_title_input"
+            android:layout_width="360dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:textStyle="italic"
+            android:background="@drawable/signup_input"
+            android:inputType="text"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:fontFamily="@font/andada"
+            android:hint="Complaint Title"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <TextView
+            android:id="@+id/complaint_description_text"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/andada"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            android:paddingLeft="20dp"
+            android:paddingRight="10dp"
+            android:text="COMPLAINT DESCRIPTION:"  />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <EditText
+            android:id="@+id/complaint_description_input"
+            android:layout_width="360dp"
+            android:layout_height="150dp"
+            android:ems="10"
+            android:textStyle="italic"
+            android:fontFamily="@font/andada"
+            android:paddingLeft="2mm"
+            android:paddingVertical="1mm"
+            android:gravity="top|left"
+            android:inputType="textMultiLine"
+            android:lines="13"
+            android:maxLines="75"
+            android:minLines="1"
+            android:maxLength="800"
+            android:scrollbars="vertical"
+            android:background="@drawable/signup_input"
+            android:hint="Write a complaint description.  (Max 800 Characters)" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
+
+
+
+        <Button
+            android:id="@+id/file_complaint_btn"
+            android:layout_width="320dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/andada"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            android:background="@drawable/rounded_button3"
+            android:text="File Complaint" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

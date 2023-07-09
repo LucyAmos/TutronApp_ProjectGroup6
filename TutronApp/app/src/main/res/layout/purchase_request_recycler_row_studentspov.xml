@@ -51,44 +51,44 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:orientation="horizontal">
-<!--
-                    <TextView
-                        android:id="@+id/name_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/andada"
-                        android:textStyle="bold"
-                        android:textSize="24sp"
-                        android:text="Name: " />
+                    <!--
+                                        <TextView
+                                            android:id="@+id/name_text"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/andada"
+                                            android:textStyle="bold"
+                                            android:textSize="24sp"
+                                            android:text="Name: " />
 
-                    <Space
-                        android:layout_width="5dp"
-                        android:layout_height="wrap_content"/>
+                                        <Space
+                                            android:layout_width="5dp"
+                                            android:layout_height="wrap_content"/>
 
-                    -->
-
-                    <TextView
-                        android:id="@+id/student_first_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/andada"
-                        android:textSize="24sp"
-                        android:textStyle="italic"
-                        android:text="FirstName" />
-
-                    <Space
-                        android:layout_width="5dp"
-                        android:layout_height="wrap_content"/>
-
+                                        -->
 
                     <TextView
-                        android:id="@+id/student_last_name"
+                        android:id="@+id/tutor_first_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/andada"
                         android:textSize="24sp"
                         android:textStyle="italic"
-                        android:text="LastName" />
+                        android:text="TutorFirstName" />
+
+                    <Space
+                        android:layout_width="5dp"
+                        android:layout_height="wrap_content"/>
+
+
+                    <TextView
+                        android:id="@+id/tutor_last_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/andada"
+                        android:textSize="24sp"
+                        android:textStyle="italic"
+                        android:text="TutorLastName" />
                 </LinearLayout>
 
                 <Space

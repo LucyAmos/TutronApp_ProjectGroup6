@@ -45,7 +45,7 @@ public class TopicsAdapter extends RecyclerView.Adapter<TopicsAdapter.MyViewHold
 
 
         if(offer){
-            holder.container.setBackgroundColor(Color.parseColor("#E5BE28"));
+            holder.container.setBackgroundColor(Color.parseColor("#DBB400"));
             holder.offerText.setText("Offered");
         }else{
             holder.container.setBackgroundColor(Color.parseColor("#A6A6A6"));

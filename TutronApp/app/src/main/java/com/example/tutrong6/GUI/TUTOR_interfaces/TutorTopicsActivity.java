@@ -3,7 +3,10 @@ package com.example.tutrong6.GUI.TUTOR_interfaces;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.content.Intent;
+//<<<<<<< Updated upstream
 import android.util.Log;
+//=======
+//>>>>>>> Stashed changes
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
