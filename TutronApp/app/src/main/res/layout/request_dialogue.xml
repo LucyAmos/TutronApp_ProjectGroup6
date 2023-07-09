@@ -29,7 +29,7 @@
             android:gravity="center"
             android:textColor="#00507F"
             android:fontFamily="@font/andada"
-            android:text="WOULD YOU LIKE TO ACCEPT THIS REQUEST?" />
+            android:text="WOULD YOU LIKE TO ACCEPT THIS PURCHASE REQUEST?" />
 
         <Space
             android:layout_width="match_parent"
