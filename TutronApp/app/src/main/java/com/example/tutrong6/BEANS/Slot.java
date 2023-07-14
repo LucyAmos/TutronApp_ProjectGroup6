@@ -83,7 +83,7 @@ public class Slot {
         return TIME_FORMAT;
     }
 
-    public double getSlotDuration(Slot slot)
+    public static double getSlotDuration(Slot slot)
     {
 
         double result = -1;

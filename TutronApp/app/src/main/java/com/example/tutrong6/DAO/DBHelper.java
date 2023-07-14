@@ -5,12 +5,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Build;
 import android.util.Log;
 
 import com.example.tutrong6.BEANS.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -24,7 +26,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public static final int SORT_BY_RATINGS = 0;
     public static final int SORT_BY_HOURLY_RATE = 1;
-    public static final int SORT_BY_NUMBER_OF = 2;
+    public static final int SORT_BY_NUMBER_OF_LESSONS = 2;
     public static final int NO_SORT = 3;
 
     public static final int FIND_TAB_LENGTH = 3;
@@ -243,9 +245,71 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO status (name) VALUES\n" +
                 "(\"PENDING\"),\n" +
                 "(\"APPROVED\"),\n" +
-                "(\"REJECTED\"),\n" +
-                "(\"COMPLETED\")");
+                "(\"REJECTED\")");
 
+        //populate topic
+        sqLiteDatabase.execSQL("INSERT INTO topic (TutorID, name, years_of_experience, description, is_offered) VALUES\n" +
+                "(3, ' Software Testing', 10, 'Software testing is the process of evaluating and verifying that a software product or application does what it is supposed to do.', 1),\n" +
+                "(3, 'Algebra', 5, 'Algebra is a branch of mathematics that deals with variables, constants, and arithmetic operations.', 1),\n" +
+                "(3, 'mechanics of Physics', 20, 'Mechanics is the branch of Physics dealing with the study of motion when subjected to forces or displacements, and the subsequent effects of the bodies on their environment.', 0),\n" +
+                "(4, 'Chemistry', 10, 'the study of matter, analysing its structure, properties and behaviour to see what happens when they change in chemical reactions.', 1),\n" +
+                "(4, 'Biology', 7, ' Biology encompasses diverse fields, including botany, conservation, ecology, evolution, genetics, marine biology, medicine, microbiology, molecular biology, physiology, and zoology', 1)");
+
+
+        //populate avaibility
+        sqLiteDatabase.execSQL("INSERT INTO avaibility (TutorID, date) VALUES\n" +
+                "(3, '17/07/2023'),\n" +
+                "(3, '18/07/2022'),\n" +
+                "(3, '20/07/2023'),\n" +
+                "(3, '22/07/2023'),\n" +
+                "(4, '17/07/2023'),\n" +
+                "(4, '18/07/2022'),\n" +
+                "(4, '20/07/2023'),\n" +
+                "(4, '22/07/2023'),\n" +
+                "(4, '24/07/2023'),\n" +
+                "(3, '24/07/2023')");
+
+        //populate slot
+        sqLiteDatabase.execSQL("INSERT INTO slot (AvaibilityID, start_time, end_time) VALUES\n" +
+                "(1, '09:00', '11:00'),\n" +
+                "(1, '13:00', '15:00'),\n" +
+                "(1, '18:00', '20:00'),\n" +
+
+                "(2, '09:00', '11:00'),\n" +
+                "(2, '13:00', '15:00'),\n" +
+                "(2, '18:00', '20:00'),\n" +
+
+                "(3, '09:00', '11:00'),\n" +
+                "(3, '13:00', '15:00'),\n" +
+                "(3, '18:00', '20:00'),\n" +
+
+                "(4, '09:00', '11:00'),\n" +
+                "(4, '13:00', '15:00'),\n" +
+                "(4, '18:00', '20:00'),\n" +
+
+                "(5, '09:00', '11:00'),\n" +
+                "(5, '13:00', '15:00'),\n" +
+                "(5, '18:00', '20:00'),\n" +
+
+                "(6, '09:00', '11:00'),\n" +
+                "(6, '13:00', '15:00'),\n" +
+                "(6, '18:00', '20:00'),\n" +
+
+                "(7, '09:00', '11:00'),\n" +
+                "(7, '13:00', '15:00'),\n" +
+                "(7, '18:00', '20:00'),\n" +
+
+                "(8, '09:00', '11:00'),\n" +
+                "(8, '13:00', '15:00'),\n" +
+                "(8, '18:00', '20:00'),\n" +
+
+                "(9, '09:00', '11:00'),\n" +
+                "(9, '13:00', '15:00'),\n" +
+                "(9, '18:00', '20:00'),\n" +
+
+                "(10, '09:00', '11:00'),\n" +
+                "(10, '13:00', '15:00'),\n" +
+                "(10, '18:00', '20:00')");
     }
 
     @Override
@@ -255,6 +319,13 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("drop table if exists address");
         sqLiteDatabase.execSQL("drop table if exists role");
         sqLiteDatabase.execSQL("drop table if exists user");
+        sqLiteDatabase.execSQL("drop table if exists decision");
+        sqLiteDatabase.execSQL("drop table if exists complaint");
+        sqLiteDatabase.execSQL("drop table if exists topic");
+        sqLiteDatabase.execSQL("drop table if exists status");
+        sqLiteDatabase.execSQL("drop table if exists lesson");
+        sqLiteDatabase.execSQL("drop table if exists avaibility");
+        sqLiteDatabase.execSQL("drop table if exists slot");
 
     }
 
@@ -1086,7 +1157,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //region FUNCTIONS DELIVERABLE 4
 
-
+    /**
+     *
+     * @param StudentID
+     * @return a student whose has the given ID
+     */
     public Student getStudentByID(int StudentID)
     {
         Student student = new Student();
@@ -1131,50 +1206,298 @@ public class DBHelper extends SQLiteOpenHelper {
      */
     public String getStatusByLessonID(int lessonID)
     {
-        int statutID = -1;
+        int statusID = -1;
         SQLiteDatabase MyData = this.getWritableDatabase();
 
         Cursor res = MyData.rawQuery("SELECT StatusID FROM lesson WHERE ID = ? ",new String[] {String.valueOf(lessonID)});
         while (res.moveToNext()) {
-            statutID = res.getInt(0);
+            statusID = res.getInt(0);
         }
-        return this.getStatusByID(statutID);
+        return this.getStatusByID(statusID);
     }
 
-    //regrouper ceci
+    /**
+     *
+     * @param tutorID id of the tutor who want to update his hourly rate
+     * @param hourly_rate new hourly rate value
+     * @return true if the hourly rate was successfully updated and false if otherwise
+     */
+    public boolean updateHourlyRate(int tutorID, double hourly_rate)
+    {
+        SQLiteDatabase MyData = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("hourly_rate",hourly_rate);
+
+        Cursor cursor = MyData.rawQuery("Select * from user where ID = ?", new String[]{String.valueOf(tutorID)});
+        if(cursor.getCount() > 0)
+        {
+            long update = MyData.update("user",contentValues,"ID=?",new String[]{String.valueOf(tutorID)});
+            return (update==-1? false:true);
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    /**
+     *
+     * @param avaibilityID ID of the avaibility we are interested in
+     * @return all the slots of a given avaibility
+     */
+    public ArrayList<Slot> getSlotsByAvaibilityID(int avaibilityID)
+    {
+        ArrayList<Slot> result = new ArrayList<Slot>();
+        SQLiteDatabase MyData = this.getWritableDatabase();
+        //SELECT ID, nom FROM user WHERE email = "admin1@mealer.ca"
+        Cursor res = MyData.rawQuery("SELECT * FROM slot WHERE AvaibilityID = ? AND is_reserved = ?",new String[] {String.valueOf(avaibilityID),"0"});
+
+        while (res.moveToNext()) {
+            Slot temp = new Slot();
+
+            temp.setID(res.getInt(0));
+            temp.setAvaibilityID(res.getInt(1));
+            String start_str = res.getString(2).trim();
+            String end_str = res.getString(3).trim();
+            //Call requires API level 26
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                temp.setStartTime(LocalTime.parse(start_str));
+                temp.setEndTime(LocalTime.parse(end_str));
+            }
+            boolean is_reserved = res.getInt(4) ==0 ? false : true;
+            temp.setIs_reserved(is_reserved);
+            result.add(temp);
+        }
+        return result;
+    }
+
+    /**
+     *
+     * @param tutorID ID if the tutor we want avaibilities
+     * @return a map<avaibilitiy_date, array of all slots for this specific date>
+     *       https://www.w3schools.com/java/java_hashmap.asp
+     */
+    public Map<Date,ArrayList<Slot>> getAvaibilitiesByTutorID(int tutorID)
+    {
+        Map<Date,ArrayList<Slot>> result = new HashMap<Date,ArrayList<Slot>>();
+
+        SQLiteDatabase MyData = this.getWritableDatabase();
+
+        Cursor res = MyData.rawQuery("SELECT * FROM avaibility WHERE TutorID = ? ",new String[] {String.valueOf(tutorID)});
+        while (res.moveToNext()) {
+            int ID = res.getInt(0);
+            Date date = new Date();
+            try {
+                 date  = res.getString(2)==null?null: new SimpleDateFormat(Complaint.getDATE_FORMAT()).parse(res.getString(2));
+            } catch (ParseException e) {
+                Log.e("ParseException", "activeComplaintsList: "+ e.getStackTrace() );
+            }
+            ArrayList<Slot> slots = this.getSlotsByAvaibilityID(ID);
+            result.put(date,slots);
+
+        }
+        return result;
+    }
+
 
     /**
      *
      * @param findBy table of values to look for in the DB.findBy[0]=tutor_name, findBy[1]= language_spoken, findBy[2]=Topic_name
      * @param sortBy sorting value. 0 = user-rtings, 1 = hourly_rate and 3 = number_of and -1 = no sort
-     * @return the tutor matching the values given in parameters
+     * @return all tutor IDs matching the values given in parameters
      */
-    public ArrayList<Tutor> findTutor(String[] findBy, int sortBy)
+    public ArrayList<Integer> findTutor(String[] findBy, int sortBy)
     {
-         ArrayList<Tutor> result = new ArrayList<Tutor>();
+         ArrayList<Integer> result = new ArrayList<Integer>();
         String tutorName = findBy[FIND_TAB_POS_TUTOR_NAME];
         String language_spoken = findBy[FIND_TAB_POS_LANGUAGE_SPOKEN];
         String topic_name = findBy[FIND_TAB_POS_TOPIC_NAME];
+        String part1 = "SELECT DISTINCT user.ID from user \n" +
+                        "JOIN topic ON user.ID = topic.TutorID   \n" +
+                        "JOIN lesson ON user.ID = lesson.TutorID\n" +
+                        "WHERE\n";
+        String condition_part = "";
+        String sort_part = "";
 
-        //TODO oontinue this function
+
+        //condition management
+
+        String addTutorName = " user.first_name LIKE '%" + tutorName + "%' OR user.last_name LIKE '%"+ tutorName +"%'\n";
+        String addLanguage = " AND user.native_language LIKE '%"+ language_spoken + "%' \n ";
+        String addTopicName = "AND topic.name  LIKE '%" + topic_name + "%' \n";
+
+        // X = empty and O = not empty
+        // tutor_name X
+
+        if(tutorName.isEmpty())
+        {
+            // language_spokenO
+            if(!language_spoken.isEmpty())
+            {
+                //case1: tutor_name X * language_spoken O *  topic_name X
+                //and case2: tutor_name X * language_spoken O *  topic_name O
+                condition_part += topic_name.isEmpty()? addLanguage : addLanguage+addTopicName;
+            }
+            //language_spoken X
+            else
+            {
+                //case3: tutor_name X * language_spoken X *  topic_name O
+                //and case4: tutor_name X * language_spoken X *  topic_name X
+                condition_part += !topic_name.isEmpty()? addTopicName :"";
+
+            }
+        }
+        // tutor_name O
+        else
+        {
+            condition_part += addTutorName;
+            if(!language_spoken.isEmpty())
+            {
+                //case5: tutor_name O * language_spoken O *  topic_name X
+                //and case6: tutor_name O * language_spoken O *  topic_name O
+                condition_part += topic_name.isEmpty()? addLanguage : addLanguage+addTopicName;
+            }
+            //language_spoken X
+            else
+            {
+                //case7: tutor_name O * language_spoken X *  topic_name O
+                //and case8: tutor_name O * language_spoken X *  topic_name X
+                condition_part += !topic_name.isEmpty()? addTopicName :"";
+            }
+
+        }
+
+        //sort mamangement
+        switch(sortBy)
+        {
+            case SORT_BY_RATINGS:
+                sort_part = " ORDER BY lesson.rating DESC ";
+                break;
+            case SORT_BY_HOURLY_RATE:
+                sort_part = " ORDER BY user.hourly_rate ASC ";
+                break;
+            case SORT_BY_NUMBER_OF_LESSONS:
+                //TODO this condition
+                break;
+        }
+
+        //SQL management
+        String cmd = part1 + condition_part + sort_part;
+        SQLiteDatabase MyData = this.getWritableDatabase();
+        Cursor res = MyData.rawQuery(cmd,null);
+
+        while (res.moveToNext()) {
+            int temp = res.getInt(0);
+            result.add(temp);
+        }
 
          return result;
     }
 
-    public boolean addLesson(Lesson lesson)
+    /**
+     *
+     * @param lesson the lesson to add in the DB
+     * @param tutorHourlyRate hourly rate of the tutor from whom the lesson is purchased
+     * @return true if the lesson was added in the DB
+     */
+    public boolean addLesson(Lesson lesson, int tutorHourlyRate)
+    {
+        SQLiteDatabase MyData = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("StudentID",lesson.getStudentID());
+        contentValues.put("TutorID",lesson.getTutorID());
+        contentValues.put("TopicID",lesson.getTopicID());
+        int statusID = Lesson.getstatusIDByEnum(Lesson.Status.PENDING);
+        contentValues.put("StatusID",statusID);
+
+        contentValues.put("date_appointment",String.valueOf(lesson.getDate_appointment()));
+        Slot timeSlot = lesson.getSlot();
+        contentValues.put("start_time",String.valueOf(timeSlot.getStartTime()));
+        contentValues.put("end_time",String.valueOf(timeSlot.getEndTime()));
+
+        double price = tutorHourlyRate * Slot.getSlotDuration(timeSlot);
+        contentValues.put("price",price);
+
+        long result = MyData.insert("lesson",null,contentValues);
+
+        if(result==-1) return false;
+        else
+            return true;
+
+    }
+
+    /**
+     *
+     * @param lessonID the ID of the lesson whose status we want
+     * @param statusID the new value of the statusID.
+     *                 Get the ID of the status wanted by the function getstatusIDByEnum(Status status) in the class Lesson
+     * @return true if the status was updated
+     */
+    public boolean updateStatusLesson(int lessonID, int statusID)
+    {
+        SQLiteDatabase MyData = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("StatusID",statusID);
+        Cursor cursor = MyData.rawQuery("Select * from lesson where ID = ?", new String[]{String.valueOf(lessonID)});
+        if(cursor.getCount() > 0)
+        {
+            long update = MyData.update("lesson",contentValues,"ID=?",new String[]{String.valueOf(lessonID)});
+            return (update==-1? false:true);
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public boolean updateRatingLesson(int lessonID, ReviewSystem review)
     {
 
+        SQLiteDatabase MyData = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
 
-        return false;
+        contentValues.put("rating",review.getRating());
+        contentValues.put("rating_date",String.valueOf(review.getRating_date()));
+        int is_rating_anonymous = review.getIs_rating_anonymous() == false? 0:1;
+        contentValues.put("is_rating_anonymous",is_rating_anonymous);
+        int is_topic_reviewed = review.getIs_topic_reviewed() == false? 0 : 1;
+        contentValues.put("is_topic_reviewed",is_topic_reviewed);
+        contentValues.put("review",review.getReview());
+
+        Cursor cursor = MyData.rawQuery("Select * from lesson where ID = ?", new String[]{String.valueOf(lessonID)});
+        if(cursor.getCount() > 0)
+        {
+            long update = MyData.update("lesson",contentValues,"ID=?",new String[]{String.valueOf(lessonID)});
+            return (update==-1? false:true);
+        }
+        else
+        {
+            return false;
+        }
     }
-    public boolean updateStatusLesson;
-    public boolean updateRatingLesson;
-    public int totalLessonGiven;
+
+    /**
+     *
+     * @param tutorID ID of the tutor we are interested in
+     * @return the number of lessons given/sold by the tutor
+     */
+    public int getCountGivenLesson(int tutorID)
+    {
+        int result = -1;
+        SQLiteDatabase MyData = this.getWritableDatabase();
+        Cursor res = MyData.rawQuery("SELECT COUNT(ID) FROM lesson WHERE TutorID = ? AND StatusID = ? ",new String[] {String.valueOf(tutorID),"3"});
+        while (res.moveToNext()) {
+            result = res.getInt(0);
+        }
+        return result;
+
+    }
 
     /**
      *
      * @param tutorID ID of the tutor we want
-     * @return
+     * @return the average rating of the given tutor
      */
     public double getAverageTutorRating(int tutorID)
     {
@@ -1188,14 +1511,261 @@ public class DBHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    public double getTopicRating;
-    public ArrayList<Lesson> getStudentEntireLessons;
-    public ArrayList<Lesson> getStudentLessonNonEvaluate;
-    public ArrayList<Lesson> getTutorLessonDemand;
-    public ArrayList<Lesson> getLessonByStatusID;
+    /**
+     *
+     * @param tutorID
+     * @return all the reviews of a tutor
+     */
+    public ArrayList<ReviewSystem> getAllReviewSystems(int tutorID)
+    {
+        ArrayList<ReviewSystem> result = new ArrayList<ReviewSystem>();
 
+        SQLiteDatabase MyData = this.getWritableDatabase();
 
+        Cursor res = MyData.rawQuery("SELECT rating,is_rating_anonymous,rating_date,is_topic_reviewed,review from lesson WHERE TutorID == ? AND rating != ? ",new String[] {String.valueOf(tutorID),"-1"});
 
+        while (res.moveToNext()) {
+
+            ReviewSystem temp = new ReviewSystem();
+            temp.setRating(res.getInt(0));
+
+            Boolean is_rating_anonymous = res.getInt(1) == 0 ? false : true;
+            temp.setIs_rating_anonymous(is_rating_anonymous);
+
+            try {
+                Date date = res.getString(2) == null ? null : new SimpleDateFormat(Complaint.getDATE_FORMAT()).parse(res.getString(2));
+                temp.setRating_date(date);
+            } catch (ParseException e)
+            {
+                Log.e("ParseException", "activeComplaintsList: " + e.getStackTrace());
+            }
+
+            Boolean is_topic_reviewed = res.getInt(3) == 0 ? false : true;
+            temp.setIs_topic_reviewed(is_topic_reviewed);
+            temp.setReview(res.getString(4));
+
+            result.add(temp);
+        }
+
+        return result;
+    }
+
+    /**
+     *
+     * @param lessonID
+     * @return
+     */
+    public ReviewSystem getReviewSystemByLessonID(int lessonID)
+    {
+        ReviewSystem result = new ReviewSystem();
+
+        SQLiteDatabase MyData = this.getWritableDatabase();
+
+        Cursor res = MyData.rawQuery("SELECT rating,is_rating_anonymous,rating_date,is_topic_reviewed,review from lesson WHERE ID == ?",new String[] {String.valueOf(lessonID)});
+
+        while (res.moveToNext()) {
+
+            ReviewSystem temp = new ReviewSystem();
+            temp.setRating(res.getInt(0));
+
+            Boolean is_rating_anonymous = res.getInt(1) == 0 ? false : true;
+            temp.setIs_rating_anonymous(is_rating_anonymous);
+
+            try {
+                Date date = res.getString(2) == null ? null : new SimpleDateFormat(Complaint.getDATE_FORMAT()).parse(res.getString(2));
+                temp.setRating_date(date);
+            } catch (ParseException e)
+            {
+                Log.e("ParseException", "activeComplaintsList: " + e.getStackTrace());
+            }
+
+            Boolean is_topic_reviewed = res.getInt(3) == 0 ? false : true;
+            temp.setIs_topic_reviewed(is_topic_reviewed);
+            temp.setReview(res.getString(4));
+
+            result=temp;
+        }
+
+        return result;
+    }
+
+    /**
+     *
+     * @param tutorID
+     * @param topicID
+     * @return
+     */
+    public double getTopicRating(int tutorID, int topicID)
+    {
+        double result = -1;
+        SQLiteDatabase MyData = this.getWritableDatabase();
+        //SELECT AVG(lesson.rating) FROM lesson
+        //JOIN topic ON topic.ID = lesson.TopicID
+        //JOIN user ON user.ID = lesson.TutorID
+        //WHERE lesson.TutorID = 3
+        //AND lesson.TopicID = 1
+        //AND lesson.rating != -1
+
+        Cursor res = MyData.rawQuery("SELECT AVG(lesson.rating) FROM lesson \n" +
+                "JOIN topic ON topic.ID = lesson.TopicID \n" +
+                "JOIN user ON user.ID = lesson.TutorID\n" +
+                "WHERE lesson.TutorID = ? \n" +
+                "AND lesson.TopicID = ? \n" +
+                "AND lesson.rating != ?",new String[] {String.valueOf(tutorID), String.valueOf(topicID),"-1"});
+        while (res.moveToNext()) {
+            result = res.getDouble(0);
+        }
+        return result;
+    }
+
+    /**
+     *
+     * @param StudentID id of the student we are interested in
+     * @param statusID the status of the lesson we want.
+     *                 If we don't want all the statuses together then we insert the value -1
+     * @return the list of customer lessons according to the given parameters
+     */
+    public ArrayList<Lesson> getStudentLessons(int StudentID, int statusID)
+    {
+        ArrayList<Lesson> result = new ArrayList<Lesson>();
+        SQLiteDatabase MyData = this.getWritableDatabase();
+        String part1 = "SELECT * FROM lesson WHERE StudentID = ? ";
+        String part2 = statusID == -1 ? "": "AND StatusID = ? ";
+        String part3 = "ORDER by ID DESC";
+        String cmd_sql = part1 + part2 + part3;
+
+        Cursor res = MyData.rawQuery(cmd_sql,new String[] {String.valueOf(StudentID),String.valueOf(statusID)});
+
+        while (res.moveToNext()) {
+
+            Lesson temp = new Lesson();
+            int lessonID = res.getInt(0);
+            temp.setID(lessonID);
+            temp.setStudentID(res.getInt(1));
+            temp.setTutorID(res.getInt(2));
+            temp.setTopicID(res.getInt(3));
+            temp.setStatus(Lesson.getstatusEnumByID(res.getInt(4)));
+
+            try {
+                Date date = res.getString(5) == null ? null : new SimpleDateFormat(Complaint.getDATE_FORMAT()).parse(res.getString(5));
+                temp.setDate_appointment(date);
+            } catch (ParseException e) {
+                Log.e("ParseException", "activeComplaintsList: " + e.getStackTrace());
+            }
+
+            //Call requires API level 26
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                LocalTime start = LocalTime.parse(res.getString(6).trim());
+                LocalTime end = LocalTime.parse(res.getString(7).trim());
+                Slot slot = new Slot(start, end);
+                temp.setSlot(slot);
+            }
+
+            temp.setPrice(res.getDouble(8));
+
+            ReviewSystem rs = getReviewSystemByLessonID(lessonID);
+            temp.setReview_system(rs);
+
+            result.add(temp);
+        }
+        return result;
+    }
+
+    /**
+     *
+     * @param studentID the ID of the student whose non evaluated lessons we want
+     * @return list of lessons not evaluated by the student
+     */
+    public ArrayList<Lesson> getLessonNonEvaluate(int studentID)
+    {
+        ArrayList<Lesson> result = new ArrayList<Lesson>();
+        SQLiteDatabase MyData = this.getWritableDatabase();
+        Cursor res = MyData.rawQuery("SELECT * FROM lesson WHERE StudentID = ? AND StatusID = ? AND rating = ?",new String[] {String.valueOf(studentID),"-1"});
+
+        while (res.moveToNext()) {
+
+            Lesson temp = new Lesson();
+            int lessonID = res.getInt(0);
+            temp.setID(lessonID);
+            temp.setStudentID(res.getInt(1));
+            temp.setTutorID(res.getInt(2));
+            temp.setTopicID(res.getInt(3));
+            temp.setStatus(Lesson.getstatusEnumByID(res.getInt(4)));
+
+            try {
+                Date date = res.getString(5) == null ? null : new SimpleDateFormat(Complaint.getDATE_FORMAT()).parse(res.getString(5));
+                temp.setDate_appointment(date);
+            } catch (ParseException e) {
+                Log.e("ParseException", "activeComplaintsList: " + e.getStackTrace());
+            }
+
+            //Call requires API level 26
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                LocalTime start = LocalTime.parse(res.getString(6).trim());
+                LocalTime end = LocalTime.parse(res.getString(7).trim());
+                Slot slot = new Slot(start, end);
+                temp.setSlot(slot);
+            }
+
+            temp.setPrice(res.getDouble(8));
+
+            ReviewSystem rs = getReviewSystemByLessonID(lessonID);
+            temp.setReview_system(rs);
+
+            result.add(temp);
+        }
+
+        return result  ;
+    }
+
+    /**
+     *
+     * @param tutorID
+     * @return
+     */
+    public ArrayList<Lesson> getTutorPurchaseDemands(int tutorID)
+    {
+        ArrayList<Lesson> result = new ArrayList<Lesson>();
+        SQLiteDatabase MyData = this.getWritableDatabase();
+        int pending = Lesson.getstatusIDByEnum(Lesson.Status.PENDING);
+        Cursor res = MyData.rawQuery("SELECT * FROM lesson WHERE TutorID = ? AND StatusID = ?",new String[] {String.valueOf(tutorID),String.valueOf(pending)});
+
+        while (res.moveToNext()) {
+
+            Lesson temp = new Lesson();
+            int lessonID = res.getInt(0);
+            temp.setID(lessonID);
+            temp.setStudentID(res.getInt(1));
+            temp.setTutorID(res.getInt(2));
+            temp.setTopicID(res.getInt(3));
+            temp.setStatus(Lesson.getstatusEnumByID(res.getInt(4)));
+
+            try {
+                Date date = res.getString(5) == null ? null : new SimpleDateFormat(Complaint.getDATE_FORMAT()).parse(res.getString(5));
+                temp.setDate_appointment(date);
+            } catch (ParseException e) {
+                Log.e("ParseException", "activeComplaintsList: " + e.getStackTrace());
+            }
+
+            //Call requires API level 26
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                LocalTime start = LocalTime.parse(res.getString(6).trim());
+                LocalTime end = LocalTime.parse(res.getString(7).trim());
+                Slot slot = new Slot(start, end);
+                temp.setSlot(slot);
+            }
+
+            temp.setPrice(res.getDouble(8));
+
+            ReviewSystem rs = getReviewSystemByLessonID(lessonID);
+            temp.setReview_system(rs);
+
+            result.add(temp);
+        }
+
+        return result  ;
+    }
+    //TODO  add tutor avaibilities function
 
 
     // endregion

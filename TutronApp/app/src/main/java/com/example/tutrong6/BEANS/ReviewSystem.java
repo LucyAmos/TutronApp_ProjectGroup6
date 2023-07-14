@@ -33,7 +33,7 @@ public class ReviewSystem {
         this.rating = rating;
     }
 
-    public boolean isIs_rating_anonymous() {
+    public boolean getIs_rating_anonymous() {
         return is_rating_anonymous;
     }
 
@@ -49,7 +49,7 @@ public class ReviewSystem {
         this.rating_date = rating_date;
     }
 
-    public boolean isIs_topic_reviewed() {
+    public boolean getIs_topic_reviewed() {
         return is_topic_reviewed;
     }
 

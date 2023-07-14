@@ -6,7 +6,7 @@ import java.util.Date;
 public class Lesson {
     // attributes
     private static final String DATE_FORMAT = "dd/MM/yyyy";
-    private enum Status{PENDING, APPROVED, REJECTED, COMPLETED};
+    public enum Status{PENDING, APPROVED, REJECTED};
     private int ID;
     private int studentID;
     private int tutorID;
@@ -141,11 +141,23 @@ public class Lesson {
                 return 2;
             case REJECTED:
                 return 3;
-            case COMPLETED:
-                return 4;
 
         }
         return 0;
+    }
+    public static Status getstatusEnumByID(int statusID)
+    {
+
+        switch(statusID){
+            case 1:
+                return Status.PENDING;
+            case 2:
+                return Status.APPROVED;
+            case 3:
+                return Status.REJECTED;
+
+        }
+       return null;
     }
 
     @Override
