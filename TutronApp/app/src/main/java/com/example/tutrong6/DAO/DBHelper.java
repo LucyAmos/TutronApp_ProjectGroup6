@@ -35,6 +35,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final int FIND_TAB_POS_LANGUAGE_SPOKEN = 1;
     public static final int FIND_TAB_POS_TOPIC_NAME = 2;
 
+    public static final int STUDENT_ID_POS = 0;
+    public static final int TOPIC_ID_POS = 1;
+
 
     // creation de la base de donnee
     public DBHelper(Context context) {
@@ -1305,25 +1308,27 @@ public class DBHelper extends SQLiteOpenHelper {
      *
      * @param findBy table of values to look for in the DB.findBy[0]=tutor_name, findBy[1]= language_spoken, findBy[2]=Topic_name
      * @param sortBy sorting value. 0 = user-rtings, 1 = hourly_rate and 3 = number_of and -1 = no sort
-     * @return all tutor IDs matching the values given in parameters
+     * @return all offered topic IDs matching the values given in parameters
      */
-    public ArrayList<Integer> findTutor(String[] findBy, int sortBy)
+    public ArrayList<Integer> findTopic(String[] findBy, int sortBy)
     {
          ArrayList<Integer> result = new ArrayList<Integer>();
         String tutorName = findBy[FIND_TAB_POS_TUTOR_NAME];
         String language_spoken = findBy[FIND_TAB_POS_LANGUAGE_SPOKEN];
         String topic_name = findBy[FIND_TAB_POS_TOPIC_NAME];
-        String part1 = "SELECT DISTINCT user.ID from user \n" +
-                        "JOIN topic ON user.ID = topic.TutorID   \n" +
-                        "JOIN lesson ON user.ID = lesson.TutorID\n" +
-                        "WHERE\n";
+        String part1 = "SELECT DISTINCT topic.ID, count(lesson.ID) from topic \n" +
+                "join user ON topic.TutorID = user.ID  \n" +
+                "JOIN lesson ON user.ID = lesson.TutorID\n" +
+                "\n" +
+                "WHERE\n" +
+                "topic.is_offered = 1";
         String condition_part = "";
         String sort_part = "";
 
 
         //condition management
 
-        String addTutorName = " user.first_name LIKE '%" + tutorName + "%' OR user.last_name LIKE '%"+ tutorName +"%'\n";
+        String addTutorName = " AND user.first_name LIKE '%" + tutorName + "%' OR user.last_name LIKE '%"+ tutorName +"%'\n";
         String addLanguage = " AND user.native_language LIKE '%"+ language_spoken + "%' \n ";
         String addTopicName = "AND topic.name  LIKE '%" + topic_name + "%' \n";
 
@@ -1378,7 +1383,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 sort_part = " ORDER BY user.hourly_rate ASC ";
                 break;
             case SORT_BY_NUMBER_OF_LESSONS:
-                //TODO this condition
+                sort_part = "ORDER BY COUNT(lesson.ID) DESC";
                 break;
         }
 
@@ -1514,37 +1519,42 @@ public class DBHelper extends SQLiteOpenHelper {
     /**
      *
      * @param tutorID
-     * @return all the reviews of a tutor
+     * @return a map< int[], ReviewSystem>: int[] is table of int containing the StudentID at pos[0] and TopicID at pos[1]
+     *      *  https://www.w3schools.com/java/java_hashmap.asp
      */
-    public ArrayList<ReviewSystem> getAllReviewSystems(int tutorID)
+    public Map<int[],ReviewSystem> getAllReviewSystems(int tutorID)
     {
-        ArrayList<ReviewSystem> result = new ArrayList<ReviewSystem>();
+        Map<int[],ReviewSystem> result = new HashMap<int[],ReviewSystem>();
 
         SQLiteDatabase MyData = this.getWritableDatabase();
 
-        Cursor res = MyData.rawQuery("SELECT rating,is_rating_anonymous,rating_date,is_topic_reviewed,review from lesson WHERE TutorID == ? AND rating != ? ",new String[] {String.valueOf(tutorID),"-1"});
+        Cursor res = MyData.rawQuery("SELECT rating,is_rating_anonymous,rating_date,is_topic_reviewed,review,StudentID,TopicID from lesson WHERE TutorID = ? AND rating != ? ",new String[] {String.valueOf(tutorID),"-1"});
 
         while (res.moveToNext()) {
 
-            ReviewSystem temp = new ReviewSystem();
-            temp.setRating(res.getInt(0));
+            ReviewSystem review_temp = new ReviewSystem();
+            review_temp.setRating(res.getInt(0));
 
             Boolean is_rating_anonymous = res.getInt(1) == 0 ? false : true;
-            temp.setIs_rating_anonymous(is_rating_anonymous);
+            review_temp.setIs_rating_anonymous(is_rating_anonymous);
 
             try {
                 Date date = res.getString(2) == null ? null : new SimpleDateFormat(Complaint.getDATE_FORMAT()).parse(res.getString(2));
-                temp.setRating_date(date);
+                review_temp.setRating_date(date);
             } catch (ParseException e)
             {
                 Log.e("ParseException", "activeComplaintsList: " + e.getStackTrace());
             }
 
             Boolean is_topic_reviewed = res.getInt(3) == 0 ? false : true;
-            temp.setIs_topic_reviewed(is_topic_reviewed);
-            temp.setReview(res.getString(4));
+            review_temp.setIs_topic_reviewed(is_topic_reviewed);
+            review_temp.setReview(res.getString(4));
 
-            result.add(temp);
+            int[] IDs = new int[2];
+            IDs[0]= res.getInt(5) ;
+            IDs[1]= res.getInt(6) ;
+
+            result.put(IDs,review_temp);
         }
 
         return result;
@@ -1553,7 +1563,7 @@ public class DBHelper extends SQLiteOpenHelper {
     /**
      *
      * @param lessonID
-     * @return
+     * @return the reviewSystem of the given lesson
      */
     public ReviewSystem getReviewSystemByLessonID(int lessonID)
     {
