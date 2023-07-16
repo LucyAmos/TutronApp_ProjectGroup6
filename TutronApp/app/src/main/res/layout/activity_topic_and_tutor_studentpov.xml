@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#CADEE8"
+    android:orientation="vertical"
+    tools:context=".GUI.ADMIN_interfaces.ComplaintOverviewActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="50sp"
+            android:gravity="center"
+            android:fontFamily="@font/andada"
+            android:textStyle="bold"
+            android:textColor="@color/tutronBluePrimary"
+            android:text="ABOUT" />
+
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <TextView
+            android:id="@+id/about_topic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="35sp"
+            android:gravity="center"
+            android:fontFamily="@font/andada"
+            android:textStyle="bold"
+            android:textColor="#707070"
+            android:text="Topic" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/years_of_experience_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:text="Years Of Experience: " />
+
+            <TextView
+                android:id="@+id/years_of_experience"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textSize="24sp"
+                android:textStyle="italic"
+                android:text="##" />
+
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="35dp" />
+
+        <TextView
+            android:id="@+id/topic_desc_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/andada"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:text="Topic Description:" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <TextView
+            android:id="@+id/topic_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/andada"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            android:text="Topic Description..." />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+
+        <TextView
+            android:id="@+id/about_tutor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="42sp"
+            android:gravity="center"
+            android:fontFamily="@font/andada"
+            android:textStyle="bold"
+            android:textColor="#C09500"
+            android:text="Tutor Profile" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <ImageView
+            android:id="@+id/tutor_profile_pic"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/default_avatar" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/name_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:text="Name: " />
+
+            <TextView
+                android:id="@+id/tutor_first_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textSize="24sp"
+                android:textStyle="italic"
+                android:text="tutFirstName" />
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tutor_last_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textSize="24sp"
+                android:textStyle="italic"
+                android:text="tutLastName" />
+
+
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/native_language_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:text="Native Language: " />
+
+            <TextView
+                android:id="@+id/native_language"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textSize="24sp"
+                android:textStyle="italic"
+                android:text="English" />
+
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/education_level_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:text="Education Level: " />
+
+            <TextView
+                android:id="@+id/education_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textSize="24sp"
+                android:textStyle="italic"
+                android:text="Bachelor's Degree" />
+
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="35dp" />
+
+        <TextView
+            android:id="@+id/tutor_desc_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/andada"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:text="Tutor Description:" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <TextView
+            android:id="@+id/tutor_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/andada"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            android:text="Tutor Description..." />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="35dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/hourly_rate_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:text="Hourly Rate: $" />
+
+            <TextView
+                android:id="@+id/hourly_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textSize="24sp"
+                android:textStyle="italic"
+                android:text="17.00" />
+
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lessons_given_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:text="Lessons Given: " />
+
+            <TextView
+                android:id="@+id/lessons_given"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/andada"
+                android:textSize="24sp"
+                android:textStyle="italic"
+                android:text="0" />
+
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/rating_text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/andada"
+                android:text="Rating:"
+                android:gravity="center_vertical"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:isIndicator="true"
+                android:scaleX=".8"
+                android:scaleY=".8"
+                android:numStars="5"
+                android:stepSize="0.1"
+                android:progressTint="#FFD364"
+                android:rating="0" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="15dp" />
+
+
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/review_btn"
+                    android:layout_width="190dp"
+                    android:layout_height="90dp"
+                    android:background="@drawable/rounded_button"
+                    android:textColor="#FFFFFF"
+                    android:fontFamily="@font/andada"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:text="REVIEWS" />
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content"
+                    />
+
+                <Button
+                    android:id="@+id/see_other_topics_btn"
+                    android:layout_width="190dp"
+                    android:layout_height="90dp"
+                    android:background="@drawable/rounded_button2"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/andada"
+                    android:textSize="28sp"
+                    android:text="OTHER TOPICS"  />
+            </LinearLayout>
+
+
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="40dp" />
+
+
+            <Button
+                android:id="@+id/request_session_btn"
+                android:layout_width="360dp"
+                android:layout_height="80dp"
+                android:background="@drawable/rounded_button5"
+                android:fontFamily="@font/andada"
+                android:textSize="32sp"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:text="Request Session" />
+
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+    </LinearLayout>
+</ScrollView>

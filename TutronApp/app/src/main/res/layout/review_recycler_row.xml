@@ -86,7 +86,7 @@
                         android:fontFamily="@font/andada"
                         android:textSize="20sp"
                         android:textStyle="italic"
-                        android:text="FirstName" />
+                        android:text="StuFirstName" />
 
                     <Space
                         android:layout_width="5dp"
@@ -100,7 +100,7 @@
                         android:fontFamily="@font/andada"
                         android:textSize="20sp"
                         android:textStyle="italic"
-                        android:text="LastName" />
+                        android:text="StuLastName" />
                 </LinearLayout>
 
                 <Space
@@ -162,6 +162,7 @@
                         android:scaleX=".6"
                         android:scaleY=".6"
                         android:numStars="5"
+                        android:stepSize="0.1"
                         android:progressTint="#FFD364"
                         android:rating="0" />
 

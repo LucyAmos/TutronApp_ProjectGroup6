@@ -46,27 +46,26 @@ public class CreditCardTest {
      * Expected: Reject Other country input and only accepts Canada
      */
 /**
-    @Test
-    public void setCVCValid(){
-        int cvc = 1124;
+ @Test
+ public void setCVCValid(){
+ int cvc = 1124;
 
-        //Step 1: set cvc to an invalid number. Number with more that 3 digit
-        try{
-            creditCard_test.setCvc(cvc);
-            fail("Test Failed:"+ cvc + " is an invalid input");
+ //Step 1: set cvc to an invalid number. Number with more that 3 digit
+ try{
+ creditCard_test.setCvc(cvc);
+ fail("Test Failed:"+ cvc + " is an invalid input");
 
-        // Step 2: Assert True if error was sent
-        }catch (IllegalArgumentException e) {
-            assertTrue("Test was Successful",true);
-        }
+ // Step 2: Assert True if error was sent
+ }catch (IllegalArgumentException e) {
+ assertTrue("Test was Successful",true);
+ }
 
-        //Step 3: Verify that the cvc was not changed
-        if (cvc >= 100 && cvc <= 999){
-            assertTrue("Test was Successful",true);
-        }
-        assertFalse("CVC or CVV number is beyond range allowed",false);
-    }
+ //Step 3: Verify that the cvc was not changed
+ if (cvc >= 100 && cvc <= 999){
+ assertTrue("Test was Successful",true);
+ }
+ assertFalse("CVC or CVV number is beyond range allowed",false);
+ }
 
-**/
+ **/
 }
-

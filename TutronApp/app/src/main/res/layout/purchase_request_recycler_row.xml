@@ -19,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#FFE49E"
+            android:id="@+id/container"
             android:layout_gravity="center_vertical">
 
 
@@ -68,13 +69,13 @@
                     -->
 
                     <TextView
-                        android:id="@+id/student_first_name"
+                        android:id="@+id/first_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/andada"
                         android:textSize="24sp"
                         android:textStyle="italic"
-                        android:text="StuFirstName" />
+                        android:text="FirstName" />
 
                     <Space
                         android:layout_width="5dp"
@@ -82,13 +83,13 @@
 
 
                     <TextView
-                        android:id="@+id/student_last_name"
+                        android:id="@+id/last_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/andada"
                         android:textSize="24sp"
                         android:textStyle="italic"
-                        android:text="StuLastName" />
+                        android:text="LastName" />
                 </LinearLayout>
 
                 <Space
@@ -112,52 +113,54 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
                             <TextView
                                 android:id="@+id/date_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textStyle="bold"
                                 android:fontFamily="@font/andada"
+                                android:text="Date: "
                                 android:textSize="20sp"
-                                android:text="Date: " />
+                                android:textStyle="bold" />
 
                             <Space
                                 android:layout_width="5dp"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content" />
 
                             <TextView
                                 android:id="@+id/date"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/andada"
-                                android:textSize="20sp"
-                                android:text="Day, Month, Year" />
+                                android:text="Day, Month, Year"
+                                android:textSize="20sp" />
 
                         </LinearLayout>
 
+                        <Space
+                            android:layout_width="wrap_content"
+                            android:layout_height="10dp" />
+
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
                             <TextView
                                 android:id="@+id/time_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textStyle="bold"
                                 android:fontFamily="@font/andada"
+                                android:text="Time: "
                                 android:textSize="20sp"
-                                android:text="Time: " />
+                                android:textStyle="bold" />
 
                             <Space
                                 android:layout_width="5dp"
@@ -168,27 +171,80 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/andada"
-                                android:textSize="20sp"
-                                android:text="00:00" />
+                                android:text="00:00"
+                                android:textSize="20sp" />
 
-                            <TextView
-                                android:id="@+id/timedash_txt"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/andada"
-                                android:textSize="20sp"
-                                android:text=" - " />
-
-                            <TextView
-                                android:id="@+id/time2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/andada"
-                                android:textSize="20sp"
-                                android:text="00:00" />
 
 
                         </LinearLayout>
+
+                        <Space
+                            android:layout_width="wrap_content"
+                            android:layout_height="10dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/price_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/andada"
+                                android:text="Price: $"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <Space
+                                android:layout_width="5dp"
+                                android:layout_height="wrap_content" />
+
+                            <TextView
+                                android:id="@+id/price"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/andada"
+                                android:text="17.00"
+                                android:textSize="20sp" />
+
+
+
+                        </LinearLayout>
+
+                        <Space
+                            android:layout_width="wrap_content"
+                            android:layout_height="15dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/status_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/andada"
+                                android:text="Status: "
+                                android:textSize="20sp"
+                                android:textStyle="bold|italic" />
+
+                            <Space
+                                android:layout_width="5dp"
+                                android:layout_height="wrap_content" />
+
+                            <TextView
+                                android:id="@+id/status"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/andada"
+                                android:text="Pending"
+                                android:textSize="20sp"
+                                android:textStyle="italic" />
+
+                        </LinearLayout>
+
 
                     </LinearLayout>
 

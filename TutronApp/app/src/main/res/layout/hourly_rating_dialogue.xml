@@ -1,0 +1,74 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="275dp"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:background="@drawable/rounded_linear_layout2"
+        android:orientation="vertical">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="5dp" />
+
+        <TextView
+            android:id="@+id/set_hourly_rating_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="SET HOURLY RATE"
+            android:textColor="#0088C8"
+            android:fontFamily="@font/andada"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/rate"
+                android:layout_width="280dp"
+                android:layout_height="60dp"
+                android:fontFamily="@font/andada"
+                android:textStyle="italic"
+                android:textSize="20sp"
+                android:paddingLeft="5dp"
+                android:inputType="numberDecimal"
+                android:gravity="center_vertical"
+                android:background="@drawable/signup_input"
+                android:hint="$$$" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
+
+
+
+            <Button
+                android:id="@+id/set_hourly_rating_Btn"
+                android:layout_width="280dp"
+                android:layout_height="60dp"
+                android:fontFamily="@font/andada"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/rounded_button"
+                android:text="Set Hourly Rate" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

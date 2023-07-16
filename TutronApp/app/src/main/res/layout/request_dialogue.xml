@@ -65,7 +65,7 @@
                 android:fontFamily="@font/andada"
                 android:textStyle="bold"
                 android:textSize="20sp"
-                android:background="@drawable/rounded_button2"
+                android:background="@drawable/rounded_button3"
                 android:text="REJECT" />
         </LinearLayout>
 
