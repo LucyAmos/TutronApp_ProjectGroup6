@@ -26,6 +26,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
@@ -121,7 +123,7 @@ public class AboutTopicActivity extends AppCompatActivity implements DatePickerD
         lessonsGiven.setText(String.valueOf(DB.getCountGivenLesson(tutorId)));
         averageRating.setRating((float) DB.getAverageTutorRating(tutorId));
 
-        Button fab = findViewById(R.id.home_fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.home_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

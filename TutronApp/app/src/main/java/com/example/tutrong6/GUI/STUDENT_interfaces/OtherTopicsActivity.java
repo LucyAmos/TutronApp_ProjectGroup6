@@ -19,6 +19,8 @@ import com.example.tutrong6.GUI.TUTOR_interfaces.TopicsAdapter;
 import com.example.tutrong6.GUI.TUTOR_interfaces.UpdateTopicsActivity;
 import com.example.tutrong6.R;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -70,7 +72,7 @@ public class OtherTopicsActivity extends AppCompatActivity implements OfferedTop
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        Button fab = findViewById(R.id.home_fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.home_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

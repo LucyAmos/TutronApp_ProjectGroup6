@@ -18,6 +18,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -150,7 +152,7 @@ public class ReviewsBoxActivity extends AppCompatActivity implements ReviewRecyc
             tutorId = Integer.parseInt(tutorIdIntent);
         }
 
-        Button fab = findViewById(R.id.home_fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.home_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

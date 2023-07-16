@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -63,7 +64,7 @@ public class TutorTopicsActivity extends AppCompatActivity implements TopicsRecy
 
         DB = new DBHelper(this);
 
-        Button fab = findViewById(R.id.home_fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.home_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

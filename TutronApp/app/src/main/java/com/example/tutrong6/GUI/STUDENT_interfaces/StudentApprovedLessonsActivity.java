@@ -18,6 +18,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -72,12 +74,12 @@ public class StudentApprovedLessonsActivity extends AppCompatActivity implements
         //adapter.setLongClickListner(this);
 
         TextView title = findViewById(R.id.purchase_request_title);
-        TextView desc = findViewById(R.id.purchase_request_title);
+        TextView desc = findViewById(R.id.purchase_request_desc);
 
         title.setText("MY APPROVED LESSONS");
         desc.setText("View And Interact With Your Approved Lessons");
 
-        Button fab = findViewById(R.id.home_fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.home_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

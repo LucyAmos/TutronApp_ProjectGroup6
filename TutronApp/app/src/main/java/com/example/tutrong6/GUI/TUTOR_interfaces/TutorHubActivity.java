@@ -19,6 +19,7 @@ import com.example.tutrong6.BEANS.User;
 import com.example.tutrong6.DAO.DBHelper;
 import com.example.tutrong6.DAO.SessionManagement;
 import com.example.tutrong6.GUI.LandingPageActivity;
+import com.example.tutrong6.GUI.PurchaseRequestActivity;
 import com.example.tutrong6.GUI.STUDENT_interfaces.StudentHubActivity;
 import com.example.tutrong6.GUI.STUDENT_interfaces.StudentSignUp;
 import com.example.tutrong6.GUI.SignUpLauncherActivity;
@@ -127,9 +128,9 @@ public class TutorHubActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Handle button click
-                Toast.makeText(TutorHubActivity.this, "Not implemented yet", Toast.LENGTH_SHORT).show();
-               /* Intent intent = new Intent(TutorHubActivity.this, PurchaseRequestInboxActivity.class);
-                startActivity(intent);*/
+                //Toast.makeText(TutorHubActivity.this, "Not implemented yet", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(TutorHubActivity.this, PurchaseRequestActivity.class);
+                startActivity(intent);
             }
 
 

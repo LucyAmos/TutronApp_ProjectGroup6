@@ -17,6 +17,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -63,7 +65,7 @@ public class SearchBoxActivity extends AppCompatActivity implements SearchRecycl
         SessionManagement sessionManagement = new SessionManagement(SearchBoxActivity.this);
         int userID = sessionManagement.getSession();
 
-        Button fab = findViewById(R.id.home_fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.home_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,7 +77,6 @@ public class SearchBoxActivity extends AppCompatActivity implements SearchRecycl
             }
 
         });
-
 
 
         recyclerView = findViewById(R.id.search_recycler);
@@ -138,6 +139,7 @@ public class SearchBoxActivity extends AppCompatActivity implements SearchRecycl
                         findBy[1] = searchInput; // language spoken
                         findBy[2] = null; // Topic name
                         searchTopicsID = DataBase.findTopic(findBy, -1);
+                        updateSearchResults();
                     }
 
                 });
@@ -148,17 +150,7 @@ public class SearchBoxActivity extends AppCompatActivity implements SearchRecycl
         });
 
 
-        for (int topicId : searchTopicsID) {
-            Topic topic = DB.getTopicByID(topicId);
-            if (topic != null) {
-                searchTopics.add(topic);
-            }
-        }
 
-
-        adapter = new SearchAdapter(this,this, searchTopics);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         Spinner sortingMenu = findViewById(R.id.dropdown_menu);
 
@@ -167,6 +159,21 @@ public class SearchBoxActivity extends AppCompatActivity implements SearchRecycl
         sortingMenu.setAdapter(sortAdapter);
         sortingMenu.setOnItemSelectedListener(this);
 
+    }
+
+    private void updateSearchResults() {
+
+        searchTopics.clear();
+        for (int topicId : searchTopicsID) {
+            Topic topic = DB.getTopicByID(topicId);
+            if (topic != null) {
+                searchTopics.add(topic);
+            }
+        }
+
+        adapter = new SearchAdapter(this, this, searchTopics);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
 
