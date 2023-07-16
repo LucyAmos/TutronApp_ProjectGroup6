@@ -70,20 +70,27 @@ public class TutorHubActivity extends AppCompatActivity {
             Button setRate = setHourlyRate.findViewById(R.id.set_hourly_rating_Btn);
             EditText rate = setHourlyRate.findViewById(R.id.rate);
 
-            String rateStr = rate.getText().toString().trim();
+
+
+
 
             setRate.setOnClickListener(new View.OnClickListener() {
                 @Override
+
                 public void onClick(View v) {
+
+                    String rateStr = rate.getText().toString().trim();
+                    //Toast.makeText(TutorHubActivity.this, rateStr, Toast.LENGTH_SHORT).show();
+
                     // Handle button click
-                    if(rateStr != null){
+                    if(!rateStr.equals("")){
                         double doubleRate = Double.parseDouble(rateStr);
                         DataBase.updateHourlyRate(userID,doubleRate);
                         setHourlyRate.dismiss();
                         recreate();
                         Toast.makeText(TutorHubActivity.this, "You Have Now Set Your Hourly Rate", Toast.LENGTH_SHORT).show();
-                    /*} else if (rateStr != null  && !isDouble(rateStr)) {
-                        Toast.makeText(TutorHubActivity.this, "Invalid Input", Toast.LENGTH_SHORT).show();*/
+                    //} else if (rateStr != null  && !isDouble(rateStr)) {
+                        //Toast.makeText(TutorHubActivity.this, "Invalid Input", Toast.LENGTH_SHORT).show();
                     }else {
                         Toast.makeText(TutorHubActivity.this, "Please Fill In Parameter", Toast.LENGTH_SHORT).show();
                     }
@@ -139,8 +146,8 @@ public class TutorHubActivity extends AppCompatActivity {
     });
 
     }
-
-    /*private boolean isDouble(String value) {
+/*
+    private boolean isDouble(String value) {
 
         String doublePattern = "[0-9]+(\\\\.[0-9]+)?";
         Pattern p = java.util.regex.Pattern.compile(doublePattern);

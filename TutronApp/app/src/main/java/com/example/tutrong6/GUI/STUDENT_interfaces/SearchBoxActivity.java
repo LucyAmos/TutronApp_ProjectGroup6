@@ -9,7 +9,11 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,32 +29,35 @@ import com.example.tutrong6.GUI.TUTOR_interfaces.TopicsAdapter;
 import com.example.tutrong6.GUI.TUTOR_interfaces.TutorTopicsActivity;
 import com.example.tutrong6.GUI.TUTOR_interfaces.UpdateTopicsActivity;
 import com.example.tutrong6.R;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 import java.util.Map;
 
 
-public class SearchBoxActivity /*extends AppCompatActivity implements SearchRecyclerInterface*/{
+public class SearchBoxActivity extends AppCompatActivity implements SearchRecyclerInterface, AdapterView.OnItemSelectedListener {
 
-/*
+
     RecyclerView recyclerView;
-    ArrayList<String> topic, offer;
 
+    ArrayList<Integer> searchTopicsID = new ArrayList<>();
     ArrayList<Topic> searchTopics = new ArrayList<>();
     DBHelper DB;
 
     DBHelper DataBase = new DBHelper(this);
-    TopicsAdapter adapter;
+    SearchAdapter adapter;
 
-    private int totalTopics;
-    private int offeredTopics;
+    Dialog searchByDialog;
 
+    private String[] findBy = new String[3];
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_search);
+
+        DB = new DBHelper(this);
 
 
         SessionManagement sessionManagement = new SessionManagement(SearchBoxActivity.this);
@@ -60,174 +67,113 @@ public class SearchBoxActivity /*extends AppCompatActivity implements SearchRecy
 
         recyclerView = findViewById(R.id.search_recycler);
 
-        DB = new DBHelper(this);
+        EditText searchBar = findViewById(R.id.search_bar_student_input);
+        Button searchButton = findViewById(R.id.search_button);
 
 
-
-        topics = DB.getAllTopics(userID);
-        Map<Integer, Integer> topicTotals = DataBase.countTopics(userID);
-        // dateStr = new SimpleDateFormat(Plainte.getDATE_FORMAT()).format(etat_de_suspension.get(i));
-        for (int i : topicTotals.keySet()) {
-            totalTopics = i;
-            offeredTopics = topicTotals.get(i);
-            Log.e("MAP", "key: " + i + " value: " + topicTotals.get(i));
-
-        }
-
-
-        TopicsAdapter adapter = new TopicsAdapter(this,this, topics);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
-        TextView totalTopicsNumber = findViewById(R.id.total_topics_number);
-        TextView offeredTopicsNumber = findViewById(R.id.offered_topics_number);
-
-        totalTopicsNumber.setText(String.valueOf(totalTopics));
-        offeredTopicsNumber.setText(String.valueOf(offeredTopics));
-
-        Button addButton = findViewById(R.id.add_topics_button);
-        addButton.setOnClickListener(new View.OnClickListener() {
+        searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle button click
-                Intent intent = new Intent(TutorTopicsActivity.this, AddTopicActivity.class);
-                String tutorId = String.valueOf(userID);
-                intent.putExtra("tutorId", tutorId);
-                startActivity(intent);
+                String searchInput = searchBar.getText().toString().trim();
+                searchByDialog = new Dialog(SearchBoxActivity.this);
+                searchByDialog.setContentView(R.layout.search_by_dialogue);
+                searchByDialog.show();
+                searchByDialog.setCancelable(true);
+
+                Window windowOffer = searchByDialog.getWindow();
+                if (windowOffer != null) {
+                    WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+                    layoutParams.copyFrom(windowOffer.getAttributes());
+                    layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+                    layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                    windowOffer.setAttributes(layoutParams);
+                }
+
+                Button searchByTopic = findViewById(R.id.search_by_TopicBtn);
+                Button searchByTutor = findViewById(R.id.search_by_tutorBtn);
+                Button searchByNativeLanguage = findViewById(R.id.search_by_languageBtn);
+
+                searchByTopic.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        searchByDialog.dismiss();
+                        findBy[0] = null; // tutor name
+                        findBy[1] = null; // language spoken
+                        findBy[2] = searchInput; // Topic name
+                        searchTopicsID = DataBase.findTopic(findBy, -1);
+                    }
+
+                });
+
+                searchByTutor.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        searchByDialog.dismiss();
+                        findBy[0] = searchInput; // tutor name
+                        findBy[1] = null; // language spoken
+                        findBy[2] = null; // Topic name
+                        searchTopicsID = DataBase.findTopic(findBy, -1);
+                    }
+
+                });
+
+                searchByNativeLanguage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        searchByDialog.dismiss();
+                        findBy[0] = null; // tutor name
+                        findBy[1] = searchInput; // language spoken
+                        findBy[2] = null; // Topic name
+                        searchTopicsID = DataBase.findTopic(findBy, -1);
+                    }
+
+                });
+
             }
 
 
         });
-        int creation_max = Topic.getCREATION_MAX();
-        if(totalTopics >= creation_max){
-            addButton.setVisibility(View.INVISIBLE);
-        }else if(totalTopics < creation_max){
-            addButton.setVisibility(View.VISIBLE);
+
+
+        for (int topicId : searchTopicsID) {
+            Topic topic = DB.getTopicByID(topicId);
+            if (topic != null) {
+                searchTopics.add(topic);
+            }
         }
 
 
-/*
-        DB = new DBHelper(this);
-        title = new ArrayList<>();
-        sneakPeek = new ArrayList<>();
-        recyclerView = findViewById(R.id.complaints_recycler);
-        adapter = new MyComplaintsAdapter(this, title, sneakPeek,complaintId, this);
+        adapter = new SearchAdapter(this,this, searchTopics);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this)); */
-        //displaydata();
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        Spinner sortingMenu = findViewById(R.id.dropdown_menu);
 
-   /* }
+        ArrayAdapter<CharSequence> sortAdapter = ArrayAdapter.createFromResource(this, R.array.sorting, android.R.layout.simple_spinner_item);
+        sortAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sortingMenu.setAdapter(sortAdapter);
+        sortingMenu.setOnItemSelectedListener(this);
+
+    }
 
 
     @Override
     public void onItemClick(int position) {
 
-        Topic selected = topics.get(position);
+        Topic selected = searchTopics.get(position);
         String topicId = String.valueOf(selected.getID());
         String tutorId = String.valueOf(selected.getTutorID());
-        String topic = String.valueOf(selected.getName());
-        String description = String.valueOf(selected.getDescription());
-        String yearsOfExperience = String.valueOf(selected.getYears_of_experience());
-        Boolean offer = selected.getIs_offered();
 
 
-        Intent intent = new Intent (TutorTopicsActivity.this, UpdateTopicsActivity.class);
-
-        //intent.putExtra("selectedTopic", (Parcelable) selected);
-        intent.putExtra("yearsOfExperience", yearsOfExperience);
-        intent.putExtra("topic", topic);
+        Intent intent = new Intent (SearchBoxActivity.this, AboutTopicActivity.class);
         intent.putExtra("tutorId", tutorId);
         intent.putExtra("topicId", topicId);
-        intent.putExtra("offer", offer);
-        intent.putExtra("description", description);
-
         startActivity(intent);
 
     }
 
-    @Override
-    public void onItemLongClick(int position) {
-        //I will add the parameters for the maximum and minimum after the value can be set in the database
-
-        unofferDialog = new Dialog(TutorTopicsActivity.this);
-        unofferDialog.setContentView(R.layout.remove_topic_dialogue);
-        unofferDialog.setCancelable(true);
-
-        Topic selected = topics.get(position);
-        Boolean offer = selected.getIs_offered();
-
-        if(!offer && offeredTopics < Topic.getOFFERING_MAX()){
-            offerDialog = new Dialog(TutorTopicsActivity.this);
-            offerDialog.setContentView(R.layout.offer_topic_dialogue);
-            offerDialog.show();
-            offerDialog.setCancelable(true);
-
-            Window windowOffer = offerDialog.getWindow();
-            if (windowOffer != null) {
-                WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-                layoutParams.copyFrom(windowOffer.getAttributes());
-                layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
-                layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
-                windowOffer.setAttributes(layoutParams);
-            }
-
-            Button offerTopic = offerDialog.findViewById(R.id.offerBtn);
-
-            offerTopic.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Handle button click
-                    selected.setIs_offered(true);
-                    DataBase.updateTopicOffer(selected.getID(),true);
-                    offerDialog.dismiss();
-                    recreate();
-                    Toast.makeText(TutorTopicsActivity.this, "You Are Now Offering This Topic", Toast.LENGTH_SHORT).show();
-                }
 
 
-            });
-
-
-
-        } else if (offer == true) {
-            unofferDialog = new Dialog(TutorTopicsActivity.this);
-            unofferDialog.setContentView(R.layout.remove_topic_dialogue);
-            unofferDialog.show();
-            unofferDialog.setCancelable(true);
-
-            Window windowUnoffer = unofferDialog.getWindow();
-            if (windowUnoffer != null) {
-                WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-                layoutParams.copyFrom(windowUnoffer.getAttributes());
-                layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
-                layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
-                windowUnoffer.setAttributes(layoutParams);
-            }
-
-            Button unoffer = unofferDialog.findViewById(R.id.removeBtn);
-
-            unoffer.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Handle button click
-                    selected.setIs_offered(false);
-                    DataBase.updateTopicOffer(selected.getID(),false);
-                    unofferDialog.dismiss();
-                    recreate();
-                    Toast.makeText(TutorTopicsActivity.this, "You Are No Longer Offering This Topic", Toast.LENGTH_SHORT).show();
-                }
-
-
-            });
-
-        }else{
-            Toast.makeText(TutorTopicsActivity.this, "You are already offering 5 topics", Toast.LENGTH_SHORT).show();
-        }
-
-
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -236,7 +182,36 @@ public class SearchBoxActivity /*extends AppCompatActivity implements SearchRecy
     }
 
 
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        String sortType = adapterView.getItemAtPosition(i).toString();
+        if(sortType.equals("Sort By: User Ratings")){
+            searchTopicsID = DataBase.findTopic(findBy, 0);
 
+        }else if(sortType.equals("Sort By: Hourly Rate")){
+            searchTopicsID = DataBase.findTopic(findBy, 1);
 
-}*/
+        }else if(sortType.equals("Sort By: Number of Lessons")){
+            searchTopicsID = DataBase.findTopic(findBy, 3);
+
+        }else{
+            searchTopicsID = DataBase.findTopic(findBy, -1);
+        }
+
+        for (int topicId : searchTopicsID) {
+            Topic topic = DB.getTopicByID(topicId);
+            if (topic != null) {
+                searchTopics.add(topic);
+            }
+        }
+
+        adapter = new SearchAdapter(this,this, searchTopics);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
 }

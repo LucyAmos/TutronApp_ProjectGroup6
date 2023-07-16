@@ -2,7 +2,7 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#DBDBDB"
+    android:background="#FFFCC2"
     android:layout_height="match_parent"
     tools:context=".GUI.STUDENT_interfaces.SearchBoxActivity">
 
@@ -72,9 +72,9 @@
 
         <Spinner
             android:id="@+id/dropdown_menu"
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
             android:layout_height="36dp"
-            android:backgroundTint="#0088C8" />
+            android:fontFamily="@font/andada"/>
 
         <Space
             android:layout_width="match_parent"

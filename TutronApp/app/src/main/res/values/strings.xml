@@ -169,6 +169,13 @@
         <item>4</item>
     </string-array>
 
+    <string-array name="sorting">
+        <item>Sort By: Not Selected</item>
+        <item>Sort By: User Ratings</item>
+        <item>Sort By: Hourly Rate</item>
+        <item>Sort By: Number of Lessons</item>
+    </string-array>
+
 
 
 </resources>

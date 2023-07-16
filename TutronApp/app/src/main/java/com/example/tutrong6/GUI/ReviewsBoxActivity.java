@@ -121,9 +121,9 @@ public class ReviewsBoxActivity extends AppCompatActivity implements ReviewRecyc
     ReviewsAdapter adapter;
     private int tutorId;
 
-    SessionManagement sessionManagement = new SessionManagement(ReviewsBoxActivity.this);
-    private int userID = sessionManagement.getSession();
-    private User session_user= DataBase.getUserbyID(userID);
+
+    private int userID;
+    private User session_user;
 
 
     Dialog editReviewDialog;
@@ -134,6 +134,11 @@ public class ReviewsBoxActivity extends AppCompatActivity implements ReviewRecyc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reviews_viewer);
         //adapter.setLongClickListner(this);
+
+        SessionManagement sessionManagement = new SessionManagement(ReviewsBoxActivity.this);
+
+        userID = sessionManagement.getSession();
+        session_user= DataBase.getUserbyID(userID);
 
 
         if(session_user.getRoleID() == Tutor.getStaticRoleID()){
@@ -229,7 +234,7 @@ public class ReviewsBoxActivity extends AppCompatActivity implements ReviewRecyc
                             Toast.makeText(ReviewsBoxActivity.this, "Please, fill in ALL the fields", Toast.LENGTH_SHORT).show();
                         } else {
                             ReviewSystem updateReview = new ReviewSystem(rating, reviewSystemPos.getIs_rating_anonymous(), reviewSystemPos.getRating_date(), reviewSystemPos.getIs_topic_reviewed(), review);
-                            Boolean addedUpdate = DataBase.updateRatingLesson(keys[1], updateReview);
+                            Boolean addedUpdate = DataBase.updateRatingLesson(keys[2], updateReview);
 
                             if (addedUpdate) {
                                 Toast.makeText(ReviewsBoxActivity.this, "Review Updated Successfully", Toast.LENGTH_SHORT).show();
@@ -248,7 +253,7 @@ public class ReviewsBoxActivity extends AppCompatActivity implements ReviewRecyc
                     @Override
                     public void onClick(View v) {
 
-                        Boolean removed = DataBase.deleteTopic(keys[1]);
+                        Boolean removed = DataBase.deleteRatingLesson(keys[2]);
                         if (removed) {
                             Toast.makeText(ReviewsBoxActivity.this, "Review Removed Successfully", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(ReviewsBoxActivity.this, TutorTopicsActivity.class));

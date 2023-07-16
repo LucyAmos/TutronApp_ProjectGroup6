@@ -1,6 +1,6 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:drawable="@drawable/email_image"
+        android:drawable="@drawable/checkmark"
         android:width="50dp"
         android:height="50dp"
         android:paddingLeft="10dp"

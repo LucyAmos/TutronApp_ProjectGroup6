@@ -24,7 +24,7 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/book_session_btn"
+                android:id="@+id/view_about_btn"
                 android:layout_width="280dp"
                 android:layout_height="60dp"
 
@@ -33,7 +33,7 @@
                 android:textSize="24sp"
                 android:textColor="#000000"
                 android:background="@drawable/rounded_button5"
-                android:text="REQUEST SESSION" />
+                android:text="VIEW INFORMATION" />
 
             <Space
                 android:layout_width="match_parent"
