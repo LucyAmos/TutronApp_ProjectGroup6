@@ -77,6 +77,19 @@ public class StudentApprovedLessonsActivity extends AppCompatActivity implements
         title.setText("MY APPROVED LESSONS");
         desc.setText("View And Interact With Your Approved Lessons");
 
+        Button fab = findViewById(R.id.home_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent intent = new Intent(StudentApprovedLessonsActivity.this, StudentHubActivity.class);
+                startActivity(intent);
+
+            }
+
+        });
+
         SessionManagement sessionManagement = new SessionManagement(StudentApprovedLessonsActivity.this);
         userID = sessionManagement.getSession();
         session_user= DataBase.getUserbyID(userID);

@@ -71,6 +71,30 @@
             android:exported="true"
             tools:ignore="ExtraText">
         </activity>
+        <activity android:name=".GUI.STUDENT_interfaces.SearchBoxActivity"
+            android:exported="true"
+            tools:ignore="ExtraText">
+        </activity>
+        <activity android:name=".GUI.STUDENT_interfaces.StudentApprovedLessonsActivity"
+            android:exported="true"
+            tools:ignore="ExtraText">
+        </activity>
+        <activity android:name=".GUI.STUDENT_interfaces.StudentHubActivity"
+            android:exported="true"
+            tools:ignore="ExtraText">
+        </activity>
+        <activity android:name=".GUI.STUDENT_interfaces.AboutTopicActivity"
+            android:exported="true"
+            tools:ignore="ExtraText">
+        </activity>
+        <activity android:name=".GUI.STUDENT_interfaces.OtherTopicsActivity"
+            android:exported="true"
+            tools:ignore="ExtraText">
+        </activity>
+        <activity android:name=".GUI.PurchaseRequestActivity"
+            android:exported="true"
+            tools:ignore="ExtraText">
+        </activity>
     </application>
 
 

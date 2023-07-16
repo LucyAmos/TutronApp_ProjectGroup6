@@ -18,6 +18,8 @@ import com.example.tutrong6.BEANS.Tutor;
 import com.example.tutrong6.BEANS.User;
 import com.example.tutrong6.DAO.DBHelper;
 import com.example.tutrong6.DAO.SessionManagement;
+import com.example.tutrong6.GUI.LandingPageActivity;
+import com.example.tutrong6.GUI.STUDENT_interfaces.StudentHubActivity;
 import com.example.tutrong6.GUI.STUDENT_interfaces.StudentSignUp;
 import com.example.tutrong6.GUI.SignUpLauncherActivity;
 import com.example.tutrong6.GUI.WelcomePage;
@@ -133,26 +135,33 @@ public class TutorHubActivity extends AppCompatActivity {
 
         });
 
-    Button myReviewsButton = findViewById(R.id.my_reviews_button);
+        Button myReviewsButton = findViewById(R.id.my_reviews_button);
         myReviewsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle button click
+                Intent intent = new Intent(TutorHubActivity.this, com.example.tutrong6.GUI.ReviewsBoxActivity.class);
+                startActivity(intent);
+            }
+
+
+        });
+
+    Button logout_btn = findViewById(R.id.logoff_button);
+
+    logout_btn.setOnClickListener(new View.OnClickListener() {
         @Override
-        public void onClick(View v) {
-            // Handle button click
-            Intent intent = new Intent(TutorHubActivity.this, com.example.tutrong6.GUI.ReviewsBoxActivity.class);
-            startActivity(intent);
+        public void onClick(View view) {
+
+            //logout
+            sessionManagement.removeSession();
+            //aller a la page d accueil.
+            startActivity(new Intent(TutorHubActivity.this, LandingPageActivity.class));
+
         }
-
-
     });
 
     }
-/*
-    private boolean isDouble(String value) {
 
-        String doublePattern = "[0-9]+(\\\\.[0-9]+)?";
-        Pattern p = java.util.regex.Pattern.compile(doublePattern);
-        Matcher m = p.matcher(value);
-        return m.matches();
-    }*/
 
 }

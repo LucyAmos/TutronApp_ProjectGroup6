@@ -32,6 +32,8 @@ import com.example.tutrong6.BEANS.Tutor;
 import com.example.tutrong6.BEANS.User;
 import com.example.tutrong6.DAO.DBHelper;
 import com.example.tutrong6.DAO.SessionManagement;
+import com.example.tutrong6.GUI.STUDENT_interfaces.StudentHubActivity;
+import com.example.tutrong6.GUI.TUTOR_interfaces.TutorHubActivity;
 import com.example.tutrong6.GUI.TUTOR_interfaces.TutorTopicsActivity;
 import com.example.tutrong6.GUI.TUTOR_interfaces.UpdateTopicsActivity;
 import com.example.tutrong6.R;
@@ -147,6 +149,24 @@ public class ReviewsBoxActivity extends AppCompatActivity implements ReviewRecyc
             String tutorIdIntent = getIntent().getStringExtra("tutorId");
             tutorId = Integer.parseInt(tutorIdIntent);
         }
+
+        Button fab = findViewById(R.id.home_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(session_user.getRoleID() == Tutor.getStaticRoleID()){
+                    Intent intent = new Intent(ReviewsBoxActivity.this, TutorHubActivity.class);
+                    startActivity(intent);
+                }else if(session_user.getRoleID() == Student.getStaticRoleID()){
+                    Intent intent = new Intent(ReviewsBoxActivity.this, StudentHubActivity.class);
+                    startActivity(intent);
+                }
+
+
+            }
+
+        });
 
         recyclerView = findViewById(R.id.reviews_recycler);
 

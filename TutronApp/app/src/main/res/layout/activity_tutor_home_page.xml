@@ -183,7 +183,7 @@
                 android:id="@+id/my_topics_button"
                 android:layout_width="300dp"
                 android:layout_height="80dp"
-                android:background="@drawable/rounded_button2"
+                android:background="@drawable/rounded_button5"
                 android:fontFamily="@font/andada"
                 android:text="My Topics"
                 android:textSize="30sp"
@@ -211,11 +211,25 @@
                 android:id="@+id/my_reviews_button"
                 android:layout_width="300dp"
                 android:layout_height="80dp"
-                android:background="@drawable/rounded_button2"
+                android:background="@drawable/rounded_button"
                 android:fontFamily="@font/andada"
                 android:text="My Reviews"
                 android:textSize="30sp"
                 android:textStyle="bold" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <Button
+                android:id="@+id/logoff_button"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:fontFamily="@font/andada"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:background="@drawable/rounded_button3"
+                android:text="Log Out" />
 
             <Space
                 android:layout_width="match_parent"

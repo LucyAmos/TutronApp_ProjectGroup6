@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -68,6 +70,19 @@ public class OtherTopicsActivity extends AppCompatActivity implements OfferedTop
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        Button fab = findViewById(R.id.home_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent intent = new Intent(OtherTopicsActivity.this, StudentHubActivity.class);
+                startActivity(intent);
+
+            }
+
+        });
+
 
 
     }
@@ -85,7 +100,7 @@ public class OtherTopicsActivity extends AppCompatActivity implements OfferedTop
         Boolean offer = selected.getIs_offered();
 
 
-        Intent intent = new Intent (OtherTopicsActivity.this, UpdateTopicsActivity.class);
+        Intent intent = new Intent (OtherTopicsActivity.this, AboutTopicActivity.class);
 
         //intent.putExtra("selectedTopic", (Parcelable) selected);
         intent.putExtra("yearsOfExperience", yearsOfExperience);

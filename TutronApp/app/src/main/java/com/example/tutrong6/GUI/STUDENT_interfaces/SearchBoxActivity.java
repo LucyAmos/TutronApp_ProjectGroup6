@@ -63,6 +63,19 @@ public class SearchBoxActivity extends AppCompatActivity implements SearchRecycl
         SessionManagement sessionManagement = new SessionManagement(SearchBoxActivity.this);
         int userID = sessionManagement.getSession();
 
+        Button fab = findViewById(R.id.home_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent intent = new Intent(SearchBoxActivity.this, StudentHubActivity.class);
+                startActivity(intent);
+
+            }
+
+        });
+
 
 
         recyclerView = findViewById(R.id.search_recycler);

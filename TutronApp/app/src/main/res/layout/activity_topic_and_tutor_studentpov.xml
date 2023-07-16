@@ -17,16 +17,37 @@
         android:paddingRight="10dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/about"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="50sp"
-            android:gravity="center"
-            android:fontFamily="@font/andada"
-            android:textStyle="bold"
-            android:textColor="@color/tutronBluePrimary"
-            android:text="ABOUT" />
+            android:orientation="horizontal">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/home_fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#000000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginBottom="16dp"
+                android:layout_marginRight="16dp"
+                app:srcCompat="@drawable/white_house"/>
+
+            <TextView
+                android:id="@+id/about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="50sp"
+                android:paddingLeft="40dp"
+                android:fontFamily="@font/andada"
+                android:textStyle="bold"
+                android:textColor="@color/tutronBluePrimary"
+                android:text="ABOUT" />
+
+        </LinearLayout>
+
+
+
 
 
         <Space
@@ -423,9 +444,14 @@
 
         </LinearLayout>
 
+
+
         <Space
             android:layout_width="match_parent"
             android:layout_height="30dp" />
 
     </LinearLayout>
+
+
+
 </ScrollView>

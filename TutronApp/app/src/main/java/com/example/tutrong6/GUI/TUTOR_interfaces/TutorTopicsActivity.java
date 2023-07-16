@@ -23,6 +23,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tutrong6.BEANS.Topic;
 import com.example.tutrong6.DAO.DBHelper;
 import com.example.tutrong6.DAO.SessionManagement;
+import com.example.tutrong6.GUI.STUDENT_interfaces.AboutTopicActivity;
+import com.example.tutrong6.GUI.STUDENT_interfaces.StudentHubActivity;
 import com.example.tutrong6.R;
 
 import java.util.ArrayList;
@@ -60,6 +62,19 @@ public class TutorTopicsActivity extends AppCompatActivity implements TopicsRecy
         recyclerView = findViewById(R.id.topics_recycler);
 
         DB = new DBHelper(this);
+
+        Button fab = findViewById(R.id.home_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent intent = new Intent(TutorTopicsActivity.this, TutorHubActivity.class);
+                startActivity(intent);
+
+            }
+
+        });
 
         topics = DB.getAllTopics(userID);
         Map<Integer, Integer> topicTotals = DataBase.countTopics(userID);

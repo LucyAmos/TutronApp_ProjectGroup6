@@ -1406,7 +1406,7 @@ public class DBHelper extends SQLiteOpenHelper {
      * @param tutorHourlyRate hourly rate of the tutor from whom the lesson is purchased
      * @return true if the lesson was added in the DB
      */
-    public boolean addLesson(Lesson lesson, int tutorHourlyRate)
+    public boolean addLesson(Lesson lesson, double tutorHourlyRate)
     {
         SQLiteDatabase MyData = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
