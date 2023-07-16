@@ -1483,6 +1483,39 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * delete a lesson's review in the DB
+     * @param lessonID ID of the lesson to delete
+     * @return true if the deletion in the DB was successfull, otherwise return false
+     */
+
+    public boolean deleteRatingLesson(int lessonID)
+    {
+        SQLiteDatabase MyData = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+       String default_str=null;
+       int default_bool  = 0;
+
+        contentValues.put("rating",-1);
+        contentValues.put("rating_date",default_str);
+
+        contentValues.put("is_rating_anonymous",default_bool);
+
+        contentValues.put("is_topic_reviewed",default_bool);
+        contentValues.put("review",default_str);
+
+        Cursor cursor = MyData.rawQuery("Select * from lesson where ID = ?", new String[]{String.valueOf(lessonID)});
+        if(cursor.getCount() > 0)
+        {
+            long update = MyData.update("lesson",contentValues,"ID=?",new String[]{String.valueOf(lessonID)});
+            return (update==-1? false:true);
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    /**
      *
      * @param tutorID ID of the tutor we are interested in
      * @return the number of lessons given/sold by the tutor
@@ -1519,7 +1552,7 @@ public class DBHelper extends SQLiteOpenHelper {
     /**
      *
      * @param tutorID
-     * @return a map< int[], ReviewSystem>: int[] is table of int containing the StudentID at pos[0] and TopicID at pos[1]
+     * @return a map< int[], ReviewSystem>: int[] is table of int containing the StudentID at pos[0], TopicID at pos[1] and lessonID at pos[2]
      *      *  https://www.w3schools.com/java/java_hashmap.asp
      */
     public Map<int[],ReviewSystem> getAllReviewSystems(int tutorID)
@@ -1528,7 +1561,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase MyData = this.getWritableDatabase();
 
-        Cursor res = MyData.rawQuery("SELECT rating,is_rating_anonymous,rating_date,is_topic_reviewed,review,StudentID,TopicID from lesson WHERE TutorID = ? AND rating != ? ",new String[] {String.valueOf(tutorID),"-1"});
+        Cursor res = MyData.rawQuery("SELECT rating,is_rating_anonymous,rating_date,is_topic_reviewed,review,StudentID,TopicID,ID from lesson WHERE TutorID = ? AND rating != ? ",new String[] {String.valueOf(tutorID),"-1"});
 
         while (res.moveToNext()) {
 
@@ -1550,9 +1583,10 @@ public class DBHelper extends SQLiteOpenHelper {
             review_temp.setIs_topic_reviewed(is_topic_reviewed);
             review_temp.setReview(res.getString(4));
 
-            int[] IDs = new int[2];
+            int[] IDs = new int[3];
             IDs[0]= res.getInt(5) ;
             IDs[1]= res.getInt(6) ;
+            IDs[2]= res.getInt(7) ;
 
             result.put(IDs,review_temp);
         }
@@ -1775,6 +1809,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return result  ;
     }
+
+
+
+
+
     //TODO  add tutor avaibilities function
 
 
