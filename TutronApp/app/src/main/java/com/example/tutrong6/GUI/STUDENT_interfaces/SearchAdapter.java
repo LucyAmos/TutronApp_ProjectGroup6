@@ -54,15 +54,16 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
         int tutorId = searchTopics.get(position).getTutorID();
 
         holder.topic.setText(searchTopics.get(position).getName());
-        holder.tutorFirstName.setText(DataBase.getTutorByID(tutorId).getFirst_name());
-        holder.tutorLastName.setText(DataBase.getTutorByID(tutorId).getLast_name());
+        Tutor tutor = DataBase.getTutorByID(tutorId);
+        holder.tutorFirstName.setText(tutor.getFirst_name());
+        holder.tutorLastName.setText(tutor.getLast_name());
 
-        byte[] profilePictureBytes = DataBase.getTutorByID(tutorId).getProfile_picture();
+        byte[] profilePictureBytes = tutor.getProfile_picture();
         Bitmap profilePictureBitmap = BitmapFactory.decodeByteArray(profilePictureBytes, 0, profilePictureBytes.length);
         holder.profilePic.setImageBitmap(profilePictureBitmap);
 
-        holder.nativeLanguage.setText(DataBase.getTutorByID(tutorId).getNative_language());
-        holder.hourlyRate.setText(String.valueOf(DataBase.getTutorByID(tutorId).getHourly_rate()));
+        holder.nativeLanguage.setText(tutor.getNative_language());
+        holder.hourlyRate.setText(String.valueOf(tutor.getHourly_rate()));
         holder.averageRating.setRating((float) DataBase.getAverageTutorRating(tutorId));
         holder.totalLessons.setText(String.valueOf(DataBase.getCountGivenLesson(tutorId)));
 

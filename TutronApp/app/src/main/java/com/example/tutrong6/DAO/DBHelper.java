@@ -313,6 +313,13 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(10, '09:00', '11:00'),\n" +
                 "(10, '13:00', '15:00'),\n" +
                 "(10, '18:00', '20:00')");
+
+        //populate lesson
+
+        sqLiteDatabase.execSQL("INSERT INTO lesson (StudentID, TutorID, TopicID, StatusID, date_appointment, start_time, end_time, rating, rating_date, is_rating_anonymous, is_topic_reviewed, review) VALUES\n" +
+                "(7, 3, 1, 3, '02/12/2022', '10:00', '12:00', 5, '04/12/2022', 0, 1, 'excellent tutor')");
+
+
     }
 
     @Override
@@ -1125,6 +1132,7 @@ public class DBHelper extends SQLiteOpenHelper {
             tutor.setHourly_rate(res.getDouble(13));
 
         }
+        Log.e("getTutorByID", "Return: "+ tutor);
 //      MyData.close();
         return tutor;
     }
@@ -1312,6 +1320,8 @@ public class DBHelper extends SQLiteOpenHelper {
      */
     public ArrayList<Integer> findTopic(String[] findBy, int sortBy)
     {
+        Log.e("findTopic", "IN the findTopic FUNCTION: "+ findBy[0] + findBy[1] + findBy[2] + sortBy);
+
          ArrayList<Integer> result = new ArrayList<Integer>();
         String tutorName = findBy[FIND_TAB_POS_TUTOR_NAME];
         String language_spoken = findBy[FIND_TAB_POS_LANGUAGE_SPOKEN];
@@ -1319,9 +1329,8 @@ public class DBHelper extends SQLiteOpenHelper {
         String part1 = "SELECT DISTINCT topic.ID, count(lesson.ID) from topic \n" +
                 "join user ON topic.TutorID = user.ID  \n" +
                 "JOIN lesson ON user.ID = lesson.TutorID\n" +
-                "\n" +
                 "WHERE\n" +
-                "topic.is_offered = 1";
+                "topic.is_offered = 1\n";
         String condition_part = "";
         String sort_part = "";
 
@@ -1392,10 +1401,20 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase MyData = this.getWritableDatabase();
         Cursor res = MyData.rawQuery(cmd,null);
 
+        Log.e("findTopic", "Query= "+ cmd );
+
+
         while (res.moveToNext()) {
             int temp = res.getInt(0);
             result.add(temp);
         }
+
+        for (int var : result)
+        {
+            Log.e("findTopic", "result: "+ var );
+
+        }
+        Log.e("findTopic", "Was IN FINDBY");
 
          return result;
     }
@@ -1808,6 +1827,29 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 
         return result  ;
+    }
+
+    public boolean addAvaibilities(ArrayList<Avaibility> av)
+    {
+
+        SQLiteDatabase MyData = this.getWritableDatabase();
+        //get the last creditCard object create
+        int credit_card_id = 0;
+        Cursor cursor = MyData.rawQuery("SELECT * FROM creditcard ORDER BY ID DESC LIMIT 1 ", null);
+        if (cursor.moveToFirst()){
+            do {
+                // Passing values
+                credit_card_id = cursor.getInt(0);
+            } while(cursor.moveToNext());
+        }
+
+
+        return false;
+    }
+
+    public boolean UpdateLastTutorCreatedAvaibilities()
+    {
+        return false;
     }
 
 
