@@ -39,7 +39,7 @@
             android:layout_height="10dp" />
 
         <EditText
-            android:id="@+id/search_bar_student_input"
+            android:id="@+id/search_bar_tutor"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:ems="10"
@@ -47,7 +47,41 @@
             android:inputType="text"
             android:fontFamily="@font/andada"
             android:background="@drawable/signup_input"
-            android:hint="Search By Topic, Tutor, or Language"
+            android:hint="Search By Tutor"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <EditText
+            android:id="@+id/search_bar_topic"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:textStyle="italic"
+            android:inputType="text"
+            android:fontFamily="@font/andada"
+            android:background="@drawable/signup_input"
+            android:hint="Search By Topic"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <EditText
+            android:id="@+id/search_bar_nativeLanguage"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:textStyle="italic"
+            android:inputType="text"
+            android:fontFamily="@font/andada"
+            android:background="@drawable/signup_input"
+            android:hint="Search By Native Language"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"/>
 

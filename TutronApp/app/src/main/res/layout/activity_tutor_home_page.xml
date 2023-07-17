@@ -174,10 +174,24 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="15dp" />
+
+            <Button
+                android:id="@+id/my_profile_button"
+                android:layout_width="240dp"
+                android:layout_height="50dp"
+                android:background="@drawable/rounded_button4"
+                android:fontFamily="@font/andada"
+                android:text="My Profile"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
 
             <Button
                 android:id="@+id/my_topics_button"

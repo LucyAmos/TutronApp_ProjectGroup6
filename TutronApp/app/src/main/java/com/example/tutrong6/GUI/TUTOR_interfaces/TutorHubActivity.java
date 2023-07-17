@@ -110,7 +110,17 @@ public class TutorHubActivity extends AppCompatActivity {
 
 
 
+        Button myProfileButton = findViewById(R.id.my_profile_button);
+        myProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle button click
+                Intent intent = new Intent(TutorHubActivity.this, TutorProfileActivity.class);
+                startActivity(intent);
+            }
 
+
+        });
 
         Button myTopicsButton = findViewById(R.id.my_topics_button);
         myTopicsButton.setOnClickListener(new View.OnClickListener() {

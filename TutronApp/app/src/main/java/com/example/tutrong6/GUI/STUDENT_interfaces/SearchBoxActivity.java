@@ -49,7 +49,9 @@ public class SearchBoxActivity extends AppCompatActivity implements SearchRecycl
     DBHelper DataBase = new DBHelper(this);
     SearchAdapter adapter;
 
-    Dialog searchByDialog;
+    private int sortBy = -1;
+
+
 
     private String[] findBy = new String[3];
 
@@ -81,73 +83,25 @@ public class SearchBoxActivity extends AppCompatActivity implements SearchRecycl
 
         recyclerView = findViewById(R.id.search_recycler);
 
-        EditText searchBar = findViewById(R.id.search_bar_student_input);
+        EditText searchBarTutor = findViewById(R.id.search_bar_tutor);
+        EditText searchBarTopic = findViewById(R.id.search_bar_topic);
+        EditText searchBarNativeLanguage = findViewById(R.id.search_bar_nativeLanguage);
         Button searchButton = findViewById(R.id.search_button);
 
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String searchInput = searchBar.getText().toString().trim();
-                searchByDialog = new Dialog(SearchBoxActivity.this);
-                searchByDialog.setContentView(R.layout.search_by_dialogue);
-                searchByDialog.show();
-                searchByDialog.setCancelable(true);
-
-                Window windowOffer = searchByDialog.getWindow();
-                if (windowOffer != null) {
-                    WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-                    layoutParams.copyFrom(windowOffer.getAttributes());
-                    layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
-                    layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
-                    windowOffer.setAttributes(layoutParams);
-                }
-
-                Button searchByTopic = findViewById(R.id.search_by_TopicBtn);
-                Button searchByTutor = findViewById(R.id.search_by_tutorBtn);
-                Button searchByNativeLanguage = findViewById(R.id.search_by_languageBtn);
-
-                searchByTopic.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        searchByDialog.dismiss();
-                        findBy[0] = null; // tutor name
-                        findBy[1] = null; // language spoken
-                        findBy[2] = searchInput; // Topic name
-                        searchTopicsID = DataBase.findTopic(findBy, -1);
-                    }
-
-                });
-
-                searchByTutor.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        searchByDialog.dismiss();
-                        findBy[0] = searchInput; // tutor name
-                        findBy[1] = null; // language spoken
-                        findBy[2] = null; // Topic name
-                        searchTopicsID = DataBase.findTopic(findBy, -1);
-                    }
-
-                });
-
-                searchByNativeLanguage.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        searchByDialog.dismiss();
-                        findBy[0] = null; // tutor name
-                        findBy[1] = searchInput; // language spoken
-                        findBy[2] = null; // Topic name
-                        searchTopicsID = DataBase.findTopic(findBy, -1);
-                        updateSearchResults();
-                    }
-
-                });
-
+                findBy[0] = searchBarTutor.getText().toString().trim(); // tutor name
+                findBy[1] = searchBarNativeLanguage.getText().toString().trim(); // language spoken
+                findBy[2] = searchBarTopic.getText().toString().trim(); // Topic name
+                searchTopicsID = DataBase.findTopic(findBy, sortBy);
+                updateSearchResults();
             }
 
-
         });
+
+
 
 
 
@@ -206,19 +160,19 @@ public class SearchBoxActivity extends AppCompatActivity implements SearchRecycl
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         String sortType = adapterView.getItemAtPosition(i).toString();
         if(sortType.equals("Sort By: User Ratings")){
-            searchTopicsID = DataBase.findTopic(findBy, 0);
+            searchTopicsID = DataBase.findTopic(findBy, sortBy);
 
         }else if(sortType.equals("Sort By: Hourly Rate")){
-            searchTopicsID = DataBase.findTopic(findBy, 1);
+            searchTopicsID = DataBase.findTopic(findBy, sortBy);
 
         }else if(sortType.equals("Sort By: Number of Lessons")){
-            searchTopicsID = DataBase.findTopic(findBy, 3);
+            searchTopicsID = DataBase.findTopic(findBy, sortBy);
 
-        }else{
+        }/*else{
             searchTopicsID = DataBase.findTopic(findBy, -1);
-        }
+        }*/
 
-        for (int topicId : searchTopicsID) {
+        /*for (int topicId : searchTopicsID) {
             Topic topic = DB.getTopicByID(topicId);
             if (topic != null) {
                 searchTopics.add(topic);
@@ -227,7 +181,9 @@ public class SearchBoxActivity extends AppCompatActivity implements SearchRecycl
 
         adapter = new SearchAdapter(this,this, searchTopics);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));*/
+
+        updateSearchResults();
     }
 
     @Override

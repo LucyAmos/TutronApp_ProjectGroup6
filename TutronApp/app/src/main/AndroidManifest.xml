@@ -95,6 +95,10 @@
             android:exported="true"
             tools:ignore="ExtraText">
         </activity>
+        <activity android:name=".GUI.TUTOR_interfaces.TutorProfileActivity"
+            android:exported="true"
+            tools:ignore="ExtraText">
+        </activity>
     </application>
 
 
