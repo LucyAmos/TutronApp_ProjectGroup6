@@ -752,10 +752,10 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put("TutorID",c.getTutorID());
         contentValues.put("title",c.getTitle());
         contentValues.put("description",c.getDescription());
-        int is_processed = c.getIs_processed()==false?0:1;
-        contentValues.put("is_processed",is_processed);
-        String strDate  = new SimpleDateFormat(Complaint.getDATE_FORMAT()).format(c.getSuspension_end_date());
-        contentValues.put("date_arret_suspension",strDate);
+        //int is_processed = c.getIs_processed()==false?0:1;
+        //contentValues.put("is_processed",is_processed);
+       // String strDate  = new SimpleDateFormat(Complaint.getDATE_FORMAT()).format(c.getSuspension_end_date());
+       // contentValues.put("date_arret_suspension",strDate);
 
         long result = MyData.insert("complaint",null,contentValues);
         if(result==-1) return false;
