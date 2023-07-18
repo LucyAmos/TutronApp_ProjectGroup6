@@ -78,7 +78,7 @@ public class PurchaseRequestActivity extends AppCompatActivity implements Purcha
         if (session_user.getRoleID() == Tutor.getStaticRoleID()) {
             lessons = DB.getTutorPurchaseDemands(userID);
         } else if (session_user.getRoleID() == Student.getStaticRoleID()) {
-            lessons = DB.getLessonNonEvaluate(userID);
+            lessons = DB.getStudentLessons(userID, 1);
         }
 
 

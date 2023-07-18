@@ -1,6 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="480dp"
+    android:layout_height="600dp"
     android:padding="16dp">
 
     <LinearLayout
@@ -12,10 +12,11 @@
 
         <TextView
             android:id="@+id/complaint_dialogue_title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="MAKE A COMPLAINT"
+            android:gravity="center"
             android:textColor="#FF0000"
             android:fontFamily="@font/andada"
             android:textSize="36sp"

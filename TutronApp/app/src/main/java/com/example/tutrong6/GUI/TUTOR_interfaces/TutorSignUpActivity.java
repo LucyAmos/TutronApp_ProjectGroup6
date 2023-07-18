@@ -219,7 +219,7 @@ public class TutorSignUpActivity extends AppCompatActivity {
             Uri imageUri = data.getData();
 
 
-             profilePictureTutor = findViewById(R.id.profile_pic_tutor);
+            profilePictureTutor = findViewById(R.id.profile_pic_tutor);
             Picasso.get().load(imageUri).into(profilePictureTutor);
 
         }

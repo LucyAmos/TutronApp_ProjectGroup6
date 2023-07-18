@@ -80,10 +80,10 @@ public class PurchaseRequestAdapter extends RecyclerView.Adapter<PurchaseRequest
 
         if(sessionUser.getRoleID() == Tutor.getStaticRoleID()){
             holder.firstName.setText(DataBase.getUserbyID(studentId).getFirst_name());
-            holder.lastName.setText(DataBase.getUserbyID(studentId).getFirst_name());
+            holder.lastName.setText(DataBase.getUserbyID(studentId).getLast_name());
         } else if(sessionUser.getRoleID() == Student.getStaticRoleID()){
             holder.firstName.setText(DataBase.getUserbyID(tutorId).getFirst_name());
-            holder.lastName.setText(DataBase.getUserbyID(tutorId).getFirst_name());
+            holder.lastName.setText(DataBase.getUserbyID(tutorId).getLast_name());
         }
 
     }

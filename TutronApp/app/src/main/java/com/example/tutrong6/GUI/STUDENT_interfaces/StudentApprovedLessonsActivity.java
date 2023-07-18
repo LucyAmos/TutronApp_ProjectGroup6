@@ -42,6 +42,8 @@ import com.example.tutrong6.GUI.TUTOR_interfaces.TutorTopicsActivity;
 import com.example.tutrong6.R;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -119,7 +121,7 @@ public class StudentApprovedLessonsActivity extends AppCompatActivity implements
         Lesson selected = lessons.get(position);
 
         doNextDialog = new Dialog(StudentApprovedLessonsActivity.this);
-        doNextDialog.setContentView(R.layout.request_dialogue);
+        doNextDialog.setContentView(R.layout.do_next_dialogue);
         doNextDialog.show();
         doNextDialog.setCancelable(true);
 
@@ -187,7 +189,9 @@ public class StudentApprovedLessonsActivity extends AppCompatActivity implements
                         double rating = givenRating.getRating();
                         String review = reviewDesc.getText().toString().trim();
 
-                        Date currentDate = new Date();
+                        LocalDateTime currentDateTime = LocalDateTime.now();
+                        ZoneId zoneId = ZoneId.systemDefault();
+                        Date currentDate = Date.from(currentDateTime.atZone(zoneId).toInstant());
 
 
                         if (review.isEmpty() || rating == 0
@@ -201,7 +205,7 @@ public class StudentApprovedLessonsActivity extends AppCompatActivity implements
                                 Toast.makeText(StudentApprovedLessonsActivity.this, "Review Added Successfully", Toast.LENGTH_SHORT).show();
                                 writeReviewDialog.dismiss();
                                 Intent intent = new Intent(StudentApprovedLessonsActivity.this, ReviewsBoxActivity.class);
-                                intent.putExtra("tutorId", String.valueOf(selected.getTutorID()));
+                                intent.putExtra("tutorId", selected.getTutorID());
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(StudentApprovedLessonsActivity.this, "Review Addition Unsuccessful", Toast.LENGTH_SHORT).show();
@@ -261,7 +265,7 @@ public class StudentApprovedLessonsActivity extends AppCompatActivity implements
                 doNextDialog.dismiss();
 
                 fileComplaintDialog = new Dialog(StudentApprovedLessonsActivity.this);
-                fileComplaintDialog.setContentView(R.layout.review_dialogue);
+                fileComplaintDialog.setContentView(R.layout.complaint_dialogue);
                 fileComplaintDialog.show();
                 fileComplaintDialog.setCancelable(true);
 
@@ -289,12 +293,14 @@ public class StudentApprovedLessonsActivity extends AppCompatActivity implements
 
                         Date currentDate = new Date();
 
+                        Date nullDate = null;
+
 
                         if (complaintTitle.isEmpty() || complaint.isEmpty()
                         ) {
                             Toast.makeText(StudentApprovedLessonsActivity.this, "Please, fill in ALL the fields", Toast.LENGTH_SHORT).show();
                         } else {
-                            Complaint fileMadeComplaint = new Complaint(userID, selected.getTutorID(), complaintTitle, complaint, 0, false, null);
+                            Complaint fileMadeComplaint = new Complaint(userID, selected.getTutorID(), complaintTitle, complaint, 0, false, nullDate);
                             Boolean complaintFiled = DataBase.addComplaint(fileMadeComplaint);
 
                             if (complaintFiled) {
