@@ -31,7 +31,7 @@ public class PurchaseRequestAdapter extends RecyclerView.Adapter<PurchaseRequest
     ArrayList<Lesson> lessons;
 
 
-    DBHelper DataBase = new DBHelper(null);
+    private DBHelper DataBase;
 
 
     public PurchaseRequestAdapter(Context context, PurchaseRequestRecyclerInterface purchaseRequestRecyclerInterface, ArrayList<Lesson> lessons, User sessionUser) {
@@ -39,6 +39,8 @@ public class PurchaseRequestAdapter extends RecyclerView.Adapter<PurchaseRequest
         this.purchaseRequestRecyclerInterface=purchaseRequestRecyclerInterface;
         this.lessons = lessons;
         this.sessionUser = sessionUser;
+
+        DataBase = new DBHelper(context);
 
     }
 
@@ -54,8 +56,8 @@ public class PurchaseRequestAdapter extends RecyclerView.Adapter<PurchaseRequest
     public void onBindViewHolder(@NonNull PurchaseRequestAdapter.MyViewHolder holder, int position) {
 
         int tutorId = lessons.get(position).getTutorID();
-        int topicId = lessons.get(position).getTutorID();
-        int studentId = lessons.get(position).getTutorID();
+        int topicId = lessons.get(position).getTopicID();
+        int studentId = lessons.get(position).getStudentID();
 
         holder.date.setText(String.valueOf(lessons.get(position).getDate_appointment()));
         holder.timeSlot.setText(String.valueOf(lessons.get(position).getSlot()));
