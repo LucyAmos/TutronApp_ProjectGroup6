@@ -29,6 +29,8 @@ android {
 }
 
 dependencies {
+    implementation 'com.google.ar:core:1.30.0'
+
 
     //JUnit testing
     testImplementation 'junit:junit:4.13.2'

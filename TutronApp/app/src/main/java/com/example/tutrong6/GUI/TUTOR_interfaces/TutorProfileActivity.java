@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tutrong6.BEANS.Tutor;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -67,15 +68,9 @@ public class TutorProfileActivity extends AppCompatActivity  {
         RatingBar averageRating = findViewById(R.id.ratingBar);
 
 
-
-        if(session_tutor.getProfile_picture() != null){
-            byte[] profilePictureBytes = session_tutor.getProfile_picture();
-            Bitmap profilePictureBitmap = BitmapFactory.decodeByteArray(profilePictureBytes, 0, profilePictureBytes.length);
-            profilePicture.setImageBitmap(profilePictureBitmap);
-        }else{
-            Drawable defaultImage = getResources().getDrawable(R.drawable.default_avatar);
-            profilePicture.setImageDrawable(defaultImage);
-        }
+        byte[] profilePictureBytes = session_tutor.getProfile_picture();
+        Bitmap profilePictureBitmap = BitmapFactory.decodeByteArray(profilePictureBytes, 0, profilePictureBytes.length);
+        profilePicture.setImageBitmap(profilePictureBitmap);
 
 
         firstName.setText(session_tutor.getFirst_name());
