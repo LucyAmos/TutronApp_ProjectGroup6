@@ -13,6 +13,7 @@ import com.example.tutrong6.BEANS.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -321,6 +322,8 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO lesson (StudentID, TutorID, TopicID, StatusID, date_appointment, start_time, end_time, rating, rating_date, is_rating_anonymous, is_topic_reviewed, review) VALUES\n" +
                 "(7, 3, 2, 3, '02/12/2022', '10:00', '12:00', 5, '04/12/2022', 0, 1, 'excellent tutor'),\n" +
                 "(7, 3, 2, 3, '02/03/2023', '17:30', '19:30', -1, NULL, 0, 0, NULL),\n" +
+                "(7, 3, 2, 1, '22/06/2024', '18:30', '20:30', -1, NULL, 0, 0, NULL),\n" +
+                "(7, 3, 2, 1, '17/04/2026', '13:30', '15:30', -1, NULL, 0, 0, NULL),\n" +
                 "(7, 4, 5, 3, '21/05/2023', '09:00', '11:00', 5, '22/05/2023', 1, 1, 'clear explanation')");
 
 
@@ -1865,7 +1868,7 @@ public class DBHelper extends SQLiteOpenHelper {
         //TODO
         SQLiteDatabase MyData = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        Log.i("addAvaibilities ", "DANS addAvaibilities: ");
+        Log.i("addAvaibilities ", "DANS AvaibilitiesList:"+ avs);
 
         for (Avaibility av : avs)
         {
@@ -1898,8 +1901,18 @@ public class DBHelper extends SQLiteOpenHelper {
                 contentValues.put("ID",sl.getID());
                 contentValues.put("AvaibilityID",avID);
 
-                String start_time  = new SimpleDateFormat(Slot.getTIME_FORMAT()).format(sl.getStartTime());
-                String end_time  = new SimpleDateFormat(Slot.getTIME_FORMAT()).format(sl.getEndTime());
+                String start_time="";
+                String end_time="";
+
+
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                     start_time = sl.getStartTime().format(DateTimeFormatter.ofPattern(Slot.getTIME_FORMAT()));
+                     end_time = sl.getEndTime().format(DateTimeFormatter.ofPattern(Slot.getTIME_FORMAT()));
+                }
+
+
+               // String start_time  = new SimpleDateFormat(Slot.getTIME_FORMAT()).format(sl.getStartTime());
+                //String end_time  = new SimpleDateFormat(Slot.getTIME_FORMAT()).format(sl.getEndTime());
 
                 contentValues.put("start_time",start_time);
                 contentValues.put("end_time",end_time);
@@ -1931,7 +1944,7 @@ public class DBHelper extends SQLiteOpenHelper {
         //put the tutorOD on the availabilies
         ArrayList<Avaibility> DefaultAvaibility = Avaibility.DefaultAvaibility();
         this.addAvaibilities(DefaultAvaibility,tutorID);
-        return false;
+        return true;
     }
 
 

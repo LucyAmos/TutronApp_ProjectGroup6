@@ -176,6 +176,15 @@ public class TutorSignUpActivity extends AppCompatActivity {
 
                                 Boolean insert = DataBase.addTutor(tutor);
                                 if(insert==true){
+                                    /*boolean insert_avaibilities = DataBase.CreatedDefaultAvaibilities();
+                                    if(insert_avaibilities)
+                                    {
+                                        Toast.makeText(TutorSignUpActivity.this, "avaibilities sucessfully added", Toast.LENGTH_SHORT).show();
+                                    }
+                                    else{
+                                        Toast.makeText(TutorSignUpActivity.this, "avaibilities FAiled to be added", Toast.LENGTH_SHORT).show();
+
+                                    }*/
                                     Toast.makeText(TutorSignUpActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(TutorSignUpActivity.this, LoginPageActivity.class));
 
