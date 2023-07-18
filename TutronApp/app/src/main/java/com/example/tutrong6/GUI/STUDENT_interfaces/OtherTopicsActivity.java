@@ -36,6 +36,7 @@ public class OtherTopicsActivity extends AppCompatActivity implements OfferedTop
     TopicsAdapter adapter;
 
     private int totalTopics;
+    private int tutorID;
     private int offeredTopics;
 
 
@@ -54,8 +55,8 @@ public class OtherTopicsActivity extends AppCompatActivity implements OfferedTop
 
         DB = new DBHelper(this);
 
-        String tutorIdIntent = getIntent().getStringExtra("tutorId");
-        int tutorID = Integer.parseInt(tutorIdIntent);
+        tutorID = getIntent().getIntExtra("tutorId",0);
+        //int tutorID = Integer.parseInt(tutorIdIntent);
 
         topics = DB.getOfferedTopics(tutorID);
         Map<Integer, Integer> topicTotals = DataBase.countTopics(userID);

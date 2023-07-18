@@ -148,8 +148,8 @@ public class ReviewsBoxActivity extends AppCompatActivity implements ReviewRecyc
         if(session_user.getRoleID() == Tutor.getStaticRoleID()){
             tutorId = userID;
         }else{
-            String tutorIdIntent = getIntent().getStringExtra("tutorId");
-            tutorId = Integer.parseInt(tutorIdIntent);
+            tutorId = getIntent().getIntExtra("tutorId",0);
+            //tutorId = Integer.parseInt(tutorIdIntent);
         }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.home_fab);

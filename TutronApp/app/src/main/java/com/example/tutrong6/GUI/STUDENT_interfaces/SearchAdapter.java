@@ -31,13 +31,15 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
     ArrayList<Topic> searchTopics;
 
 
-    DBHelper DataBase = new DBHelper(context);
+    private DBHelper DataBase;
 
 
     public SearchAdapter(Context context, SearchRecyclerInterface searchRecyclerInterface, ArrayList<Topic> searchTopics) {
         this.context = context;
         this.searchRecyclerInterface=searchRecyclerInterface;
         this.searchTopics = searchTopics;
+
+        DataBase = new DBHelper(context);
 
     }
 
@@ -51,7 +53,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull SearchAdapter.MyViewHolder holder, int position) {
 
-        int topicID = searchTopics.get(position).getTutorID();
+        int topicID = searchTopics.get(position).getID();
         Topic topic = DataBase.getTopicByID(topicID);
 
         holder.topic.setText(topic.getName());
@@ -60,9 +62,12 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
         holder.tutorLastName.setText(tutor.getLast_name());
 
         byte[] profilePictureBytes = tutor.getProfile_picture();
-        Bitmap profilePictureBitmap = BitmapFactory.decodeByteArray(profilePictureBytes, 0, profilePictureBytes.length);
-        holder.profilePic.setImageBitmap(profilePictureBitmap);
-
+        if(profilePictureBytes != null) {
+            Bitmap profilePictureBitmap = BitmapFactory.decodeByteArray(profilePictureBytes, 0, profilePictureBytes.length);
+            holder.profilePic.setImageBitmap(profilePictureBitmap);
+        }else{
+            holder.profilePic.setImageDrawable(context.getResources().getDrawable(R.drawable.default_avatar));
+        }
         holder.nativeLanguage.setText(tutor.getNative_language());
         holder.hourlyRate.setText(String.valueOf(tutor.getHourly_rate()));
         holder.averageRating.setRating((float) DataBase.getAverageTutorRating(tutor.getID()));

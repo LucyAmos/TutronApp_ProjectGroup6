@@ -1,15 +1,16 @@
 package com.example.tutrong6.GUI.STUDENT_interfaces;
 
 
+import static android.widget.Toast.LENGTH_LONG;
+
+import static com.example.tutrong6.BEANS.Avaibility.DATE_FORMAT;
+
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.TimePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -17,65 +18,50 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.tutrong6.BEANS.Avaibility;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
-import com.example.tutrong6.BEANS.Avaibility;
-import com.example.tutrong6.BEANS.Complaint;
 import com.example.tutrong6.BEANS.Lesson;
-import com.example.tutrong6.BEANS.ReviewSystem;
 import com.example.tutrong6.BEANS.Slot;
-import com.example.tutrong6.BEANS.Topic;
 import com.example.tutrong6.BEANS.Tutor;
-import com.example.tutrong6.BEANS.User;
 import com.example.tutrong6.DAO.DBHelper;
 import com.example.tutrong6.DAO.SessionManagement;
-import com.example.tutrong6.GUI.ADMIN_interfaces.AdminInboxActivity;
-import com.example.tutrong6.GUI.ADMIN_interfaces.ComplaintOverviewActivity;
 import com.example.tutrong6.GUI.ADMIN_interfaces.DatePickerFragment;
 import com.example.tutrong6.GUI.ReviewsBoxActivity;
-import com.example.tutrong6.GUI.TUTOR_interfaces.AddTopicActivity;
-import com.example.tutrong6.GUI.TUTOR_interfaces.TutorHubActivity;
-import com.example.tutrong6.GUI.TUTOR_interfaces.TutorTopicsActivity;
 import com.example.tutrong6.R;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 public class AboutTopicActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
 
     DBHelper DB;
 
-    String tutorIdIntent = getIntent().getStringExtra("tutorId");
-    String topicIdIntent = getIntent().getStringExtra("topicId");
-    private int tutorId = Integer.parseInt(tutorIdIntent);
-    private int topicId = Integer.parseInt(topicIdIntent);
+    private int tutorId;
+    private int topicId;
 
     ArrayList<Slot> timeSlots = new ArrayList<>();
 
     Dialog bookSession;
     private int userID;
+
+    private String dateText = "";
+    private String timeText = "";
 
 
     private Date sessionDate;
@@ -85,6 +71,13 @@ public class AboutTopicActivity extends AppCompatActivity implements DatePickerD
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topic_and_tutor_studentpov);
+
+        DBHelper DB = new DBHelper(this);
+
+        String tutorIdIntent = getIntent().getStringExtra("tutorId");
+        String topicIdIntent = getIntent().getStringExtra("topicId");
+        tutorId = Integer.parseInt(tutorIdIntent);
+        topicId = Integer.parseInt(topicIdIntent);
 
         SessionManagement sessionManagement = new SessionManagement(AboutTopicActivity.this);
 
@@ -107,7 +100,7 @@ public class AboutTopicActivity extends AppCompatActivity implements DatePickerD
 
 
         topic.setText(DB.getTopicByID(topicId).getName());
-        yearsOfExperience.setText(DB.getTopicByID(topicId).getYears_of_experience());
+        yearsOfExperience.setText(String.valueOf(DB.getTopicByID(topicId).getYears_of_experience()));
         topicDescription.setText(DB.getTopicByID(topicId).getDescription());
 
         byte[] profilePictureBytes = DB.getTutorByID(tutorId).getProfile_picture();
@@ -183,10 +176,10 @@ public class AboutTopicActivity extends AppCompatActivity implements DatePickerD
                     windowOffer.setAttributes(layoutParams);
                 }
 
-                Button bookRequest = bookSession.findViewById(R.id.open_date_time);
+                Button bookRequest = bookSession.findViewById(R.id.book_request_btn);
                 //TextView dateText = bookSession.findViewById(R.id.date);
                 //Spinner timeText = bookSession.findViewById(R.id.time);
-                Button dateTimePickerButton = bookSession.findViewById(R.id.book_request_btn);
+                Button dateTimePickerButton = bookSession.findViewById(R.id.open_date_time);
 
                 dateTimePickerButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -202,11 +195,7 @@ public class AboutTopicActivity extends AppCompatActivity implements DatePickerD
                     public void onClick(View v) {
                         // Handle button click
 
-                        TextView date = findViewById(R.id.date);
-                        Spinner time = bookSession.findViewById(R.id.time);
 
-                        String dateText = date.getText().toString().trim();
-                        String timeText = time.getSelectedItem().toString();
 
                         Tutor tutor = DB.getTutorByID(tutorId);
 
@@ -246,42 +235,60 @@ public class AboutTopicActivity extends AppCompatActivity implements DatePickerD
 
 @Override
 public void onDateSet(DatePicker view, int year, int month, int day){
+    DBHelper DB = new DBHelper(this);
     Calendar c = Calendar.getInstance();
     c.set(Calendar.YEAR, year);
     c.set(Calendar.MONTH, month);
     c.set(Calendar.DAY_OF_MONTH, day);
 
-    TextView date = findViewById(R.id.date);
+    TextView date = bookSession.findViewById(R.id.date);
     Spinner time = bookSession.findViewById(R.id.time);
 
 
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault());
+
+    //date.setText(DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime()));
+    //timeText = time.getSelectedItem().toString();
+
+
+    SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
     String selectedDate = dateFormat.format(c.getTime());
+    dateText = selectedDate;
     date.setText(selectedDate);
+    Date selectedDateDateFormat = null;
+    try {
+        selectedDateDateFormat = dateFormat.parse(selectedDate);
+    } catch (ParseException e) {
+        throw new RuntimeException(e);
+    }
     sessionDate = c.getTime();
 
 
     Map<Date, ArrayList<Slot>> availability = DB.getAvaibilitiesByTutorID(tutorId);
-    ArrayList<Slot> timeSlots = availability.get(c.getTime());
+
+    ArrayList<Slot> timeSlots = availability.get(selectedDateDateFormat);
 
 
-    ArrayAdapter<Slot> slotAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, timeSlots);
-    slotAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-    time.setAdapter(slotAdapter);
-    time.setVisibility(View.VISIBLE);
+    if (timeSlots != null && !timeSlots.isEmpty()) {
+        ArrayAdapter<Slot> slotAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, timeSlots);
+        slotAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        time.setAdapter(slotAdapter);
+        time.setVisibility(View.VISIBLE);
 
-    time.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-        @Override
-        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            Slot selectedSlot = timeSlots.get(position);
-            sessionTime=selectedSlot;
-        }
+        time.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Slot selectedSlot = timeSlots.get(position);
+                sessionTime = selectedSlot;
+            }
 
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
-            // Do nothing
-        }
-    });
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Do nothing
+            }
+        });
+    } else {
+        Toast.makeText(AboutTopicActivity.this, "No Available Timeslots", LENGTH_LONG).show();
+    }
 }
 
 
