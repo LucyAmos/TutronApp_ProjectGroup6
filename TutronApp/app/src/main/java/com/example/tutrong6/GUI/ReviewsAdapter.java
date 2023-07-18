@@ -36,7 +36,7 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.MyViewHo
     Map<int[], ReviewSystem> reviewSystemMap;
 
 
-    DBHelper DataBase = new DBHelper(null);
+    private DBHelper DataBase;
 
 
 
@@ -45,6 +45,8 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.MyViewHo
         this.context = context;
         this.reviewRecyclerInterface=reviewRecyclerInterface;
         this.reviewSystemMap = reviewSystemMap;
+
+        DataBase = new DBHelper(context);
 
     }
 
@@ -65,7 +67,11 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.MyViewHo
         int topicId = keys[1];
         int studentId = keys[0];
 
-        holder.topic.setText(DataBase.getTopicByID(topicId).getName());
+
+        Topic topic = DataBase.getTopicByID(topicId);
+        if (topic != null) {
+            holder.topic.setText(topic.getName());
+        }
 
         boolean anonStatus = reviewSystem.getIs_rating_anonymous();
 
@@ -104,7 +110,7 @@ public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.MyViewHo
 
         public MyViewHolder(@NonNull View itemView, ReviewRecyclerInterface reviewRecyclerInterface) {
             super(itemView);
-            topic = itemView.findViewById(R.id.topic_name);
+            topic = itemView.findViewById(R.id.topic);
             studentFirstName = itemView.findViewById(R.id.student_first_name);
             studentLastName = itemView.findViewById(R.id.student_last_name);
             date = itemView.findViewById(R.id.student_date_posted);

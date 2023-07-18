@@ -68,17 +68,16 @@ public class PurchaseRequestActivity extends AppCompatActivity implements Purcha
 
         SessionManagement sessionManagement = new SessionManagement(PurchaseRequestActivity.this);
         userID = sessionManagement.getSession();
-        session_user= DataBase.getUserbyID(userID);
-
+        session_user = DataBase.getUserbyID(userID);
 
 
         recyclerView = findViewById(R.id.purchase_request_recycler);
 
         DB = new DBHelper(this);
 
-        if(session_user.getRoleID() == Tutor.getStaticRoleID()){
+        if (session_user.getRoleID() == Tutor.getStaticRoleID()) {
             lessons = DB.getTutorPurchaseDemands(userID);
-        }else if(session_user.getRoleID() == Student.getStaticRoleID()){
+        } else if (session_user.getRoleID() == Student.getStaticRoleID()) {
             lessons = DB.getLessonNonEvaluate(userID);
         }
 
@@ -88,10 +87,10 @@ public class PurchaseRequestActivity extends AppCompatActivity implements Purcha
             @Override
             public void onClick(View v) {
 
-                if(session_user.getRoleID() == Tutor.getStaticRoleID()){
+                if (session_user.getRoleID() == Tutor.getStaticRoleID()) {
                     Intent intent = new Intent(PurchaseRequestActivity.this, TutorHubActivity.class);
                     startActivity(intent);
-                }else if(session_user.getRoleID() == Student.getStaticRoleID()){
+                } else if (session_user.getRoleID() == Student.getStaticRoleID()) {
                     Intent intent = new Intent(PurchaseRequestActivity.this, StudentHubActivity.class);
                     startActivity(intent);
                 }
@@ -102,7 +101,7 @@ public class PurchaseRequestActivity extends AppCompatActivity implements Purcha
         });
 
 
-        adapter = new PurchaseRequestAdapter(this,this, lessons, session_user);
+        adapter = new PurchaseRequestAdapter(this, this, lessons, session_user);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -112,7 +111,7 @@ public class PurchaseRequestActivity extends AppCompatActivity implements Purcha
     @Override
     public void onItemClick(int position) {
 
-        if(session_user.getRoleID() == Tutor.getStaticRoleID()) {
+        if (session_user.getRoleID() == Tutor.getStaticRoleID()) {
 
             Lesson selected = lessons.get(position);
 
@@ -161,20 +160,16 @@ public class PurchaseRequestActivity extends AppCompatActivity implements Purcha
                 }
             });
 
-            }
-
-
+        }
 
 
     }
-    @Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.tutron_menu, menu);
         return true;
-    }
-
-
+    }*/
 
 
 }
