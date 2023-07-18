@@ -17,7 +17,7 @@ public class Avaibility {
     private int ID;
     private int TutorID;
     private Date date;
-    private static final String DATE_FORMAT = "dd/MM/yyyy";
+    public static final String DATE_FORMAT = "dd/MM/yyyy";
     private ArrayList<Slot> slots;
 
     // constructors

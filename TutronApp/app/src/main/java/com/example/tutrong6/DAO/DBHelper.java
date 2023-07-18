@@ -16,13 +16,15 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class DBHelper extends SQLiteOpenHelper {
 
 //attribut
     private static final String DATABASE_NAME = "tutronDB";
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
 
     public static final int SORT_BY_RATINGS = 0;
     public static final int SORT_BY_HOURLY_RATE = 1;
@@ -217,8 +219,8 @@ public class DBHelper extends SQLiteOpenHelper {
         //populate some tutors
         sqLiteDatabase.execSQL("INSERT INTO user (roleID, first_name, last_name, email, password, education_level, native_language, description, profile_picture, addressID, credit_card_id, is_suspended) VALUES\n" +
                 "( 3, 'Kris', 'Klool','kk@gmail.com', '0000', 'Master', 'english', 'extremely patient tutor', NULL, NULL,NULL, 0),\n" +
-                "( 3, 'Gordon', 'Loutou', 'gl@gmail.com', '0000', 'Bachelor', 'french', 'provide clear and simple explanation', NULL, NULL,NULL, 0),\n" +
-                "( 3, 'Puistas', 'Coukap', 'tut@gmail.com', '5555', 'Phd', 'english', 'science enthousiast at your service', NULL, NULL,NULL, 1),\n" +
+                "( 3, 'Gordon', 'Loutou', 'gl@gmail.com', '0000', 'Bachelor', 'english', 'provide clear and simple explanation', NULL, NULL,NULL, 0),\n" +
+                "( 3, 'Puistas', 'Coukap', 'tut@gmail.com', '5555', 'Phd', 'french', 'science enthousiast at your service', NULL, NULL,NULL, 1),\n" +
                 "( 3, 'Roodie', 'Clok','rc@gmail.com', '9999', 'Master', 'french', 'adore teaching ', NULL, NULL,NULL, 1)");
 
         //populate A student
@@ -317,7 +319,9 @@ public class DBHelper extends SQLiteOpenHelper {
         //populate lesson
 
         sqLiteDatabase.execSQL("INSERT INTO lesson (StudentID, TutorID, TopicID, StatusID, date_appointment, start_time, end_time, rating, rating_date, is_rating_anonymous, is_topic_reviewed, review) VALUES\n" +
-                "(7, 3, 1, 3, '02/12/2022', '10:00', '12:00', 5, '04/12/2022', 0, 1, 'excellent tutor')");
+                "(7, 3, 2, 3, '02/12/2022', '10:00', '12:00', 5, '04/12/2022', 0, 1, 'excellent tutor'),\n" +
+                "(7, 3, 2, 3, '02/03/2023', '17:30', '19:30', -1, NULL, 0, 0, NULL),\n" +
+                "(7, 4, 5, 3, '21/05/2023', '09:00', '11:00', 5, '22/05/2023', 1, 1, 'clear explanation')");
 
 
     }
@@ -1108,6 +1112,7 @@ public class DBHelper extends SQLiteOpenHelper {
      */
     public Tutor getTutorByID(int tutorID)
     {
+        Log.e("getTutorByID", "tutorID= "+ tutorID);
         Tutor tutor = new Tutor();
         SQLiteDatabase MyData = this.getWritableDatabase();
 
@@ -1326,11 +1331,9 @@ public class DBHelper extends SQLiteOpenHelper {
         String tutorName = findBy[FIND_TAB_POS_TUTOR_NAME];
         String language_spoken = findBy[FIND_TAB_POS_LANGUAGE_SPOKEN];
         String topic_name = findBy[FIND_TAB_POS_TOPIC_NAME];
-        String part1 = "SELECT DISTINCT topic.ID, count(lesson.ID) from topic \n" +
-                "join user ON topic.TutorID = user.ID  \n" +
-                "JOIN lesson ON user.ID = lesson.TutorID\n" +
-                "WHERE\n" +
-                "topic.is_offered = 1\n";
+        String lesson_join_part = "";
+        String second_return_parameter = "";
+
         String condition_part = "";
         String sort_part = "";
 
@@ -1386,17 +1389,31 @@ public class DBHelper extends SQLiteOpenHelper {
         switch(sortBy)
         {
             case SORT_BY_RATINGS:
+                second_return_parameter=",lesson.rating as RatingLesson";
+                lesson_join_part="left Join lesson ON topic.ID = lesson.TopicID";
                 sort_part = " ORDER BY lesson.rating DESC ";
                 break;
             case SORT_BY_HOURLY_RATE:
+                second_return_parameter=",user.hourly_rate ";
+                lesson_join_part="Join lesson ON user.ID = lesson.TutorID";
                 sort_part = " ORDER BY user.hourly_rate ASC ";
                 break;
             case SORT_BY_NUMBER_OF_LESSONS:
-                sort_part = "ORDER BY COUNT(lesson.ID) DESC";
+                second_return_parameter=",(select count(lesson.ID) from lesson where lesson.TopicID = topic.ID) as countLesson";
+                lesson_join_part="Join lesson ON user.ID = lesson.TutorID";
+                sort_part = "ORDER BY countLesson DESC";
                 break;
         }
 
         //SQL management
+        String part1 = "SELECT  DISTINCT topic.ID as TopicID\n" +
+                second_return_parameter +
+                "from topic \n" +
+                "join user ON topic.TutorID = user.ID  " +
+                lesson_join_part +
+                "WHERE\n" +
+                "topic.is_offered = 1\n";
+
         String cmd = part1 + condition_part + sort_part;
         SQLiteDatabase MyData = this.getWritableDatabase();
         Cursor res = MyData.rawQuery(cmd,null);
@@ -1408,6 +1425,9 @@ public class DBHelper extends SQLiteOpenHelper {
             int temp = res.getInt(0);
             result.add(temp);
         }
+        List<Integer> temp= result.stream().distinct().collect(Collectors.toList());
+        result.clear();
+        result.addAll(temp);
 
         for (int var : result)
         {
@@ -1829,26 +1849,87 @@ public class DBHelper extends SQLiteOpenHelper {
         return result  ;
     }
 
-    public boolean addAvaibilities(ArrayList<Avaibility> av)
+    public boolean addSlots(Slot slot)
     {
-
+        //TODO
+        return false;
+    }
+    /**
+     *
+     * @param avs
+     * @return
+     */
+    public boolean addAvaibilities(ArrayList<Avaibility> avs, int tutorID)
+    {
+        //TODO
         SQLiteDatabase MyData = this.getWritableDatabase();
-        //get the last creditCard object create
-        int credit_card_id = 0;
-        Cursor cursor = MyData.rawQuery("SELECT * FROM creditcard ORDER BY ID DESC LIMIT 1 ", null);
+        ContentValues contentValues = new ContentValues();
+        Log.i("addAvaibilities ", "DANS addAvaibilities: ");
+
+        for (Avaibility av : avs)
+        {
+
+            //add avaibility
+            contentValues.put("ID",av.getID());
+            contentValues.put("TutorID",tutorID);
+            String strDate  = new SimpleDateFormat(Avaibility.DATE_FORMAT).format(av.getDate());
+            contentValues.put("date",strDate);
+
+            long result = MyData.insert("avaibility",null,contentValues);
+
+            if(result==-1) return false;
+            Log.i("addAvaibilities ", "FINI D INSERER AVAIBILiTY ");
+
+            //add slot
+            //get last avaibilities created
+            int avID = 0;
+            Cursor cursor = MyData.rawQuery("SELECT * FROM avaibility ORDER BY ID DESC LIMIT 1 ", null);
+            if (cursor.moveToFirst()){
+                do {
+                    // Passing values
+                    avID = cursor.getInt(0);
+                } while(cursor.moveToNext());
+            }
+
+            ArrayList<Slot> slots = av.getSlots();
+            for(Slot sl : slots)
+            {
+                contentValues.put("ID",sl.getID());
+                contentValues.put("AvaibilityID",avID);
+
+                String start_time  = new SimpleDateFormat(Slot.getTIME_FORMAT()).format(sl.getStartTime());
+                String end_time  = new SimpleDateFormat(Slot.getTIME_FORMAT()).format(sl.getEndTime());
+
+                contentValues.put("start_time",start_time);
+                contentValues.put("end_time",end_time);
+
+                long result2 = MyData.insert("slot",null,contentValues);
+
+                if(result2==-1) return false;
+                Log.i("addAvaibilities ", "FINI D INSERER SLOT ");
+            }
+
+        }
+        return true;
+
+    }
+
+    public boolean CreatedDefaultAvaibilities()
+    {
+            //TODO
+        SQLiteDatabase MyData = this.getWritableDatabase();
+        //get the last tutor object create
+        int tutorID = 0;
+        Cursor cursor = MyData.rawQuery("SELECT * FROM user WHERE roleID= ? ORDER BY ID DESC LIMIT 1 ", new String[] {String.valueOf(Tutor.getStaticRoleID())});
         if (cursor.moveToFirst()){
             do {
                 // Passing values
-                credit_card_id = cursor.getInt(0);
+                tutorID = cursor.getInt(0);
             } while(cursor.moveToNext());
         }
-
-
-        return false;
-    }
-
-    public boolean UpdateLastTutorCreatedAvaibilities()
-    {
+        //put the tutorOD on the availabilies
+        ArrayList<Avaibility> DefaultAvaibility = Avaibility.DefaultAvaibility();
+        this.addAvaibilities(DefaultAvaibility,tutorID);
         return false;
     }
 

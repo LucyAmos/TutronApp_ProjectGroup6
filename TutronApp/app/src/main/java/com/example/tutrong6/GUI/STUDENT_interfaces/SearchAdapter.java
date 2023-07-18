@@ -31,7 +31,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
     ArrayList<Topic> searchTopics;
 
 
-    DBHelper DataBase = new DBHelper(null);
+    DBHelper DataBase = new DBHelper(context);
 
 
     public SearchAdapter(Context context, SearchRecyclerInterface searchRecyclerInterface, ArrayList<Topic> searchTopics) {
@@ -51,10 +51,11 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull SearchAdapter.MyViewHolder holder, int position) {
 
-        int tutorId = searchTopics.get(position).getTutorID();
+        int topicID = searchTopics.get(position).getTutorID();
+        Topic topic = DataBase.getTopicByID(topicID);
 
-        holder.topic.setText(searchTopics.get(position).getName());
-        Tutor tutor = DataBase.getTutorByID(tutorId);
+        holder.topic.setText(topic.getName());
+        Tutor tutor = DataBase.getTutorByID(topic.getTutorID());
         holder.tutorFirstName.setText(tutor.getFirst_name());
         holder.tutorLastName.setText(tutor.getLast_name());
 
@@ -64,8 +65,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHold
 
         holder.nativeLanguage.setText(tutor.getNative_language());
         holder.hourlyRate.setText(String.valueOf(tutor.getHourly_rate()));
-        holder.averageRating.setRating((float) DataBase.getAverageTutorRating(tutorId));
-        holder.totalLessons.setText(String.valueOf(DataBase.getCountGivenLesson(tutorId)));
+        holder.averageRating.setRating((float) DataBase.getAverageTutorRating(tutor.getID()));
+        holder.totalLessons.setText(String.valueOf(DataBase.getCountGivenLesson(tutor.getID())));
 
 
 
