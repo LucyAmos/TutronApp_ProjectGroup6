@@ -1428,9 +1428,14 @@ public class DBHelper extends SQLiteOpenHelper {
             int temp = res.getInt(0);
             result.add(temp);
         }
-        List<Integer> temp= result.stream().distinct().collect(Collectors.toList());
-        result.clear();
-        result.addAll(temp);
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            List<Integer> temp= null;
+            temp = result.stream().distinct().collect(Collectors.toList());
+            result.clear();
+            result.addAll(temp);
+        }
+
 
         for (int var : result)
         {
@@ -1567,7 +1572,8 @@ public class DBHelper extends SQLiteOpenHelper {
     {
         int result = -1;
         SQLiteDatabase MyData = this.getWritableDatabase();
-        Cursor res = MyData.rawQuery("SELECT COUNT(ID) FROM lesson WHERE TutorID = ? AND StatusID = ? ",new String[] {String.valueOf(tutorID),"3"});
+        int statusID = Lesson.getstatusIDByEnum(Lesson.Status.APPROVED);
+        Cursor res = MyData.rawQuery("SELECT COUNT(ID) FROM lesson WHERE TutorID = ? AND StatusID = ? ",new String[] {String.valueOf(tutorID),String.valueOf(statusID)});
         while (res.moveToNext()) {
             result = res.getInt(0);
         }
@@ -1853,10 +1859,53 @@ public class DBHelper extends SQLiteOpenHelper {
         return result  ;
     }
 
-    public boolean addSlots(Slot slot)
+    public boolean createSlotRecord(Slot sl, int avID)
     {
         //TODO
-        return false;
+        SQLiteDatabase MyData = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("AvaibilityID",avID);
+
+        String start_time="";
+        String end_time="";
+
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            start_time = String.valueOf((sl.getStartTime().format(DateTimeFormatter.ofPattern(Slot.getTIME_FORMAT()))));
+            end_time = String.valueOf(sl.getEndTime().format(DateTimeFormatter.ofPattern(Slot.getTIME_FORMAT())));
+        }
+
+
+        contentValues.put("start_time",start_time);
+        contentValues.put("end_time",end_time);
+
+        long result = MyData.insert("slot",null,contentValues);
+        Log.i("addAvaibilities ", "FINI D INSERER SLOT: AvaibilityID= " + avID + " start_time="+start_time+ " end_time="+end_time);
+
+        if(result==-1) return false;
+        else
+            return true;
+    }
+
+
+    public boolean createAvaibilityRecord(Avaibility av, int tutorID)
+    {
+        //TODO
+        SQLiteDatabase MyData = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("TutorID",tutorID);
+
+        String strDate  = String.valueOf(new SimpleDateFormat(Avaibility.DATE_FORMAT).format(av.getDate()));
+        contentValues.put("date",strDate);
+        Log.i("addAvaibilities ", "FINI D INSERER AVAIBILiTY : tutorID= " + tutorID + " date="+strDate);
+
+        long result = MyData.insert("avaibility",null,contentValues);
+
+        if(result==-1) return false;
+        else
+            return true;
     }
     /**
      *
@@ -1868,60 +1917,37 @@ public class DBHelper extends SQLiteOpenHelper {
         //TODO
         SQLiteDatabase MyData = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        Log.i("addAvaibilities ", "DANS AvaibilitiesList:"+ avs);
+        Log.i("addAvaibilities ", "DANS AvaibilitiesList:");
 
         for (Avaibility av : avs)
         {
-
             //add avaibility
-            contentValues.put("ID",av.getID());
-            contentValues.put("TutorID",tutorID);
-            String strDate  = new SimpleDateFormat(Avaibility.DATE_FORMAT).format(av.getDate());
-            contentValues.put("date",strDate);
-
-            long result = MyData.insert("avaibility",null,contentValues);
-
-            if(result==-1) return false;
-            Log.i("addAvaibilities ", "FINI D INSERER AVAIBILiTY ");
+            boolean addAv = this.createAvaibilityRecord(av, tutorID);
 
             //add slot
             //get last avaibilities created
-            int avID = 0;
-            Cursor cursor = MyData.rawQuery("SELECT * FROM avaibility ORDER BY ID DESC LIMIT 1 ", null);
-            if (cursor.moveToFirst()){
-                do {
-                    // Passing values
-                    avID = cursor.getInt(0);
-                } while(cursor.moveToNext());
-            }
-
-            ArrayList<Slot> slots = av.getSlots();
-            for(Slot sl : slots)
+            if(addAv)
             {
-                contentValues.put("ID",sl.getID());
-                contentValues.put("AvaibilityID",avID);
-
-                String start_time="";
-                String end_time="";
-
-
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                     start_time = sl.getStartTime().format(DateTimeFormatter.ofPattern(Slot.getTIME_FORMAT()));
-                     end_time = sl.getEndTime().format(DateTimeFormatter.ofPattern(Slot.getTIME_FORMAT()));
+                int avID = 0;
+                Cursor cursor = MyData.rawQuery("SELECT * FROM avaibility ORDER BY ID DESC LIMIT 1 ", null);
+                if (cursor.moveToFirst()){
+                    do {
+                        // Passing values
+                        avID = cursor.getInt(0);
+                    } while(cursor.moveToNext());
                 }
 
-
-               // String start_time  = new SimpleDateFormat(Slot.getTIME_FORMAT()).format(sl.getStartTime());
-                //String end_time  = new SimpleDateFormat(Slot.getTIME_FORMAT()).format(sl.getEndTime());
-
-                contentValues.put("start_time",start_time);
-                contentValues.put("end_time",end_time);
-
-                long result2 = MyData.insert("slot",null,contentValues);
-
-                if(result2==-1) return false;
-                Log.i("addAvaibilities ", "FINI D INSERER SLOT ");
+                ArrayList<Slot> slots = av.getSlots();
+                for(Slot sl : slots)
+                {
+                    this.createSlotRecord(sl,avID);
+                }
             }
+            else{
+                Log.i("addAvaibilities ", "NO AVAIBILITIES CREATED" );
+
+                return false;}
+
 
         }
         return true;
@@ -1941,6 +1967,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 tutorID = cursor.getInt(0);
             } while(cursor.moveToNext());
         }
+        Log.e("CreatedDefaultAv", "tutorID= " + tutorID);
         //put the tutorOD on the availabilies
         ArrayList<Avaibility> DefaultAvaibility = Avaibility.DefaultAvaibility();
         this.addAvaibilities(DefaultAvaibility,tutorID);

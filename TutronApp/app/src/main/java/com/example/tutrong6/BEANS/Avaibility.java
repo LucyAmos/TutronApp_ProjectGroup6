@@ -106,7 +106,7 @@ public class Avaibility {
             slots.add(new Slot(LocalTime.parse("18:00"),LocalTime.parse("20:00")));
             slots.add(new Slot(LocalTime.parse("20:30"),LocalTime.parse("22:30")));
 
-            int duration_in_days = 21;
+            int duration_in_days = 10;
 
             ArrayList<Date> dates = new ArrayList<Date>();
 

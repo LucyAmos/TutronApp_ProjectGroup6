@@ -69,8 +69,12 @@ public class TutorProfileActivity extends AppCompatActivity  {
 
 
         byte[] profilePictureBytes = session_tutor.getProfile_picture();
-        Bitmap profilePictureBitmap = BitmapFactory.decodeByteArray(profilePictureBytes, 0, profilePictureBytes.length);
-        profilePicture.setImageBitmap(profilePictureBitmap);
+        if(profilePictureBytes !=null)
+        {
+            Bitmap profilePictureBitmap = BitmapFactory.decodeByteArray(profilePictureBytes, 0, profilePictureBytes.length);
+            profilePicture.setImageBitmap(profilePictureBitmap);
+        }
+
 
 
         firstName.setText(session_tutor.getFirst_name());

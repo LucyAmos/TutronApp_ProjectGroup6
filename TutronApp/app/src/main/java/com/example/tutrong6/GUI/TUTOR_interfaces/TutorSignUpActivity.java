@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.tutrong6.BEANS.*;
 import com.example.tutrong6.DAO.*;
 import com.example.tutrong6.GUI.LoginPageActivity;
+import com.example.tutrong6.GUI.SignUpLauncherActivity;
 import com.example.tutrong6.R;
 import com.squareup.picasso.Picasso;
 
@@ -176,8 +177,8 @@ public class TutorSignUpActivity extends AppCompatActivity {
 
                                 Boolean insert = DataBase.addTutor(tutor);
                                 if(insert==true){
-                                    /*boolean insert_avaibilities = DataBase.CreatedDefaultAvaibilities();
-                                    if(insert_avaibilities)
+                                    boolean insert_avaibilities = DataBase.CreatedDefaultAvaibilities();
+                                    /*if(insert_avaibilities)
                                     {
                                         Toast.makeText(TutorSignUpActivity.this, "avaibilities sucessfully added", Toast.LENGTH_SHORT).show();
                                     }
