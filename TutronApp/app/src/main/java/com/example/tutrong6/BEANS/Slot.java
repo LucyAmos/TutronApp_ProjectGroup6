@@ -97,13 +97,15 @@ public class Slot {
 
         return result;
     }
-
-    @Override
-    public String toString() {
+    public String affiche() {
         return "Slot{" +
                 "avaibilityID=" + avaibilityID +
                 ", startTime=" + startTime +
                 ", endTime=" + endTime +
                 '}';
+    }
+    @Override
+    public String toString() {
+        return "" + startTime + "-" + endTime ;
     }
 }

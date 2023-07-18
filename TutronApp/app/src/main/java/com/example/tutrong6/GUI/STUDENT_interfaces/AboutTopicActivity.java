@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -25,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tutrong6.BEANS.Avaibility;
+import com.example.tutrong6.BEANS.Complaint;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -103,16 +105,22 @@ public class AboutTopicActivity extends AppCompatActivity implements DatePickerD
         yearsOfExperience.setText(String.valueOf(DB.getTopicByID(topicId).getYears_of_experience()));
         topicDescription.setText(DB.getTopicByID(topicId).getDescription());
 
-        byte[] profilePictureBytes = DB.getTutorByID(tutorId).getProfile_picture();
-        Bitmap profilePictureBitmap = BitmapFactory.decodeByteArray(profilePictureBytes, 0, profilePictureBytes.length);
-        profilePicture.setImageBitmap(profilePictureBitmap);
+        Tutor tutor = DB.getTutorByID(tutorId);
 
-        firstName.setText(DB.getTutorByID(tutorId).getFirst_name());
-        lastName.setText(DB.getTutorByID(tutorId).getLast_name());
-        nativeLanguage.setText(DB.getTutorByID(tutorId).getNative_language());
-        educationLevel.setText(DB.getTutorByID(tutorId).getEducation_level());
-        tutorDescription.setText(DB.getTutorByID(tutorId).getDescription());
-        hourlyRate.setText(String.valueOf(DB.getTutorByID(tutorId).getHourly_rate()));
+        byte[] profilePictureBytes =tutor.getProfile_picture();
+        if(profilePictureBytes != null)
+        {
+            Bitmap profilePictureBitmap = BitmapFactory.decodeByteArray(profilePictureBytes, 0, profilePictureBytes.length);
+            profilePicture.setImageBitmap(profilePictureBitmap);
+        }
+
+
+        firstName.setText(tutor.getFirst_name());
+        lastName.setText(tutor.getLast_name());
+        nativeLanguage.setText(tutor.getNative_language());
+        educationLevel.setText(tutor.getEducation_level());
+        tutorDescription.setText(tutor.getDescription());
+        hourlyRate.setText(String.valueOf(tutor.getHourly_rate()));
         lessonsGiven.setText(String.valueOf(DB.getCountGivenLesson(tutorId)));
         averageRating.setRating((float) DB.getAverageTutorRating(tutorId));
 
@@ -201,8 +209,7 @@ public class AboutTopicActivity extends AppCompatActivity implements DatePickerD
 
                         double tutorHourlyRate = tutor.getHourly_rate();
 
-
-
+                        Log.e("LESSON REQUEST" , "dateText = "+dateText +"timeText="+timeText+ "sessionDate= "+sessionDate +"sessionTime= "+sessionTime);
                         if(dateText.isEmpty() || timeText.isEmpty()
                         )
                         {
@@ -260,7 +267,13 @@ public void onDateSet(DatePicker view, int year, int month, int day){
     } catch (ParseException e) {
         throw new RuntimeException(e);
     }
-    sessionDate = c.getTime();
+    String real_month = month>=0&&month<=8?"0"+(month+1):""+(month+1);
+    try {
+        sessionDate = new SimpleDateFormat(Complaint.getDATE_FORMAT()).parse(day +"/"+real_month+"/"+year);
+    } catch (ParseException e) {
+        Log.e("ERROR TEMP_BTN", "onDateSet: "+e.getStackTrace() );
+    }
+   // sessionDate = c.getTime();
 
 
     Map<Date, ArrayList<Slot>> availability = DB.getAvaibilitiesByTutorID(tutorId);
@@ -278,6 +291,7 @@ public void onDateSet(DatePicker view, int year, int month, int day){
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Slot selectedSlot = timeSlots.get(position);
+                timeText= String.valueOf(selectedSlot);
                 sessionTime = selectedSlot;
             }
 

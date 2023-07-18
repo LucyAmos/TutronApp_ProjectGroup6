@@ -1456,7 +1456,8 @@ public class DBHelper extends SQLiteOpenHelper {
         int statusID = Lesson.getstatusIDByEnum(Lesson.Status.PENDING);
         contentValues.put("StatusID",statusID);
 
-        contentValues.put("date_appointment",String.valueOf(lesson.getDate_appointment()));
+        String strDate  = new SimpleDateFormat(Complaint.getDATE_FORMAT()).format(lesson.getDate_appointment());
+        contentValues.put("date_appointment",String.valueOf(strDate));
         Slot timeSlot = lesson.getSlot();
         contentValues.put("start_time",String.valueOf(timeSlot.getStartTime()));
         contentValues.put("end_time",String.valueOf(timeSlot.getEndTime()));

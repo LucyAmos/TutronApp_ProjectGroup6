@@ -21,6 +21,14 @@ public class Lesson {
     //constructors
 
     public Lesson() {}
+
+    public Lesson(int studentID, int tutorID, int topicID,  Date date_time_appointment, Slot slot) {
+        this.studentID = studentID;
+        this.tutorID = tutorID;
+        this.topicID = topicID;
+        this.date_appointment = date_time_appointment;
+        this.slot = slot;
+    }
     public Lesson(int studentID, int tutorID, int topicID,  Date date_time_appointment, Slot slot,  ReviewSystem review_system) {
         this.studentID = studentID;
         this.tutorID = tutorID;
