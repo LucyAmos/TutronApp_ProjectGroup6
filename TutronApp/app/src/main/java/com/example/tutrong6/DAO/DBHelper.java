@@ -1392,30 +1392,30 @@ public class DBHelper extends SQLiteOpenHelper {
         switch(sortBy)
         {
             case SORT_BY_RATINGS:
-                second_return_parameter=",lesson.rating as RatingLesson";
-                lesson_join_part="left Join lesson ON topic.ID = lesson.TopicID";
+                second_return_parameter=",lesson.rating as RatingLesson ";
+                lesson_join_part="left Join lesson ON topic.ID = lesson.TopicID ";
                 sort_part = " ORDER BY lesson.rating DESC ";
                 break;
             case SORT_BY_HOURLY_RATE:
                 second_return_parameter=",user.hourly_rate ";
-                lesson_join_part="Join lesson ON user.ID = lesson.TutorID";
+                lesson_join_part="Join lesson ON user.ID = lesson.TutorID ";
                 sort_part = " ORDER BY user.hourly_rate ASC ";
                 break;
             case SORT_BY_NUMBER_OF_LESSONS:
-                second_return_parameter=",(select count(lesson.ID) from lesson where lesson.TopicID = topic.ID) as countLesson";
-                lesson_join_part="Join lesson ON user.ID = lesson.TutorID";
-                sort_part = "ORDER BY countLesson DESC";
+                second_return_parameter=",(select count(lesson.ID) from lesson where lesson.TopicID = topic.ID) as countLesson ";
+                lesson_join_part="Join lesson ON user.ID = lesson.TutorID ";
+                sort_part = "ORDER BY countLesson DESC ";
                 break;
         }
 
         //SQL management
-        String part1 = "SELECT  DISTINCT topic.ID as TopicID\n" +
+        String part1 = "SELECT  DISTINCT topic.ID as TopicID \n " +
                 second_return_parameter +
-                "from topic \n" +
-                "join user ON topic.TutorID = user.ID  " +
+                "from topic \n " +
+                "join user ON topic.TutorID = user.ID   " +
                 lesson_join_part +
-                "WHERE\n" +
-                "topic.is_offered = 1\n";
+                "WHERE \n " +
+                "topic.is_offered = 1 \n ";
 
         String cmd = part1 + condition_part + sort_part;
         SQLiteDatabase MyData = this.getWritableDatabase();
