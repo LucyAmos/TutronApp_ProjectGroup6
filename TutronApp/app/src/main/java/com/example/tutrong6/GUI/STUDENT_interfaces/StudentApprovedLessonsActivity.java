@@ -61,6 +61,8 @@ public class StudentApprovedLessonsActivity extends AppCompatActivity implements
     PurchaseRequestAdapter adapter;
 
     private int userID;
+
+    private Lesson selected;
     private User session_user;
 
 
@@ -118,7 +120,7 @@ public class StudentApprovedLessonsActivity extends AppCompatActivity implements
     public void onItemClick(int position) {
 
 
-        Lesson selected = lessons.get(position);
+        selected = lessons.get(position);
 
         doNextDialog = new Dialog(StudentApprovedLessonsActivity.this);
         doNextDialog.setContentView(R.layout.do_next_dialogue);
@@ -240,7 +242,7 @@ public class StudentApprovedLessonsActivity extends AppCompatActivity implements
                                 Toast.makeText(StudentApprovedLessonsActivity.this, "Review Added Successfully", Toast.LENGTH_SHORT).show();
                                 writeReviewDialog.dismiss();
                                 Intent intent = new Intent(StudentApprovedLessonsActivity.this, ReviewsBoxActivity.class);
-                                intent.putExtra("tutorId", String.valueOf(selected.getTutorID()));
+                                intent.putExtra("tutorId", selected.getTutorID());
                                 startActivity(intent);
                             } else {
                                 Toast.makeText(StudentApprovedLessonsActivity.this, "Review Addition Unsuccessful", Toast.LENGTH_SHORT).show();
