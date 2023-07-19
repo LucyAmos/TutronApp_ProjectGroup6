@@ -256,7 +256,7 @@ public class ReviewsBoxActivity extends AppCompatActivity implements ReviewRecyc
                             Toast.makeText(ReviewsBoxActivity.this, "Please, fill in ALL the fields", Toast.LENGTH_SHORT).show();
                         } else {
                             ReviewSystem updateReview = new ReviewSystem(rating, reviewSystemPos.getIs_rating_anonymous(), reviewSystemPos.getRating_date(), reviewSystemPos.getIs_topic_reviewed(), review);
-                            Boolean addedUpdate = DataBase.updateRatingLesson(keys[2], updateReview);
+                            Boolean addedUpdate = DataBase.updateRatingLesson(keys[2], updateReview,false);
 
                             if (addedUpdate) {
                                 Toast.makeText(ReviewsBoxActivity.this, "Review Updated Successfully", Toast.LENGTH_SHORT).show();

@@ -1504,14 +1504,27 @@ public class DBHelper extends SQLiteOpenHelper {
             return false;
         }
     }
-    public boolean updateRatingLesson(int lessonID, ReviewSystem review)
+
+    /**
+     *
+     * @param lessonID
+     * @param review
+     * @return
+     */
+    public boolean updateRatingLesson(int lessonID, ReviewSystem review, boolean is_being_created)
     {
 
         SQLiteDatabase MyData = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
         contentValues.put("rating",review.getRating());
-        contentValues.put("rating_date",String.valueOf(review.getRating_date()));
+        if(is_being_created)
+        {
+            Date actualdate = new Date();
+            String strDate  =  String.valueOf(new SimpleDateFormat(ReviewSystem.DATE_FORMAT).format(actualdate)) ;
+            contentValues.put("rating_date",strDate);
+        }
+
         int is_rating_anonymous = review.getIs_rating_anonymous() == false? 0:1;
         contentValues.put("is_rating_anonymous",is_rating_anonymous);
         int is_topic_reviewed = review.getIs_topic_reviewed() == false? 0 : 1;
@@ -1709,6 +1722,29 @@ public class DBHelper extends SQLiteOpenHelper {
             result = res.getDouble(0);
         }
         return result;
+    }
+
+    /***
+     *
+     * @param topicID
+     * @param studentID
+     * @param tutorID
+     * @return
+     */
+    public boolean isTopicAlreadyReviewedByStudent(int topicID, int studentID, int tutorID)
+    {
+        SQLiteDatabase MyData = this.getWritableDatabase();
+        int result = 0;
+        Cursor res = MyData.rawQuery("SELECT count(ID) from lesson \n" +
+                "where TutorID=? AND StudentID=?\n" +
+                "AND rating != ?\n" +
+                "AND TopicID = ?",new String[] {String.valueOf(tutorID), String.valueOf(studentID),"-1",String.valueOf(topicID)});
+        while (res.moveToNext()) {
+            result = res.getInt(0);
+        }
+      if(result ==0){return false;}
+      else {return true;}
+
     }
 
     /**

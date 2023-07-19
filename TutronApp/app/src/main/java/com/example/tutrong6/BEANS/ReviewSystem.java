@@ -1,9 +1,11 @@
 package com.example.tutrong6.BEANS;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class ReviewSystem {
     //attributes
+    public static final String DATE_FORMAT = "dd/MM/yyyy";
     private double rating;
     private boolean is_rating_anonymous;
     private Date rating_date;
@@ -66,6 +68,8 @@ public class ReviewSystem {
     }
 
     //
+
+
 
     @Override
     public String toString() {

@@ -194,14 +194,17 @@ public class StudentApprovedLessonsActivity extends AppCompatActivity implements
                         LocalDateTime currentDateTime = LocalDateTime.now();
                         ZoneId zoneId = ZoneId.systemDefault();
                         Date currentDate = Date.from(currentDateTime.atZone(zoneId).toInstant());
+                        int tutorID = selected.getTutorID();
+                        int topicID = selected.getTopicID();
+                        int studentID= userID;
 
 
-                        if (review.isEmpty() || rating == 0
+                        if (review.isEmpty() || rating == 0 || rating ==-1
                         ) {
                             Toast.makeText(StudentApprovedLessonsActivity.this, "Please, fill in ALL the fields", Toast.LENGTH_SHORT).show();
-                        } else if (!lessons.get(position).getReview_system().getIs_topic_reviewed()) {
+                        } else if (!DataBase.isTopicAlreadyReviewedByStudent(topicID,studentID,tutorID)) {
                             ReviewSystem addReview = new ReviewSystem(rating, false, currentDate, true, review);
-                            Boolean addedReview = DataBase.updateRatingLesson(selected.getID(), addReview);
+                            Boolean addedReview = DataBase.updateRatingLesson(selected.getID(), addReview,true);
 
                             if (addedReview) {
                                 Toast.makeText(StudentApprovedLessonsActivity.this, "Review Added Successfully", Toast.LENGTH_SHORT).show();
@@ -229,14 +232,17 @@ public class StudentApprovedLessonsActivity extends AppCompatActivity implements
                         String review = reviewDesc.getText().toString().trim();
 
                         Date currentDate = new Date();
+                        int tutorID = selected.getTutorID();
+                        int topicID = selected.getTopicID();
+                        int studentID= userID;
 
 
                         if (review.isEmpty() || rating == 0
                         ) {
                             Toast.makeText(StudentApprovedLessonsActivity.this, "Please, fill in ALL the fields", Toast.LENGTH_SHORT).show();
-                        } else if (!selected.getReview_system().getIs_topic_reviewed()) {
+                        } else if (!DataBase.isTopicAlreadyReviewedByStudent(topicID,studentID,tutorID)) {
                             ReviewSystem addReview = new ReviewSystem(rating, true, currentDate, true, review);
-                            Boolean addedReview = DataBase.updateRatingLesson(selected.getID(), addReview);
+                            Boolean addedReview = DataBase.updateRatingLesson(selected.getID(), addReview,true);
 
                             if (addedReview) {
                                 Toast.makeText(StudentApprovedLessonsActivity.this, "Review Added Successfully", Toast.LENGTH_SHORT).show();
